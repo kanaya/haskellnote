@@ -5,6 +5,7 @@
 \usepackage{fancybox}
 \usepackage{MnSymbol}
 \usepackage{stmaryrd}
+\usepackage{haskellstyle}
 
 \usepackage{geometry}
 \usepackage{ascmac}
@@ -13,92 +14,8 @@
 \author{Ichi Kanaya}
 \date{2025}
 
+\newcommand{\keyword}[1]{\textgt{#1}}
 \newcommand{\tobewritten}[1]{\begin{screen}\textbf{TK.} {#1}\end{screen}}
-
-\newenvironment{footcode}{\begingroup\VerbatimEnvironment\begin{Verbatim}}{\end{Verbatim}\endgroup}
-
-\newcommand{\haskell}{\textsf{Haskell}}
-
-\newcommand{\mathCompose}{\bullet}
-\newcommand{\mathWeakCompose}{\mathop{\$}}
-
-\newcommand{\mathLambda}[2]{\backslash#1\mapsto#2}
-\newcommand{\mathAnonymousParameter}{\lozenge}
-\newcommand{\mathWhere}[1]{\mathop{\textsf{where}}\left\{#1\right\}}
-\newcommand{\mathLetIn}[2]{\mathop{\textsf{let}}\left\{#1\right\}\mathop{\textsf{in}}#2}
-
-\newcommand{\mathTypeIs}{::}
-\newcommand{\mathTypeInt}{\mathbb{Z}}
-\newcommand{\mathTypeBool}{\mathbb{B}}
-\newcommand{\mathTypeReal}{\mathbb{R}}
-\newcommand{\mathTypeChar}{\mathbf{Char}}
-\newcommand{\mathTypeString}{\mathbf{String}}
-\newcommand{\mathTypeFunction}[2]{#1\rightarrow#2}
-\newcommand{\mathTypeFunctionII}[3]{#1\rightarrow#2\rightarrow#3}
-
-\newcommand{\mathTypeList}[1]{\llbracket#1\rrbracket}
-\newcommand{\mathList}[1]{{#1}_\mathrm{s}}
-\newcommand{\mathMakeList}[1]{\left[#1\right]}
-\newcommand{\mathEmptyList}{[\,]}
-\newcommand{\mathIn}{\in}
-\newcommand{\mathMakeListComplehention}[2]{\mathMakeList{#1\mid#2}}
-\newcommand{\mathListConcat}{\mathop{\#}}
-
-\newcommand{\mathIf}[3]{\mathop{\textsf{if}}#1\mathop{\textsf{then}}#2\mathop{\textsf{else}}#3}
-\newcommand{\mathCompareEq}{\equiv}
-\newcommand{\mathAny}{\_}
-\newcommand{\mathPatternMatch}[4]{\left\{\begin{aligned}#1&=#2\\#3&=#4\end{aligned}\right.}
-\newcommand{\mathCase}[5]{\mathop{\textsf{case}}#1\mathop{\textsf{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
-\newcommand{\mathOtherwise}{\mathop{\textsf{otherwise}}}
-\newcommand{\mathPatternMatchConditional}[5]{\left\{\begin{aligned}#1&\mid_{#2}=#3\\&\mid_{#4}=#5\end{aligned}\right.}
-
-\newcommand{\mathFib}{\mathop{\mathrm{fib}}}
-
-\newcommand{\mathAnonymousOperator}{\mathop{\maltese}}
-\newcommand{\mathMap}{\otimes}
-\newcommand{\mathFold}[2]{\bigcup_{#1}^{#2}}
-\newcommand{\mathFoldRight}[2]{\bigsqcup_{#1}^{#2}}
-
-\newcommand{\mathFuncTypeGeneral}[2]{{}^{#1}\left\llangle#2\right\rrangle}
-\newcommand{\mathMakeGeneral}[2]{{}^{#1}\left\langle#2\right\rangle}
-\newcommand{\mathMaybe}[1]{{#1}_?}
-\newcommand{\mathTypeMaybe}[1]{\mathFuncTypeGeneral{?}{#1}}
-\newcommand{\mathMakeJust}[1]{\mathMakeGeneral{\text{Just}}{#1}}
-\newcommand{\mathNothing}{\emptyset}
-
-\newcommand{\mathTypeGeneral}[1]{\mathbf{#1}}
-\newcommand{\mathClassNum}{\mathfrak{Num}}
-\newcommand{\mathClassFunctor}{\mathfrak{Functor}}
-\newcommand{\mathClassApplicative}{\mathfrak{Applicative}}
-\newcommand{\mathClassMonad}{\mathfrak{Monad}}
-\newcommand{\mathClassGeneral}[1]{\mathbf{#1}}
-\newcommand{\mathTypeClass}[3]{#1\supset#2\Rightarrow#3}
-
-\newcommand{\mathAnonymousTypeParameter}{\blacklozenge}
-
-\newcommand{\mathPure}[1]{#1_\star}
-\newcommand{\mathMakePure}[1]{\mathMakeGeneral{\star}{#1}}
-\newcommand{\mathFMap}{\mathop{\circledS}}%{\times}
-
-\newcommand{\mathApplicativeMap}{\boxtimes}
-
-\newcommand{\mathMakeReturn}[1]{\mathMakeGeneral{\text{return}}{#1}}
-\newcommand{\mathBind}{\mathrel{\ooalign{\hss$\heartsuit$\hss\cr$\longrightarrow$}}}
-\newcommand{\mathLiftM}[1]{{#1}^*}
-
-\newcommand{\mathAnyKind}{\bigstar}
-
-\newcommand{\mathData}[2]{\mathop{\textsf{data}}#1=#2}
-\newcommand{\mathConstructor}[1]{\mathop{\mathrm{#1}}}
-\newcommand{\mathOr}{\vee}
-\newcommand{\mathAnd}{\wedge}
-
-\newcommand{\mathMain}{\mathop{\textsl{main}}}
-\newcommand{\mathGetLine}{\mathop{\textsl{getLine}}}
-\newcommand{\mathPrint}{\mathop{\textsl{print}}}
-\newcommand{\mathNext}{\gg}
-
-\newcommand{\mathDo}[1]{\mathop{\textsf{do}}\left\{#1\right\}}
 
 \begin{document}
 
@@ -110,9 +27,9 @@
 \begin{equation}
 x=1
 \end{equation}
-変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を束縛するという．
+変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．
 
-変数の値がいつでも変化しないことを「参照透過性」と呼ぶ．プログラマーが変数の値を変化させたい理由はユーザー入力，ループ，例外，内部状態，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザー入力に関しても章を改めて取り上げる．
+変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマーが変数の値を変化させたい理由はユーザー入力，ループ，例外，内部状態，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザー入力に関しても章を改めて取り上げる．
 
 本書では変数名を原則1文字として，イタリック体で表し，$w,x,y,z$のようなアルファベット後半の文字を使う．
 
@@ -126,7 +43,7 @@ fx=x+1
 
 本書では関数名を原則1文字として，イタリック体で表し，$f,g,h$のようにアルファベットの$f$以降の文字を使う．ただし有名な関数についてはローマン体で表し，文字数も2文字以上とする．たとえば$\sin$などの三角関数や指数関数がそれにあたる．
 
-変数$x$に関数$f$を適用する場合は次のように書く．\footnote{\haskell では \verb|z = f x| と書く．}
+変数$x$に関数$f$を\keyword{適用}する場合は次のように書く．\footnote{\haskell では \verb|z = f x| と書く．}
 \begin{equation}
 z=fx
 \end{equation}
@@ -139,7 +56,7 @@ z=fxy
 
 \section{ラムダ}
 
-関数とは，変数名に束縛されたラムダ式である．ラムダ式は次のように書く．\footnote{\haskell では \verb|f = \x -> x+1| と書く．}
+関数とは，変数名に束縛された\keyword{ラムダ式}である．ラムダ式は次のように書く．\footnote{\haskell では \verb|f = \x -> x+1| と書く．}
 \begin{equation}
 f=\mathLambda{x}{x+1}
 \end{equation}
@@ -152,7 +69,7 @@ f&=\left(\mathAnonymousParameter+1\right)\\
 
 \section{ローカル変数}
 
-関数内でローカル変数を使いたい場合は以下のように行う．\footnote{\haskell では \verb|z = let {y = 1} in x+y| と書く．\verb|let| 節内の式がひとつの場合，中括弧は省略可能である．式が複数になる場合は \verb|;| で区切る．}
+関数内で\keyword{ローカル変数}を使いたい場合は以下のように行う．\footnote{\haskell では \verb|z = let {y = 1} in x+y| と書く．\verb|let| 節内の式がひとつの場合，中括弧は省略可能である．式が複数になる場合は \verb|;| で区切る．}
 \begin{equation}
 z=\mathLetIn{y=1}{x+y}
 \end{equation}
@@ -173,17 +90,17 @@ fn=\mathLambda{x}{n+x}
 n&=3\\
 g&=fn
 \end{align}
-この例では，関数$g$の中に値$n=3$が閉じ込められているため$g1$は$4$と評価される．値を閉じ込めたラムダ式をクロージャと呼ぶ．
+この例では，関数$g$の中に値$n=3$が閉じ込められているため$g1$は$4$と評価される．値を閉じ込めたラムダ式を\keyword{クロージャ}と呼ぶ．
 
 \section{型}
 
-すべての変数，関数には型がある．代表的な型にはブール型，整数型，浮動小数点型，文字型がある．以降，ブール型を$\mathTypeBool$で，整数型を$\mathTypeInt$で表す．\footnote{\haskell ではブール型を \verb|Bool|，整数型を \verb|Int|，多倍長整数型を \verb|Integer| と書く．}
+すべての変数，関数には\keyword{型}がある．代表的な型にはブール型，整数型，浮動小数点型，文字型がある．以降，ブール型を$\mathTypeBool$で，整数型を$\mathTypeInt$で表す．\footnote{\haskell ではブール型を \verb|Bool|，整数型を \verb|Int|，多倍長整数型を \verb|Integer| と書く．}
 
 浮動小数点型は実数全体を表現できないが，本書では実数全体を意味する$\mathTypeReal$で表すことにする．\footnote{\haskell では単精度浮動小数点型を \verb|Float|，倍精度浮動小数点型を \verb|Double| と書く．}
 
 本書では対応する，あるいは近い数学概念がある場合，型名をブラックボード体1文字で書く．文字型のように対応する数学概念がない場合はボールドローマン体を用いる．文字型は$\mathTypeChar$とする．\footnote{\haskell ではUnicode文字型を \verb|Char| と書く．}
 
-変数$x$の型が$\mathTypeInt$のとき，以下のように型注釈を書く．\footnote{\haskell では \verb|x :: Int| と書く．}
+変数$x$の型が$\mathTypeInt$のとき，以下のように\keyword{型注釈}を書く．\footnote{\haskell では \verb|x :: Int| と書く．}
 \begin{equation}
 x\mathTypeIs\mathTypeInt
 \end{equation}
@@ -218,12 +135,12 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
 
 \section{条件}
 
-条件分岐は次のように書く．\footnote{\haskell では \verb|z = if x>0 then x else -x| と書く．}
+\keyword{条件分岐}は次のように書く．\footnote{\haskell では \verb|z = if x>0 then x else -x| と書く．}
 \begin{equation}
 z=\mathIf{x>0}{x}{-x}
 \end{equation}
 
-条件分岐の代わりに以下のようなパターンマッチも使える．\footnote{\haskell では以下のように書くのが一般的である．
+条件分岐の代わりに以下のような\keyword{パターンマッチ}も使える．\footnote{\haskell では以下のように書くのが一般的である．
 \begin{footcode}
       f = case x of 1 -> 1
                     _ -> 0
@@ -242,7 +159,7 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 \mathPatternMatch{f1}{1}{f\mathAny}{0}
 \end{equation}
 
-関数定義には次のようにガードと呼ばれる条件を付与することができる．\footnote{\haskell では次のように書く．
+関数定義には次のように\keyword{ガード}と呼ばれる条件を付与することができる．\footnote{\haskell では次のように書く．
 \begin{footcode}
       f x | x > 0     = x
           | otherwise = -x
@@ -272,7 +189,7 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 
 \section{関数合成}
 
-関数の合成は次のように書く．\footnote{\haskell では \verb|f = f2.f1| と書く．}
+関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|f = f2.f1| と書く．}
 \begin{equation}
 f=f_2\mathCompose f_1
 \end{equation}
@@ -290,7 +207,7 @@ f&=f_3\mathWeakCompose f_2\mathCompose f_1\\
 
 \section{タプル}
 
-複数の変数をまとめてひとつのタプルにすることができる．例を挙げる．\footnote{\haskell では \verb|z = (x, y)| と書く．}
+複数の変数をまとめてひとつの\keyword{タプル}にすることができる．例を挙げる．\footnote{\haskell では \verb|z = (x, y)| と書く．}
 \begin{equation}
 z=(x,y)
 \end{equation}
@@ -300,21 +217,21 @@ z=(x,y)
 z\mathTypeIs(\mathTypeInt,\mathTypeInt)
 \end{equation}
 
-要素を含まないタプルをユニットと呼ぶ．ユニットは次のように書く．\footnote{\haskell では \verb|z = ()| と書く．}
+要素を含まないタプルを\keyword{ユニット}と呼ぶ．ユニットは次のように書く．\footnote{\haskell では \verb|z = ()| と書く．}
 \begin{equation}
 z=()
 \end{equation}
 
-ユニットの型はユニット型で，型注釈を次のように書く．\footnote{\haskell では \verb|z :: ()| と書く．}
+ユニットの型は\keyword{ユニット型}で，型注釈を次のように書く．\footnote{\haskell では \verb|z :: ()| と書く．}
 \begin{equation}
 z\mathTypeIs()
 \end{equation}
 
 \section{リストと内包表記}
 
-ある変数がリストであるとき，その変数がリストであることを忘れないように$\mathList{x}$と小さく$\mathrm{s}$を付けることにする．
+ある変数が\keyword{リスト}であるとき，その変数がリストであることを忘れないように$\mathList{x}$と小さく$\mathrm{s}$を付けることにする．
 
-空リストは次のように定義する．\footnote{\haskell では \verb|xs = []| と書く．}
+\keyword{空リスト}は次のように定義する．\footnote{\haskell では \verb|xs = []| と書く．}
 \begin{equation}
 \mathList{x}=\mathEmptyList
 \end{equation}
@@ -333,7 +250,7 @@ z\mathTypeIs()
 \mathList{x}=\mathMakeList{1,2,\dots,100}
 \end{equation}
 
-リストの構成にはない方表記が使える．例を挙げる．\footnote{\haskell では次のように書く．
+リストの構成には\keyword{内包表記}が使える．例を挙げる．\footnote{\haskell では次のように書く．
 \begin{footcode}
       xs = [x^2 | x <- [1, 2..100], x>50]
 \end{footcode}}
@@ -341,14 +258,14 @@ z\mathTypeIs()
 \mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},x>50}
 \end{equation}
 
-リストとリストをつなぐ場合は$\mathListConcat$演算子を用いる．\footnote{\haskell では \verb|zs = xs ++ ys| と書く．}
+リストとリストをつなぐ場合は\keyword{リスト結合演算子}$\mathListConcat$を用いる．\footnote{\haskell では \verb|zs = xs ++ ys| と書く．}
 \begin{equation}
 \mathList{z}=\mathList{x}\mathListConcat\mathList{y}
 \end{equation}
 
 \section{マップと畳み込み}
 
-リスト$\mathList{x}$の各要素に関数$f$を適用して，その結果をリスト$\mathList{z}$に格納するためには次のようにマップ演算子$\mathMap$を用いる．\footnote{\haskell では \verb|zs = f `map` xs| と書く．}
+リスト$\mathList{x}$の各要素に関数$f$を適用して，その結果をリスト$\mathList{z}$に格納するためには次のように\keyword{マップ演算子}$\mathMap$を用いる．\footnote{\haskell では \verb|zs = f `map` xs| と書く．}
 \begin{equation}
 \mathList{z}=f\mathMap\mathList{x}
 \end{equation}
@@ -425,7 +342,7 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \end{equation}
 
-型パラメタには制約をつけることができる．型の集合を型クラスと呼び，フラクチュール体で書く．たとえば数を表す型クラスは$\mathClassNum$である．型パラメタ$\mathTypeGeneral{a}$が型クラス$\mathClassNum$に属するとき，上述の関数$f$の型注釈は次のようになる．\footnote{\haskell では \verb|f :: Num a => a -> a| と書く．}
+\keyword{型パラメタ}には制約をつけることができる．型の集合を\keyword{型クラス}と呼び，フラクチュール体で書く．たとえば数を表す型クラスは$\mathClassNum$である．型パラメタ$\mathTypeGeneral{a}$が型クラス$\mathClassNum$に属するとき，上述の関数$f$の型注釈は次のようになる．\footnote{\haskell では \verb|f :: Num a => a -> a| と書く．}
 \begin{equation}
 f\mathTypeIs
   \mathTypeClass{\mathClassNum}
@@ -465,7 +382,7 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \end{equation}
 とする．
 
-リストもMaybeも元の型$\mathTypeGeneral{a}$から派生しており，関数適用のための特別な演算子を持つことになる．そこで，リストやMaybeは関手という型クラスに属する，型パラメタを伴う型であるとする．関手の型クラスを$\mathClassFunctor$で表す．関手型クラスの$\mathTypeGeneral{a}$型の変数を次のように型注釈する．\footnote{\haskell では \verb|xm :: Functor f => f a| と書く．}
+リストもMaybeも元の型$\mathTypeGeneral{a}$から派生しており，関数適用のための特別な演算子を持つことになる．そこで，リストやMaybeは\keyword{関手}という型クラスに属する，型パラメタを伴う型であるとする．関手の型クラスを$\mathClassFunctor$で表す．関手型クラスの$\mathTypeGeneral{a}$型の変数を次のように型注釈する．\footnote{\haskell では \verb|xm :: Functor f => f a| と書く．}
 \begin{equation}
 \mathPure{x}\mathTypeIs
   \mathTypeClass{\mathClassFunctor}
