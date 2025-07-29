@@ -1,0 +1,16 @@
+version: '3'
+
+env:
+  PLATEX: platex
+  DVIPDF: dvipdfmx -p a5
+  RM: rm
+
+tasks:
+  build:
+    desc: Bulid PDF from TeX source.
+    cmds:
+      - $PLATEX haskell; $PLATEX haskell; $DVIPDF haskell
+  clean:
+    desc: Clean up intermediate files.
+    cmds:
+      - $RM *.aux *.dvi *.idx *.log *.toc
