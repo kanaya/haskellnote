@@ -9,7 +9,7 @@ tasks:
   build:
     desc: Bulid PDF from TeX source.
     cmds:
-      - $PLATEX haskell; $PLATEX haskell; $DVIPDF haskell
+      - $PLATEX haskellnote; $PLATEX haskellnote; $DVIPDF haskellnote
   clean:
     desc: Clean up intermediate files.
     cmds:
