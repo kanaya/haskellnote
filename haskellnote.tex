@@ -45,6 +45,7 @@
 \newcommand{\mathListConcat}{\mathop{\#}}
 
 \newcommand{\mathIf}[3]{\mathop{\textsf{if}}#1\mathop{\textsf{then}}#2\mathop{\textsf{else}}#3}
+\newcommand{\mathCompareEq}{\equiv}
 \newcommand{\mathAny}{\_}
 \newcommand{\mathPatternMatch}[4]{\left\{\begin{aligned}#1&=#2\\#3&=#4\end{aligned}\right.}
 \newcommand{\mathCase}[5]{\mathop{\textsf{case}}#1\mathop{\textsf{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
@@ -230,7 +231,7 @@ z=\mathIf{x>0}{x}{-x}
 \begin{equation}
 f=\mathCase{x}{1}{1}{\mathAny}{0}
 \end{equation}
-この場合$x=1$ならば$f$は$1$を，そうでなければ$f$は$0$を返す．ここに$\mathAny$はすべてのパターンに一致する記号である．パターンマッチは上から順に行われる．
+この場合$x\mathCompareEq1$ならば$f$は$1$を，そうでなければ$f$は$0$を返す．ここに$\mathAny$はすべてのパターンに一致する記号である．パターンマッチは上から順に行われる．
 
 関数定義にもパターンマッチを使える．\footnote{\haskell では次のように書く．
 \begin{footcode}
@@ -375,13 +376,13 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \begin{equation}
 z=y/x
 \end{equation}
-のときに$x=0$であったとしたら，この計算は失敗する．プログラムが計算を失敗した場合，たいていのプログラマは大域ジャンプを試みる．しかし大域ジャンプは変数の書き換えを行うことであるから，別の方法が望まれる．\haskell では失敗する可能性がある場合にはMaybeという機構が使える．
+のときに$x\mathCompareEq0$であったとしたら，この計算は失敗する．プログラムが計算を失敗した場合，たいていのプログラマは大域ジャンプを試みる．しかし大域ジャンプは変数の書き換えを行うことであるから，別の方法が望まれる．\haskell では失敗する可能性がある場合にはMaybeという機構が使える．
 
-いま関数$f$が引数$x$と$y$を取り，$x\neq0$であるならば$y/x$を返すとする．もし$x=0$であれば失敗を意味する$\mathNothing$（ナッシング）を返すとする．すると関数$f$の定義は次のようになる．
+いま関数$f$が引数$x$と$y$を取り，$x\neq0$であるならば$y/x$を返すとする．もし$x\mathCompareEq0$であれば失敗を意味する$\mathNothing$（ナッシング）を返すとする．すると関数$f$の定義は次のようになる．
 \begin{equation}
 fyx=\mathIf{x\neq0}{y/x}{\mathNothing}
 \end{equation}
-残念ながら上式は不完全である．なぜならば$x\neq0$のときの戻り値は数であるのに対して，$x=0$のときの戻り値は数ではないからである．そこで
+残念ながら上式は不完全である．なぜならば$x\neq0$のときの戻り値は数であるのに対して，$x\mathCompareEq0$のときの戻り値は数ではないからである．そこで
 \begin{equation}
 fyx=\mathIf{x\neq0}{\mathMakeJust{y/x}}{\mathNothing}
 \end{equation}
