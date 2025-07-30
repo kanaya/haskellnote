@@ -5,6 +5,7 @@
 \usepackage{fancybox}
 \usepackage{MnSymbol}
 \usepackage{stmaryrd}
+\usepackage{manfnt}
 \usepackage{haskellstyle}
 
 \usepackage{geometry}
@@ -425,14 +426,6 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \end{equation}
 であると解釈する．
 
-関手は次の関手則に従う．
-\begin{align}
-\mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
-(g\mathCompose f)\mathFMap\mathPure{x}&=((g\mathFMap)\mathCompose(f\mathFMap))\mathPure{x}\\
-&=g\mathFMap(f\mathFMap\mathPure{x})
-\end{align}
-% つまり組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}},\mathId,\mathFMap)$はモノイドである．--結合性は示していない．
-
 Function of parametric type with functor class:\footnote{In \haskell, \verb|f :: Functor f => a -> f a|.}
 \begin{equation}
 f\mathTypeIs
@@ -610,6 +603,8 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \mathPure{z}=\mathDo{x'\leftarrow\mathPure{x};y'\leftarrow\mathPure{y};fx';gy'}
 \end{equation}
 
+\dbend
+
 \section{モノイド則}
 型$\mathTypeGeneral{a}$の変数$x,y,z$について，特別な変数$\mathIdentity\mathTypeIs\mathTypeGeneral{a}$および二項演算子$\mathAnyBinaryOperator$があり
 \begin{align}
@@ -655,6 +650,7 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
 \mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})&=(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}
 \end{align}
+% つまり，組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathFuncTypeGeneral{\mathTypeGeneral{m}}{\mathTypeGeneral{a}}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
 
 次の\keyword{クライスリスター}すなわち
 \begin{equation}
