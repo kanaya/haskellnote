@@ -19,7 +19,7 @@
 \newcommand{\mathTypeFunction}[2]{#1\rightarrow#2}
 \newcommand{\mathTypeFunctionII}[3]{#1\rightarrow#2\rightarrow#3}
 
-\newcommand{\mathTypeList}[1]{\llbracket#1\rrbracket}
+\newcommand{\mathTypeList}[1]{[#1]}
 \newcommand{\mathList}[1]{{#1}_\mathrm{s}}
 \newcommand{\mathMakeList}[1]{\left[#1\right]}
 \newcommand{\mathEmptyList}{[\,]}
@@ -37,6 +37,8 @@
 
 \newcommand{\mathFib}{\mathop{\mathrm{fib}}}
 
+\newcommand{\mathId}{\mathop{\mathrm{id}}}
+
 \newcommand{\mathAnonymousOperator}{\mathop{\maltese}}
 \newcommand{\mathMap}{\otimes}
 \newcommand{\mathFold}[2]{\bigcup_{#1}^{#2}}
@@ -48,6 +50,7 @@
 \newcommand{\mathTypeMaybe}[1]{\mathFuncTypeGeneral{?}{#1}}
 \newcommand{\mathMakeJust}[1]{\mathMakeGeneral{\text{Just}}{#1}}
 \newcommand{\mathNothing}{\emptyset}
+\newcommand{\mathMonadic}[1]{\tilde{#1}}
 
 \newcommand{\mathTypeGeneral}[1]{\mathbf{#1}}
 \newcommand{\mathClassNum}{\mathfrak{Num}}
@@ -63,10 +66,12 @@
 \newcommand{\mathMakePure}[1]{\mathMakeGeneral{\star}{#1}}
 \newcommand{\mathFMap}{\mathop{\circledS}}%{\times}
 
-\newcommand{\mathApplicativeMap}{\boxtimes}
+\newcommand{\mathApplicativeMap}{\mathop{\circledast}}
+\newcommand{\mathApplicativeFuncCall}[1]{\llbracket#1\rrbracket}
 
 \newcommand{\mathMakeReturn}[1]{\mathMakeGeneral{\text{return}}{#1}}
-\newcommand{\mathBind}{\mathrel{\ooalign{\hss$\heartsuit$\hss\cr$\longrightarrow$}}}
+\newcommand{\mathBind}{\mathop{\heartsuit}}
+\newcommand{\mathBindRight}{\mathrel{\ooalign{\hss$\mathBind$\hss\cr$\longrightarrow$}}}
 \newcommand{\mathLiftM}[1]{{#1}^*}
 
 \newcommand{\mathAnyKind}{\bigstar}

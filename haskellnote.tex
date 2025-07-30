@@ -31,7 +31,7 @@ x=1
 
 変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマーが変数の値を変化させたい理由はユーザー入力，ループ，例外，内部状態，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザー入力に関しても章を改めて取り上げる．
 
-本書では変数名を原則1文字として，イタリック体で表し，$w,x,y,z$のようなアルファベット後半の文字を使う．
+本書では変数名を原則1文字として，イタリック体で表し，$w,x,y,z$のような$n$以降のアルファベットを使う．
 
 \section{関数}
 
@@ -118,7 +118,7 @@ f\mathTypeIs\mathTypeFunctionII{\mathTypeInt}{\mathTypeInt}{\mathTypeInt}
 \end{equation}
 ここで関数$f$は整数型の引数をふたつとり，整数型の値を返す．型$\mathTypeFunctionII{\mathTypeInt}{\mathTypeInt}{\mathTypeInt}$は$\mathTypeFunction{\mathTypeInt}{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\right)}$と解釈される．
 
-$(\mathTypeFunction{\mathTypeInt}{\mathTypeInt})$型の関数を受取，$(\mathTypeFunction{\mathTypeInt}{\mathTypeInt})$型の関数を返す関数は次の型を持つ．\footnote{\haskell では以下のように書く．
+$(\mathTypeFunction{\mathTypeInt}{\mathTypeInt})$型の関数を受け取り，$(\mathTypeFunction{\mathTypeInt}{\mathTypeInt})$型の関数を返す関数は次の型を持つ．\footnote{\haskell では以下のように書く．
 \begin{footcode}
       f :: (Int -> Int) -> (Int -> Int)
 \end{footcode}}
@@ -132,6 +132,13 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
   {\mathTypeFunction{\mathTypeInt}{\mathTypeInt}}
 \end{equation}
 と書いても良い．
+
+\section{リテラル}
+
+\keyword{リテラル}は次のように書く．\footnote{\haskell では \verb|z = 1| と書く．}
+\begin{equation}
+z=1
+\end{equation}
 
 \section{条件}
 
@@ -170,28 +177,27 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 
 \section{関数の再帰呼び出し}
 
-関数は再帰的に呼び出せる．$x\ge0$を前提とすると，$x$番目のフィボナッチ数を計算する関数$\mathFib$を次のように定義できる．\footnote{\haskell では次のように書く．ただし\haskell には符号なし整数型がないために \verb|x| が正であることを別に担保する必要がある．またこのコードは無駄な再帰呼び出しを行っており実用的ではない．
+関数は再帰的に呼び出せる．$n\ge0$を前提とすると，$n$番目のフィボナッチ数を計算する関数$\mathFib$を次のように定義できる．\footnote{\haskell では次のように書く．ただし\haskell には符号なし整数型がないために \verb|n| が正であることを別に担保する必要がある．またこのコードは無駄な再帰呼び出しを行っており実用的ではない．
 \begin{footcode}
       fib 0 = 0
       fib 1 = 1
-      fib x = fib (x-1) + fib (x-2)
+      fib n = fib (n-1) + fib (n-2)
 \end{footcode}}
 \begin{equation}
 \left\{
 \begin{aligned}
 \mathFib 0&=0\\
 \mathFib 1&=1\\
-\mathFib x&=\mathFib(x-1)+\mathFib(x-2)
+\mathFib n&=\mathFib(n-1)+\mathFib(n-2)
 \end{aligned}
 \right.
 \end{equation}
-% x<0
 
 \section{関数合成}
 
-関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|f = f2.f1| と書く．}
+関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g.f| と書く．}
 \begin{equation}
-f=f_2\mathCompose f_1
+k=g\mathCompose f
 \end{equation}
 関数合成演算子$\mathCompose$は以下のように右結合する．
 \begin{align}
@@ -199,11 +205,21 @@ f&=f_3\mathCompose f_2\mathCompose f_1\\
 &=\left(f_3\mathCompose f_2\right)\mathCompose f_1\\
 \end{align}
 
-優先順位の低い関数合成演算子もあると便利である．そのために演算子$\mathWeakCompose$を導入する．例を挙げる．\footnote{\haskell では \verb|f = f3 $ f2.f1| と書く．}
+優先順位の低い関数合成演算子もあると便利である．そのために演算子$\mathWeakCompose$を導入する．例を挙げる．\footnote{\haskell では \verb|k = h $ g.f| と書く．}
 \begin{align}
-f&=f_3\mathWeakCompose f_2\mathCompose f_1\\
-&=f_3\mathCompose\left(f_2\mathCompose f_1\right)
+k&=h\mathWeakCompose g\mathCompose f\\
+&=h\mathCompose\left(g\mathCompose f\right)
 \end{align}
+
+いま任意の関数$f$に対して
+\begin{equation}
+\mathId f=f
+\end{equation}
+なる関数$\mathId$があり，かつ任意の関数$f,g,h$に対して
+\begin{equation}
+(h\mathCompose g)\mathCompose f=h\mathCompose(g\mathCompose f)
+\end{equation}
+が成り立つとする．このとき関数は\keyword{モノイド}であるという．
 
 \section{タプル}
 
@@ -297,13 +313,14 @@ z=y/x
 
 いま関数$f$が引数$x$と$y$を取り，$x\neq0$であるならば$y/x$を返すとする．もし$x\mathCompareEq0$であれば失敗を意味する$\mathNothing$（ナッシング）を返すとする．すると関数$f$の定義は次のようになる．
 \begin{equation}
-fyx=\mathIf{x\neq0}{y/x}{\mathNothing}
+fyx=\mathIf{x\neq0}{y/x}{\mathNothing}\dots\text{（不完全）}
 \end{equation}
 残念ながら上式は不完全である．なぜならば$x\neq0$のときの戻り値は数であるのに対して，$x\mathCompareEq0$のときの戻り値は数ではないからである．そこで
 \begin{equation}
-fyx=\mathIf{x\neq0}{\mathMakeJust{y/x}}{\mathNothing}
+\mathMonadic{f}yx=\mathIf{x\neq0}{\mathMakeJust{y/x}}{\mathNothing}
 \end{equation}
 とする．ここに$\mathMakeJust{y/x}$は数$y/x$から作られる，Maybeで包まれた数である．
+% ~fの理由．
 
 整数型$\mathTypeInt$をMaybeで包む場合は$\mathTypeMaybe{\mathTypeInt}$と書く．Maybeで包まれた型を持つ変数は$\mathMaybe{x}$のように小さく$?$をつける．例を挙げる．\footnote{\haskell では \verb|xm :: Maybe Int| と書く．}
 \begin{equation}
@@ -413,6 +430,12 @@ fmap.
 
 関手は関手則に従う．
 
+\begin{align}
+\mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
+(g\mathCompose f)\mathFMap\mathPure{x}&=((g\mathFMap)\mathCompose(f\mathFMap))\mathPure{x}\\
+&=g\mathFMap(f\mathFMap\mathPure{x})
+\end{align}
+
 Function of parametric type with functor class:\footnote{In \haskell, \verb|f :: Functor f => a -> f a|.}
 \begin{equation}
 f\mathTypeIs
@@ -430,6 +453,10 @@ Example function application:\footnote{In \haskell, \verb|zm = (+1) <$> Just x|.
 
 \section{関手としての関数}
 
+\begin{equation}
+f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{q}}{\mathTypeGeneral{r}}
+\end{equation}
+
 Function as a functor:\footnote{In \haskell, \verb|f :: ((->) r) q|.}
 \begin{equation}
 f\mathTypeIs\left(\mathTypeFunction{\mathAnonymousTypeParameter}{\mathTypeGeneral{r}}\right)\mathTypeGeneral{q}
@@ -441,6 +468,12 @@ Thus,
 \begin{equation}
 f_2\mathCompose f_1\equiv f_2\mathFMap f_1
 \end{equation}
+
+\begin{align}
+\mathId\mathCompose f&=\mathId f=f\\
+(h\mathCompose g)\mathCompose f&=((h\mathCompose)\mathCompose(g\mathCompose))f\\
+&=h\mathCompose(g\mathCompose f)
+\end{align}
 
 \section{アプリカティブ関手}
 
@@ -474,20 +507,30 @@ or\footnote{In \haskell, \verb|zm = (+) <$> xm <*> ym| or \verb|zm = liftA2 (+) 
   \mathFMap\mathPure{x}
   \mathApplicativeMap\mathPure{y}
 \end{equation}
+or
+\begin{equation}
+\mathPure{z}=\mathApplicativeFuncCall{f\,\mathPure{x}\,\mathPure{y}}
+\end{equation}
 
 \section{モナド}
 
+Returning \emph{List}.
+\begin{equation}
+	.
+\end{equation}
 Returning \emph{Maybe}:\footnote{In \haskell, \verb|f :: Int -> Maybe Int| and \verb|f x = Just x|.}
 \begin{align}
 f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
 fx&=\mathMakeJust{x}
 \end{align}
+% Applicative.
 Returning \emph{monad}:
 \begin{align}
 f&\mathTypeIs
   \mathTypeFunction{\mathTypeInt}{\mathFuncTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}\\
 fx&=\mathMakeReturn{x}
 \end{align}
+
 
 Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
 \begin{equation}
@@ -499,7 +542,7 @@ f\mathTypeIs
 
 Monadic function binding:\footnote{In \haskell, \verb|zm = xm >>= f1 >>= f2|.}
 \begin{equation}
-\mathPure{z}=\mathPure{x}\mathBind f_1\mathBind f_2
+\mathPure{z}=\mathPure{x}\mathBindRight f_1\mathBindRight f_2
 \end{equation}
 where
 \begin{align}
@@ -513,7 +556,7 @@ zm = xm >>= f >>= g'
   where g' w = pure (g w)
 \end{footcode}}
 \begin{multline}
-\mathPure{z}=\mathPure{x}\mathBind f\mathBind g'\\
+\mathPure{z}=\mathPure{x}\mathBindRight f\mathBindRight g'\\
 \mathWhere{g'w=\mathMakePure{gw}}
 \end{multline}
 where
@@ -523,7 +566,7 @@ g&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}.
 \end{align}
 Another solution is:
 \begin{equation}
-\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBind\mathPure{x}
+\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBindRight\mathPure{x}
 \end{equation}
 where $\mathLiftM{g}$ means \verb|liftM g| in \haskell.\footnote{In \haskell, \verb|zm = (liftM g . f) xm|.}
 
@@ -560,7 +603,7 @@ or \verb|data V2 = V2 Int Int|.}
 
 IO example:\footnote{In \haskell, \verb|main = getLine >>= print >> return 0|.}
 \begin{equation}
-\mathMain=\mathGetLine\mathBind\mathPrint\mathNext\mathMakeReturn{0}
+\mathMain=\mathGetLine\mathBindRight\mathPrint\mathNext\mathMakeReturn{0}
 \end{equation}
 
 \section{Do構文}
@@ -569,5 +612,37 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \begin{equation}
 \mathPure{z}=\mathDo{x'\leftarrow\mathPure{x};y'\leftarrow\mathPure{y};fx';gy'}
 \end{equation}
+
+\section{Notes}
+
+Monoid law.
+\begin{align}
+\mathId\mathCompose f&=f\\
+(h\mathCompose g)\mathCompose f&=h\mathCompose(g\mathCompose f)
+\end{align}
+
+Functor law.
+\begin{align}
+\mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
+(g\mathCompose f)\mathFMap\mathPure{x}&=((f\mathFMap)\mathCompose(g\mathFMap))\mathPure{x}\\
+&=f\mathFMap(g\mathFMap\mathPure{x})
+\end{align}
+
+Applicative law.
+\begin{align}
+\mathId\mathApplicativeMap\mathPure{x}&=\mathPure{x}\\
+\mathMakePure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{fx}\\
+\mathPure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{\mathAnonymousParameter\mathWeakCompose x}\mathApplicativeMap\mathPure{f}\\
+\mathMakePure{\mathAnonymousParameter\mathCompose\mathAnonymousParameter}\mathApplicativeMap\mathPure{h}\mathApplicativeMap\mathPure{g}\mathApplicativeMap\mathPure{f}
+&=\mathPure{h}\mathApplicativeMap(\mathPure{g}\mathApplicativeMap\mathPure{f})\\
+&=\mathPure{h}\mathApplicativeMap\mathMakePure{g\mathCompose f}
+\end{align}
+
+Monadic law.
+\begin{align}
+\mathMonadic{f}\mathBind\mathMakeReturn{x}&=\mathMonadic{f}x\\
+\mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
+\mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})&=(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}
+\end{align}
 
 \end{document}
