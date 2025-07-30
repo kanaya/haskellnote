@@ -69,7 +69,7 @@
 \newcommand{\mathApplicativeMap}{\mathop{\circledast}}
 \newcommand{\mathApplicativeFuncCall}[1]{\llbracket#1\rrbracket}
 
-\newcommand{\mathMakeReturn}[1]{\mathMakeGeneral{\text{return}}{#1}}
+\newcommand{\mathMakeReturn}[1]{\mathMakePure{#1}}%{\mathMakeGeneral{\text{return}}{#1}}
 \newcommand{\mathBind}{\mathop{\heartsuit}}
 \newcommand{\mathBindRight}{\mathrel{\ooalign{\hss$\mathBind$\hss\cr$\longrightarrow$}}}
 \newcommand{\mathLiftM}[1]{{#1}^*}
@@ -87,3 +87,6 @@
 \newcommand{\mathNext}{\gg}
 
 \newcommand{\mathDo}[1]{\mathop{\textsf{do}}\left\{#1\right\}}
+
+\newcommand{\mathIdentity}{i}
+\newcommand{\mathAnyBinaryOperator}{\bigcirc}

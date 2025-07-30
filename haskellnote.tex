@@ -613,36 +613,63 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \mathPure{z}=\mathDo{x'\leftarrow\mathPure{x};y'\leftarrow\mathPure{y};fx';gy'}
 \end{equation}
 
-\section{Notes}
+\section{モノイド則}
+型$\mathTypeGeneral{a}$の変数$x,y,z$について，特別な変数$\mathIdentity\mathTypeIs\mathTypeGeneral{a}$および二項演算子$\mathAnyBinaryOperator$があり
+\begin{align}
+\mathIdentity\mathAnyBinaryOperator x&=x\\
+(x\mathAnyBinaryOperator y)\mathAnyBinaryOperator z&=x\mathAnyBinaryOperator(y\mathAnyBinaryOperator z)
+\end{align}
+であるとき，組み合わせ$(\mathTypeGeneral{a},\mathIdentity,\mathAnyBinaryOperator)$をモノイドと呼ぶ．
 
-Monoid law.
+同じ型から同じ型への1引数関数を改めて$\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}$で表し，特別な変数$\mathIdentity$を関数$\mathId$，二項演算子を$\mathCompose$とすると以下の関係が成り立つ．
 \begin{align}
 \mathId\mathCompose f&=f\\
 (h\mathCompose g)\mathCompose f&=h\mathCompose(g\mathCompose f)
 \end{align}
+そこで組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}},\mathId,\mathCompose)$はモノイドであると言える．
 
-Functor law.
+\section{関手則}
+
+関手のマップ演算子$\mathFMap$は以下の規則に従う．
 \begin{align}
 \mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
-(g\mathCompose f)\mathFMap\mathPure{x}&=((f\mathFMap)\mathCompose(g\mathFMap))\mathPure{x}\\
-&=f\mathFMap(g\mathFMap\mathPure{x})
+(g\mathCompose f)\mathFMap\mathPure{x}&=((g\mathFMap)\mathCompose(f\mathFMap))\mathPure{x}\\
+&=g\mathFMap(f\mathFMap\mathPure{x})
 \end{align}
 
-Applicative law.
+\section{アプリカティブ関手則}
+
+アプリカティブ関手のマップ演算子$\mathApplicativeMap$は以下の規則に従う．
 \begin{align}
-\mathId\mathApplicativeMap\mathPure{x}&=\mathPure{x}\\
+\mathMakePure{\mathId}\mathApplicativeMap\mathPure{x}&=\mathPure{x}\\
 \mathMakePure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{fx}\\
 \mathPure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{\mathAnonymousParameter\mathWeakCompose x}\mathApplicativeMap\mathPure{f}\\
 \mathMakePure{\mathAnonymousParameter\mathCompose\mathAnonymousParameter}\mathApplicativeMap\mathPure{h}\mathApplicativeMap\mathPure{g}\mathApplicativeMap\mathPure{f}
-&=\mathPure{h}\mathApplicativeMap(\mathPure{g}\mathApplicativeMap\mathPure{f})\\
-&=\mathPure{h}\mathApplicativeMap\mathMakePure{g\mathCompose f}
+&=\mathPure{h}\mathApplicativeMap(\mathPure{g}\mathApplicativeMap\mathPure{f})
 \end{align}
 
-Monadic law.
+\section{モナド則}
+
+モナドのマップ演算子$\mathBind$は以下の規則に従う．
 \begin{align}
 \mathMonadic{f}\mathBind\mathMakeReturn{x}&=\mathMonadic{f}x\\
 \mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
 \mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})&=(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}
 \end{align}
+
+クライスリスター
+\begin{equation}
+\mathMonadic{f}^\bigstar=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
+\end{equation}
+% http://walk.northcol.org/haskell/monads/
+
+% 正格評価
+% https://kazu-yamamoto.hatenablog.jp/entry/20110413/1302683869
+
+% returnの削除
+% https://qiita.com/mod_poppo/items/8c483951703b5ea0f74e
+
+% STモナド
+% https://qiita.com/7shi/items/2e9bff5d88302de1a9e9
 
 \end{document}
