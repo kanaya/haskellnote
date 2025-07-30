@@ -419,22 +419,19 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
     {\mathFuncTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{b}}}
 \end{equation}
 
-
 もし変数$\mathPure{x}$の型がリストであれば
 \begin{equation}
 \mathFMap=\mathMap
 \end{equation}
 であると解釈する．
 
-fmap.
-
-関手は関手則に従う．
-
+関手は次の関手則に従う．
 \begin{align}
 \mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
 (g\mathCompose f)\mathFMap\mathPure{x}&=((g\mathFMap)\mathCompose(f\mathFMap))\mathPure{x}\\
 &=g\mathFMap(f\mathFMap\mathPure{x})
 \end{align}
+% つまり組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}},\mathId,\mathFMap)$はモノイドである．--結合性は示していない．
 
 Function of parametric type with functor class:\footnote{In \haskell, \verb|f :: Functor f => a -> f a|.}
 \begin{equation}
