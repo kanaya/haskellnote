@@ -657,10 +657,17 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})&=(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}
 \end{align}
 
-クライスリスター
+次の\keyword{クライスリスター}すなわち
 \begin{equation}
-\mathMonadic{f}^\bigstar=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
+\mathStar{\mathMonadic{f}}=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
 \end{equation}
+を用いると，モナド則は次のように書き換えられる．
+\begin{align}
+\left(\mathStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
+\left(\mathStar{\mathMakePure{\mathAnonymousParameter}}\right)\mathPure{x}&=\mathPure{x}\\
+\mathStar{\mathMonadic{g}}\left(\mathStar{\mathMonadic{f}}\mathPure{x}\right)&=\mathStar{\left(\mathStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}
+\end{align}
+
 % http://walk.northcol.org/haskell/monads/
 
 % 正格評価
