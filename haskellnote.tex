@@ -664,7 +664,13 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \mathStar{\left(\mathStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathStar{\mathMonadic{g}}\left(\mathStar{\mathMonadic{f}}\mathPure{x}\right)
 \end{align}
 
+\section{関手（数学）}
 
+圏$\mathcal{C}$の対象を$X$とする．圏$\mathcal{D}$の対象は関手$\mathfrak{F}$によって対象$X$と関係づけられる．圏$\mathcal{C}$における射$f:X\rightarrow Y$が$\mathfrak{F}(f):\mathfrak{F}(X)\rightarrow\mathfrak{F}(Y)$に対応し，次の関係を満たす．
+\begin{itemize}
+\item $X\in\mathcal{C}$に対して$\mathfrak{F}(\mathId_X)=\mathId_{\mathfrak{F}(X)}$
+\item $f:X\rightarrow Y$および$g:Y\rightarrow Z$に対して$\mathfrak{F}(g\mathCompose f)=\mathfrak{F}(g)\mathCompose\mathfrak{F}(f)$
+\end{itemize}
 
 % http://walk.northcol.org/haskell/monads/
 
