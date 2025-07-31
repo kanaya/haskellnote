@@ -486,21 +486,22 @@ where
 Applicative style:\footnote{In \haskell, \verb|zm = pure (+) <*> xm <*> ym|.}
 \begin{equation}
 \mathPure{z}
-  =\mathMakePure{\mathAnonymousParameter+\mathAnonymousParameter}
+  =\mathMakePure{f}
   \mathApplicativeMap\mathPure{x}
   \mathApplicativeMap\mathPure{y}
 \end{equation}
-or\footnote{In \haskell, \verb|zm = (+) <$> xm <*> ym| or \verb|zm = liftA2 (+) xm ym|.}
+or\footnote{In \haskell, \verb|zm = f <$> xm <*> ym|.}
 \begin{equation}
 \mathPure{z}
-  =\left(\mathAnonymousParameter+\mathAnonymousParameter\right)
+  =f
   \mathFMap\mathPure{x}
   \mathApplicativeMap\mathPure{y}
 \end{equation}
-or
+or\footnote{In \haskell, \verb|zm = liftA2 f xm ym|. }
 \begin{equation}
 \mathPure{z}=\mathApplicativeFuncCall{f\,\mathPure{x}\,\mathPure{y}}
 \end{equation}
+
 
 \section{モナド}
 
@@ -648,7 +649,7 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \begin{align}
 \mathMonadic{f}\mathBind\mathMakeReturn{x}&=\mathMonadic{f}x\\
 \mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
-\mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})&=(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}
+(\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}&=\mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})
 \end{align}
 % つまり，組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathFuncTypeGeneral{\mathTypeGeneral{m}}{\mathTypeGeneral{a}}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
 
@@ -660,8 +661,10 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \begin{align}
 \left(\mathStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
 \left(\mathStar{\mathMakePure{\mathAnonymousParameter}}\right)\mathPure{x}&=\mathPure{x}\\
-\mathStar{\mathMonadic{g}}\left(\mathStar{\mathMonadic{f}}\mathPure{x}\right)&=\mathStar{\left(\mathStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}
+\mathStar{\left(\mathStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathStar{\mathMonadic{g}}\left(\mathStar{\mathMonadic{f}}\mathPure{x}\right)
 \end{align}
+
+
 
 % http://walk.northcol.org/haskell/monads/
 
