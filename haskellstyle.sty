@@ -2,13 +2,13 @@
 
 \newcommand{\haskell}{\textsf{Haskell}}
 
-\newcommand{\mathCompose}{\bullet}
-\newcommand{\mathWeakCompose}{\mathop{\$}}
+\newcommand{\mathCompose}{\mathbin{\bullet}}
+\newcommand{\mathWeakCompose}{\mathbin{\$}}
 
 \newcommand{\mathLambda}[2]{\backslash#1\mapsto#2}
-\newcommand{\mathAnonymousParameter}{\lozenge}
-\newcommand{\mathWhere}[1]{\mathop{\textsf{where}}\left\{#1\right\}}
-\newcommand{\mathLetIn}[2]{\mathop{\textsf{let}}\left\{#1\right\}\mathop{\textsf{in}}#2}
+\newcommand{\mathAnonymousParameter}{\mathord{\lozenge}}
+\newcommand{\mathWhere}[1]{\mathrel{\textsf{where}}\left\{#1\right\}}
+\newcommand{\mathLetIn}[2]{\mathrel{\textsf{let}}\left\{#1\right\}\mathrel{\textsf{in}}#2}
 
 \newcommand{\mathTypeIs}{::}
 \newcommand{\mathTypeInt}{\mathbb{Z}}
@@ -25,22 +25,22 @@
 \newcommand{\mathEmptyList}{[\,]}
 \newcommand{\mathIn}{\in}
 \newcommand{\mathMakeListComplehention}[2]{\mathMakeList{#1\mid#2}}
-\newcommand{\mathListConcat}{\mathop{\#}}
+\newcommand{\mathListConcat}{\mathbin{\#}}
 
-\newcommand{\mathIf}[3]{\mathop{\textsf{if}}#1\mathop{\textsf{then}}#2\mathop{\textsf{else}}#3}
+\newcommand{\mathIf}[3]{\mathrel{\textsf{if}}#1\mathrel{\textsf{then}}#2\mathrel{\textsf{else}}#3}
 \newcommand{\mathCompareEq}{\equiv}
 \newcommand{\mathAny}{\_}
 \newcommand{\mathPatternMatch}[4]{\left\{\begin{aligned}#1&=#2\\#3&=#4\end{aligned}\right.}
-\newcommand{\mathCase}[5]{\mathop{\textsf{case}}#1\mathop{\textsf{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
-\newcommand{\mathOtherwise}{\mathop{\textsf{otherwise}}}
+\newcommand{\mathCase}[5]{\mathrel{\textsf{case}}#1\mathrel{\textsf{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
+\newcommand{\mathOtherwise}{\mathrel{\textsf{otherwise}}}
 \newcommand{\mathPatternMatchConditional}[5]{\left\{\begin{aligned}#1&\mid_{#2}=#3\\&\mid_{#4}=#5\end{aligned}\right.}
 
-\newcommand{\mathFib}{\mathop{\mathrm{fib}}}
+\newcommand{\mathFib}{\mathord{\mathrm{fib}}}
 
-\newcommand{\mathId}{\mathop{\mathrm{id}}}
-\newcommand{\mathConst}{\mathop{\mathrm{const}}}
+\newcommand{\mathId}{\mathord{\mathrm{id}}}
+\newcommand{\mathConst}{\mathord{\mathrm{const}}}
 
-\newcommand{\mathAnonymousOperator}{\mathop{\maltese}}
+\newcommand{\mathAnonymousOperator}{\mathbin{\maltese}}
 \newcommand{\mathMap}{\otimes}
 \newcommand{\mathFold}[2]{\bigcup_{#1}^{#2}}
 \newcommand{\mathFoldRight}[2]{\bigsqcup_{#1}^{#2}}
@@ -65,29 +65,29 @@
 
 \newcommand{\mathPure}[1]{#1_\star}
 \newcommand{\mathMakePure}[1]{\mathMakeGeneral{\star}{#1}}
-\newcommand{\mathFMap}{\mathop{\circledS}}%{\times}
+\newcommand{\mathFMap}{\mathbin{\circledS}}%{\times}
 
-\newcommand{\mathApplicativeMap}{\mathop{\circledast}}
+\newcommand{\mathApplicativeMap}{\mathbin{\circledast}}
 \newcommand{\mathApplicativeFuncCall}[1]{\llbracket#1\rrbracket}
 
 \newcommand{\mathMakeReturn}[1]{\mathMakePure{#1}}%{\mathMakeGeneral{\text{return}}{#1}}
-\newcommand{\mathBind}{\mathop{\heartsuit}}
+\newcommand{\mathBind}{\mathbin{\heartsuit}}
 \newcommand{\mathBindRight}{\mathrel{\ooalign{\hss$\mathBind$\hss\cr$\longrightarrow$}}}
 \newcommand{\mathLiftM}[1]{{#1}^*}
 
 \newcommand{\mathAnyKind}{\star}
 
-\newcommand{\mathData}[2]{\mathop{\textsf{data}}#1=#2}
-\newcommand{\mathConstructor}[1]{\mathop{\mathrm{#1}}}
+\newcommand{\mathData}[2]{\mathord{\textsf{data}}#1=#2}
+\newcommand{\mathConstructor}[1]{\mathord{\mathrm{#1}}}
 \newcommand{\mathOr}{\vee}
 \newcommand{\mathAnd}{\wedge}
 
-\newcommand{\mathMain}{\mathop{\textsl{main}}}
-\newcommand{\mathGetLine}{\mathop{\textsl{getLine}}}
-\newcommand{\mathPrint}{\mathop{\textsl{print}}}
+\newcommand{\mathMain}{\mathord{\textsl{main}}}
+\newcommand{\mathGetLine}{\mathord{\textsl{getLine}}}
+\newcommand{\mathPrint}{\mathord{\textsl{print}}}
 \newcommand{\mathNext}{\gg}
 
-\newcommand{\mathDo}[1]{\mathop{\textsf{do}}\left\{#1\right\}}
+\newcommand{\mathDo}[1]{\mathord{\textsf{do}}\left\{#1\right\}}
 
 \newcommand{\mathIdentity}{i}
 \newcommand{\mathAnyBinaryOperator}{\bigcirc}

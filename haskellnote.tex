@@ -626,12 +626,27 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 
 \section{関手則}
 
-関手のマップ演算子$\mathFMap$は以下の規則に従う．
+関手のマップ演算子$\mathFMap$は以下の\keyword{関手則}に従う．
 \begin{align}
 \mathId\mathFMap\mathPure{x}&=\mathId\mathPure{x}\\
 (g\mathCompose f)\mathFMap\mathPure{x}&=((g\mathFMap)\mathCompose(f\mathFMap))\mathPure{x}\\
 &=g\mathFMap(f\mathFMap\mathPure{x})
 \end{align}
+
+関手則は\keyword{関手（数学）}に由来する．
+
+\keyword{圏}$\mathCategory{C}$の\keyword{対象}を$\mathObject{X}$とする．圏$\mathCategory{D}$の対象は関手（数学）$\mathFunctor{F}$によって対象$\mathObject{X}$と関係づけられる．圏$\mathCategory{C}$における\keyword{射}$f:\mathObject{X}\rightarrow\mathObject{Y}$が$\mathFunctor{F}f:\mathFunctor{F}\mathObject{X}\rightarrow\mathFunctor{F}\mathObject{Y}$に対応し，次の関係を満たす．
+\begin{itemize}
+\item $\mathObject{X}\in\mathCategory{C}$に対して$\mathFunctor{F}\mathId_{\mathObject{X}}=\mathId_{\mathFunctor{F}\mathObject{X}}$
+\item $f:\mathObject{X}\rightarrow\mathObject{Y}$および$g:\mathObject{Y}\rightarrow\mathObject{Z}$に対して$\mathFunctor{F}(g\mathCompose f)=(\mathFunctor{F}g)\mathCompose(\mathFunctor{F}f)$
+\end{itemize}
+
+いま
+\begin{align}
+\mathId_{\mathObject{X}},\mathId_{\mathFunctor{F}\mathObject{X}}&\rightarrow\mathId\\
+f\mathFMap&\rightarrow\mathFunctor{F}f
+\end{align}
+と対応付けると，関数（数学）が満たす法則と関数則は一致する．
 
 \section{アプリカティブ関手則}
 
@@ -661,17 +676,12 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 を用いると，モナド則は次のように書き換えられる．
 \begin{align}
 \left(\mathKleisliStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
-\left(\mathKleisliStar{\mathMakePure{\mathAnonymousParameter}}\right)\mathPure{x}&=\mathPure{x}\\
+\mathKleisliStar{\left(\mathMakePure{\mathAnonymousParameter}\right)}\mathPure{x}&=\mathPure{x}\\
 \mathKleisliStar{\left(\mathKleisliStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathKleisliStar{\mathMonadic{g}}\left(\mathKleisliStar{\mathMonadic{f}}\mathPure{x}\right)
 \end{align}
 
 \section{関手（数学）}
 
-圏$\mathCategory{C}$の対象を$\mathObject{X}$とする．圏$\mathCategory{D}$の対象は関手$\mathFunctor{F}$によって対象$\mathObject{X}$と関係づけられる．圏$\mathCategory{C}$における射$f:\mathObject{X}\rightarrow\mathObject{Y}$が$\mathFunctor{F}f:\mathFunctor{F}\mathObject{X}\rightarrow\mathFunctor{F}\mathObject{Y}$に対応し，次の関係を満たす．
-\begin{itemize}
-\item $\mathObject{X}\in\mathCategory{C}$に対して$\mathFunctor{F}\mathId_{\mathObject{X}}=\mathId_{\mathFunctor{F}\mathObject{X}}$
-\item $f:\mathObject{X}\rightarrow\mathObject{Y}$および$g:\mathObject{Y}\rightarrow\mathObject{Z}$に対して$\mathFunctor{F}(g\mathCompose f)=(\mathFunctor{F}g)\mathCompose(\mathFunctor{F}f)$
-\end{itemize}
 
 % http://walk.northcol.org/haskell/monads/
 
