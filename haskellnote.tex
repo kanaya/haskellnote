@@ -7,6 +7,8 @@
 \usepackage{stmaryrd}
 \usepackage{manfnt}
 \usepackage{bm}
+% \usepackage{tikz}
+% \usetikzlibrary{graphs}
 \usepackage{haskellstyle}
 
 \usepackage{geometry}
@@ -207,10 +209,10 @@ f&=f_3\mathCompose f_2\mathCompose f_1\\
 &=\left(f_3\mathCompose f_2\right)\mathCompose f_1\\
 \end{align}
 
-優先順位の低い関数合成演算子もあると便利である．そのために演算子$\mathWeakCompose$を導入する．例を挙げる．\footnote{\haskell では \verb|k = h $ g.f| と書く．}
+関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g.f) x| と書く．}
 \begin{align}
-k&=h\mathWeakCompose g\mathCompose f\\
-&=h\mathCompose\left(g\mathCompose f\right)
+z&=h\mathApply(g\mathCompose f)x\\
+&=h\left((g\mathCompose f)x\right)
 \end{align}
 
 いま任意の関数$f$に対して
@@ -660,7 +662,7 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 \begin{align}
 \mathMakePure{\mathId}\mathApplicativeMap\mathPure{x}&=\mathPure{x}\\
 \mathMakePure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{fx}\\
-\mathPure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{\mathAnonymousParameter\mathWeakCompose x}\mathApplicativeMap\mathPure{f}\\
+\mathPure{f}\mathApplicativeMap\mathMakePure{x}&=\mathMakePure{\mathAnonymousParameter\mathApply x}\mathApplicativeMap\mathPure{f}\\
 \mathMakePure{\mathAnonymousParameter\mathCompose\mathAnonymousParameter}\mathApplicativeMap\mathPure{h}\mathApplicativeMap\mathPure{g}\mathApplicativeMap\mathPure{f}
 &=\mathPure{h}\mathApplicativeMap(\mathPure{g}\mathApplicativeMap\mathPure{f})
 \end{align}
@@ -686,7 +688,11 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 \mathKleisliStar{\left(\mathKleisliStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathKleisliStar{\mathMonadic{g}}\left(\mathKleisliStar{\mathMonadic{f}}\mathPure{x}\right)
 \end{align}
 
-\section{関手（数学）}
+% \begin{tikzpicture}[nodes = {text depth = 1ex, text height = 2ex}]
+%   \graph{ tex -> dvi -> ps -> pdf,
+%   bib -> bbl,
+%   bbl -> dvi};
+% \end{tikzpicture}
 
 
 % http://walk.northcol.org/haskell/monads/
