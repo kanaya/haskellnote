@@ -11,9 +11,10 @@
 \newcommand{\mathLetIn}[2]{\mathrel{\textsf{let}}\left\{#1\right\}\mathrel{\textsf{in}}#2}
 
 \newcommand{\mathTypeIs}{::}
-\newcommand{\mathTypeInt}{\mathbb{Z}}
-\newcommand{\mathTypeBool}{\mathbb{B}}
-\newcommand{\mathTypeReal}{\mathbb{R}}
+\newcommand{\mathSet}[1]{\mathord{\mathbb{#1}}}
+\newcommand{\mathTypeInt}{\mathSet{Z}}
+\newcommand{\mathTypeBool}{\mathSet{B}}
+\newcommand{\mathTypeReal}{\mathSet{R}}
 \newcommand{\mathTypeChar}{\mathbf{Char}}
 \newcommand{\mathTypeString}{\mathbf{String}}
 \newcommand{\mathTypeFunction}[2]{#1\rightarrow#2}
@@ -90,7 +91,7 @@
 \newcommand{\mathDo}[1]{\mathord{\textsf{do}}\left\{#1\right\}}
 
 \newcommand{\mathIdentity}{i}
-\newcommand{\mathAnyBinaryOperator}{\bigcirc}
+\newcommand{\mathAnyBinaryOperator}{\mathbin{\bigcirc}}
 
 \newcommand{\mathKleisliStar}[1]{{#1}^\bigstar}
 \newcommand{\mathCategory}[1]{\mathcal{#1}}
