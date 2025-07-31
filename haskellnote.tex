@@ -615,14 +615,14 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \end{align}
 であるとき，組み合わせ$(\mathTypeGeneral{a},\mathAnyBinaryOperator,\mathIdentity)$をモノイドと呼ぶ．
 
+組み合わせ$(\mathTypeInt,+,0)$や$(\mathTypeInt,\times,1)$はモノイドである．
+
 同じ型から同じ型への1引数関数を改めて$\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}$で表し，特別な変数$\mathIdentity$を関数$\mathId$，二項演算子を$\mathCompose$とすると以下の関係が成り立つ．
 \begin{align}
 \mathId\mathCompose f&=f\\
 (h\mathCompose g)\mathCompose f&=h\mathCompose(g\mathCompose f)
 \end{align}
 そこで組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}},\mathCompose,\mathId)$はモノイドであると言える．
-
-他に，組み合わせ$(\mathTypeInt,+,0)$や$(\mathTypeInt,\times,1)$もモノイドである．
 
 \section{関手則}
 
