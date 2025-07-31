@@ -381,7 +381,13 @@ f\mathTypeIs
 \begin{equation}
 \mathList{x}\mathTypeIs\mathTypeList{\mathTypeGeneral{a}}
 \end{equation}
-という型注釈を持つ．型$\mathTypeGeneral{a}$型のMaybeの変数は
+という型注釈を持つ．これは
+\begin{equation}
+\mathList{x}\mathTypeIs\mathFunctorTypeGeneral{[]}{\mathTypeGeneral{a}}
+\end{equation}
+のシンタックスシュガーである．
+
+型$\mathTypeGeneral{a}$型のMaybeの変数は
 \begin{equation}
 \mathMaybe{x}\mathTypeIs\mathTypeMaybe{\mathTypeGeneral{a}}
 \end{equation}
@@ -406,7 +412,7 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \mathPure{x}\mathTypeIs
   \mathTypeClass{\mathClassFunctor}
     {\mathClassGeneral{f}}
-    {\mathFuncTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
+    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
 \end{equation}
 
 型クラス$\mathClassFunctor$に属する型は$\mathFMap$演算子を持たねばならない．演算子$\mathFMap$は次の形を持つ．\footnote{In \haskell, \verb|zm = f <$> xm|.}
@@ -417,8 +423,8 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \begin{equation}
 \mathAnonymousParameter\mathFMap\mathAnonymousParameter
   \mathTypeIs\mathTypeFunctionII{\left(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{b}}\right)}
-    {\mathFuncTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
-    {\mathFuncTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{b}}}
+    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
+    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{b}}}
 \end{equation}
 
 もし変数$\mathPure{x}$の型がリストであれば
@@ -433,7 +439,7 @@ f\mathTypeIs
   \mathTypeClass{\mathClassFunctor}
     {\mathClassGeneral{f}}
     {\mathTypeFunction{\mathTypeGeneral{a}}
-      {\mathFuncTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}}
+      {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}}
 \end{equation}
 
 
@@ -451,7 +457,7 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{q}}{\mathTypeGeneral{r}}
 Function as a functor:\footnote{In \haskell, \verb|f :: ((->) r) q|.}
 \begin{equation}
 f\mathTypeIs\left(\mathTypeFunction{\mathAnonymousTypeParameter}{\mathTypeGeneral{r}}\right)\mathTypeGeneral{q}
-=\mathFuncTypeGeneral{\left(\mathTypeFunction{\mathAnonymousTypeParameter}{\mathTypeGeneral{r}}\right)}
+=\mathFunctorTypeGeneral{\left(\mathTypeFunction{\mathAnonymousTypeParameter}{\mathTypeGeneral{r}}\right)}
   {\mathTypeGeneral{q}}
 \end{equation}
 
@@ -480,7 +486,7 @@ Applicative map:\footnote{In \haskell, \verb|zm = f <*> xm|.}
 where
 \begin{equation}
 \mathPure{f}\mathTypeIs
-  \mathFuncTypeGeneral{\mathTypeGeneral{f}}
+  \mathFunctorTypeGeneral{\mathTypeGeneral{f}}
   {\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{b}}}
 \end{equation}
 
@@ -519,7 +525,7 @@ fx&=\mathMakeJust{x}
 Returning \emph{monad}:
 \begin{align}
 f&\mathTypeIs
-  \mathTypeFunction{\mathTypeInt}{\mathFuncTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}\\
+  \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}\\
 fx&=\mathMakeReturn{x}
 \end{align}
 
@@ -529,7 +535,7 @@ Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
 f\mathTypeIs
   \mathTypeClass{\mathClassMonad}
     {\mathClassGeneral{m}}
-    {\mathTypeFunction{\mathTypeGeneral{a}}{\mathFuncTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}}
+    {\mathTypeFunction{\mathTypeGeneral{a}}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}}
 \end{equation}
 
 Monadic function binding:\footnote{In \haskell, \verb|zm = xm >>= f1 >>= f2|.}
@@ -667,7 +673,7 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 \mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
 (\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}&=\mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})
 \end{align}
-% つまり，組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathFuncTypeGeneral{\mathTypeGeneral{m}}{\mathTypeGeneral{a}}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
+% つまり，組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathFunctorTypeGeneral{\mathTypeGeneral{m}}{\mathTypeGeneral{a}}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
 
 次の\keyword{クライスリスター}すなわち
 \begin{equation}
