@@ -6,6 +6,7 @@
 \usepackage{MnSymbol}
 \usepackage{stmaryrd}
 \usepackage{manfnt}
+\usepackage{bm}
 \usepackage{haskellstyle}
 
 \usepackage{geometry}
@@ -655,21 +656,21 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 
 次の\keyword{クライスリスター}すなわち
 \begin{equation}
-\mathStar{\mathMonadic{f}}=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
+\mathKleisliStar{\mathMonadic{f}}=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
 \end{equation}
 を用いると，モナド則は次のように書き換えられる．
 \begin{align}
-\left(\mathStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
-\left(\mathStar{\mathMakePure{\mathAnonymousParameter}}\right)\mathPure{x}&=\mathPure{x}\\
-\mathStar{\left(\mathStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathStar{\mathMonadic{g}}\left(\mathStar{\mathMonadic{f}}\mathPure{x}\right)
+\left(\mathKleisliStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
+\left(\mathKleisliStar{\mathMakePure{\mathAnonymousParameter}}\right)\mathPure{x}&=\mathPure{x}\\
+\mathKleisliStar{\left(\mathKleisliStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathKleisliStar{\mathMonadic{g}}\left(\mathKleisliStar{\mathMonadic{f}}\mathPure{x}\right)
 \end{align}
 
 \section{関手（数学）}
 
-圏$\mathcal{C}$の対象を$X$とする．圏$\mathcal{D}$の対象は関手$\mathfrak{F}$によって対象$X$と関係づけられる．圏$\mathcal{C}$における射$f:X\rightarrow Y$が$\mathfrak{F}(f):\mathfrak{F}(X)\rightarrow\mathfrak{F}(Y)$に対応し，次の関係を満たす．
+圏$\mathCategory{C}$の対象を$\mathObject{X}$とする．圏$\mathCategory{D}$の対象は関手$\mathFunctor{F}$によって対象$\mathObject{X}$と関係づけられる．圏$\mathCategory{C}$における射$f:\mathObject{X}\rightarrow\mathObject{Y}$が$\mathFunctor{F}f:\mathFunctor{F}\mathObject{X}\rightarrow\mathFunctor{F}\mathObject{Y}$に対応し，次の関係を満たす．
 \begin{itemize}
-\item $X\in\mathcal{C}$に対して$\mathfrak{F}(\mathId_X)=\mathId_{\mathfrak{F}(X)}$
-\item $f:X\rightarrow Y$および$g:Y\rightarrow Z$に対して$\mathfrak{F}(g\mathCompose f)=\mathfrak{F}(g)\mathCompose\mathfrak{F}(f)$
+\item $\mathObject{X}\in\mathCategory{C}$に対して$\mathFunctor{F}\mathId_{\mathObject{X}}=\mathId_{\mathFunctor{F}\mathObject{X}}$
+\item $f:\mathObject{X}\rightarrow\mathObject{Y}$および$g:\mathObject{Y}\rightarrow\mathObject{Z}$に対して$\mathFunctor{F}(g\mathCompose f)=(\mathFunctor{F}g)\mathCompose(\mathFunctor{F}f)$
 \end{itemize}
 
 % http://walk.northcol.org/haskell/monads/
