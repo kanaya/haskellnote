@@ -681,13 +681,13 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 
 次の\keyword{クライスリスター}すなわち
 \begin{equation}
-\mathKleisliStar{\mathMonadic{f}}=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
+\mathKleisliStar{f}=(\mathMonadic{f}\mathBind\mathAnonymousParameter)
 \end{equation}
 を用いると，モナド則は次のように書き換えられる．
 \begin{align}
-\left(\mathKleisliStar{\mathMonadic{f}}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
+\left(\mathKleisliStar{f}\right)\mathMakePure{x}&=\mathMonadic{f}x\\
 \mathKleisliStar{\left(\mathMakePure{\mathAnonymousParameter}\right)}\mathPure{x}&=\mathPure{x}\\
-\mathKleisliStar{\left(\mathKleisliStar{\mathMonadic{g}}\mathMonadic{f}\right)}\mathPure{x}&=\mathKleisliStar{\mathMonadic{g}}\left(\mathKleisliStar{\mathMonadic{f}}\mathPure{x}\right)
+\mathKleisliStar{\left(\mathKleisliStar{g}\mathMonadic{f}\right)}\mathPure{x}&=\mathKleisliStar{g}\left(\mathKleisliStar{f}\mathPure{x}\right)
 \end{align}
 
 % \begin{tikzpicture}[nodes = {text depth = 1ex, text height = 2ex}]
