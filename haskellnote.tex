@@ -356,6 +356,16 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 \end{align}
 と定義される．
 
+\section{Maybeの中のリスト}
+
+\begin{equation}
+\mathMaybe{x}=\mathMakeJust{[1,2,\dots,100]}
+\end{equation}
+
+\begin{equation}
+\mathMaybe{z}=(f\mathMap)\mathFMap\mathMaybe{x}
+\end{equation}
+
 \section{型パラメタ}
 
 型をパラメタとして扱うことができる．任意の型を$\mathTypeGeneral{a}$と，ボールド体小文字で書く．ある型$\mathTypeGeneral{a}$の引数を取り，同じ型を返す関数の型は次のように書ける．\footnote{\haskell では \verb|f :: a -> a| と書く．}
