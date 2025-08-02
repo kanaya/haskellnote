@@ -28,12 +28,14 @@
 \newcommand{\mathMakeListComplehention}[2]{\mathMakeList{#1\mid#2}}
 \newcommand{\mathListConcat}{\mathbin{\#}}
 
-\newcommand{\mathIf}[3]{\mathrel{\textsf{if}}#1\mathrel{\textsf{then}}#2\mathrel{\textsf{else}}#3}
+\newcommand{\mathKeyword}[1]{\textsf{#1}}
+\newcommand{\mathConstant}[1]{\textrm{#1}}
+\newcommand{\mathIf}[3]{\mathrel{\mathKeyword{if}}#1\mathrel{\mathKeyword{then}}#2\mathrel{\mathKeyword{else}}#3}
 \newcommand{\mathCompareEq}{\equiv}
 \newcommand{\mathAny}{\_}
 \newcommand{\mathPatternMatch}[4]{\left\{\begin{aligned}#1&=#2\\#3&=#4\end{aligned}\right.}
-\newcommand{\mathCase}[5]{\mathrel{\textsf{case}}#1\mathrel{\textsf{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
-\newcommand{\mathOtherwise}{\mathrel{\textsf{otherwise}}}
+\newcommand{\mathCase}[5]{\mathrel{\mathKeyword{case}}#1\mathrel{\mathKeyword{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
+\newcommand{\mathOtherwise}{\mathrel{\mathConstant{otherwise}}}
 \newcommand{\mathPatternMatchConditional}[5]{\left\{\begin{aligned}#1&\mid_{#2}=#3\\&\mid_{#4}=#5\end{aligned}\right.}
 
 \newcommand{\mathFib}{\mathop{\mathrm{fib}}}
