@@ -367,7 +367,7 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 \begin{equation}
 \mathMaybe{x}=\mathMakeJust{[1,2,\dots,100]}
 \end{equation}
-のとき，リストの各要素に関数$f$を適用するには次のように書く．\footnote{\haskell では \verb|zm = (f <$>) <$> xm| と書く．最初の \verb|<$>| はリストの各要素に関数$f$を適用する演算子，2番目の \verb|<$>| はMaybeの中のリストの各要素に関数$f$を適用する演算子である．}
+のとき，リストの各要素に関数$f\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}$を適用するには次のように書く．\footnote{\haskell では \verb|zm = (f <$>) <$> xm| と書く．最初の \verb|<$>| はリストの各要素に関数$f$を適用する演算子，2番目の \verb|<$>| はMaybeの中のリストの各要素に関数$f$を適用する演算子である．}
 \begin{equation}
 \mathMaybe{z}=(f\mathMap)\mathFMap\mathMaybe{x}
 \end{equation}
