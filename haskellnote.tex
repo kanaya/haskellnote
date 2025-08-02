@@ -205,8 +205,8 @@ k=g\mathCompose f
 \end{equation}
 関数合成演算子$\mathCompose$は以下のように右結合する．
 \begin{align}
-f&=f_3\mathCompose f_2\mathCompose f_1\\
-&=\left(f_3\mathCompose f_2\right)\mathCompose f_1\\
+k&=h\mathCompose g\mathCompose f\\
+&=\left(h\mathCompose g\right)\mathCompose f\\
 \end{align}
 
 関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g.f) x| と書く．}
@@ -247,9 +247,11 @@ z=()
 z\mathTypeIs()
 \end{equation}
 
-\section{リストと内包表記}
+\section{リスト}
 
-ある変数が\keyword{リスト}であるとき，その変数がリストであることを忘れないように$\mathList{x}$と小さく$\mathrm{s}$を付けることにする．
+任意の型について，その型の要素を並べた列を\keyword{リスト}と呼ぶ．
+
+ある変数がリストであるとき，その変数がリストであることを忘れないように$\mathList{x}$と小さく$\mathrm{s}$を付けることにする．
 
 \keyword{空リスト}は次のように定義する．\footnote{\haskell では \verb|xs = []| と書く．}
 \begin{equation}
@@ -270,6 +272,13 @@ z\mathTypeIs()
 \mathList{x}=\mathMakeList{1,2,\dots,100}
 \end{equation}
 
+リストとリストをつなぐ場合は\keyword{リスト結合演算子}$\mathListConcat$を用いる．\footnote{\haskell では \verb|zs = xs ++ ys| と書く．}
+\begin{equation}
+\mathList{z}=\mathList{x}\mathListConcat\mathList{y}
+\end{equation}
+
+\section{内包表記}
+
 リストの構成には\keyword{内包表記}が使える．例を挙げる．\footnote{\haskell では次のように書く．
 \begin{footcode}
       xs = [x^2 | x <- [1, 2..100], x>50]
@@ -278,10 +287,6 @@ z\mathTypeIs()
 \mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},x>50}
 \end{equation}
 
-リストとリストをつなぐ場合は\keyword{リスト結合演算子}$\mathListConcat$を用いる．\footnote{\haskell では \verb|zs = xs ++ ys| と書く．}
-\begin{equation}
-\mathList{z}=\mathList{x}\mathListConcat\mathList{y}
-\end{equation}
 
 \section{マップと畳み込み}
 
@@ -358,10 +363,11 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 
 \section{Maybeの中のリスト}
 
+リストがMaybeの中に入っている場合は，リストの各要素に関数を適用することができる．例を挙げる．
 \begin{equation}
 \mathMaybe{x}=\mathMakeJust{[1,2,\dots,100]}
 \end{equation}
-
+のとき，リストの各要素に関数$f$を適用するには次のように書く．\footnote{\haskell では \verb|zm = (f <$>) <$> xm| と書く．最初の \verb|<$>| はリストの各要素に関数$f$を適用する演算子，2番目の \verb|<$>| はMaybeの中のリストの各要素に関数$f$を適用する演算子である．}
 \begin{equation}
 \mathMaybe{z}=(f\mathMap)\mathFMap\mathMaybe{x}
 \end{equation}
