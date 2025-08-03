@@ -139,10 +139,30 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
 
 \section{リテラル}
 
-\keyword{リテラル}は次のように書く．\footnote{\haskell では \verb|z = 1| と書く．}
+整数型の\keyword{リテラル}は次のように書く．\footnote{\haskell では \verb|x = 1| と書く．}
 \begin{equation}
-z=1
+x=1
 \end{equation}
+変数の束縛と型注釈を組み合わせると次のようになる．\footnote{\haskell では \verb|x :: Int = 1| と書く．}
+\begin{equation}
+x\mathTypeIs\mathTypeInt=1
+\end{equation}
+
+同様に，浮動小数点型のリテラルは次のように書く．\footnote{\haskell では \verb|x = 1.0| と書く．}
+\begin{equation}
+x=1.0
+\end{equation}
+
+文字型のリテラルは次のように書く．\footnote{\haskell では \verb|x = 'a'| と書く．}
+\begin{equation}
+x=\mathLiteralChar{a}
+\end{equation}
+
+論理型のリテラルは次のように書く．\footnote{\haskell では \verb|x = True| と書く．}
+\begin{equation}
+x=\mathLiteral{True}
+\end{equation}
+論理型リテラルは$\mathLiteral{True}$の他に$\mathLiteral{False}$がある．なお$\mathLiteral{True}$と$\mathLiteral{False}$は正しくは\keyword{値コンストラクタ}である．
 
 \section{条件}
 
@@ -286,6 +306,19 @@ z\mathTypeIs()
 \begin{equation}
 \mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},x>50}
 \end{equation}
+
+\section{文字列}
+
+文字型のリストを文字列型と呼び$\mathTypeString$で表す．$\mathTypeString$型は次のように予約語$\mathKeyword{type}$を用いて，\keyword{型シノニム}として定義される．
+\begin{equation}
+\mathKeyword{type}\;\mathTypeString=\mathTypeList{\mathTypeChar}
+\end{equation}
+
+文字列型のリテラルは次のように書く．\footnote{\haskell では \verb|x :: String = "Hello, World!"| と書く．}
+\begin{equation}
+x\mathTypeIs\mathTypeString=\mathLiteralString{Hello, World!}
+\end{equation}
+
 
 
 \section{マップと畳み込み}
