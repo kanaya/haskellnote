@@ -37,16 +37,6 @@ x=1
 
 本書では変数名を原則1文字として，イタリック体で表し，$w,x,y,z$のような$n$以降のアルファベットを使う．
 
-\section{IO survival kit}
-
-\begin{equation}
-  \textsl{main}=\textsl{print}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
-\end{equation}
-or
-\begin{equation}
-  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
-\end{equation}
-
 \section{関数}
 
 関数$f$は次のように定義できる．\footnote{\haskell では \verb|f x = x+1| と書く．}
@@ -67,6 +57,18 @@ z=fx
 z=fxy
 \end{equation}
 なお$fxy$は$(fx)y$と解釈される．前半の$(fx)$は1引数の関数とみなせる．
+
+\section{IO survival kit}
+
+\begin{align}
+f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
+f&=\dots\\
+\textsl{main}&=\textsl{print}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
+\end{align}
+or
+\begin{equation}
+  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
+\end{equation}
 
 \section{ラムダ}
 
