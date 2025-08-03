@@ -76,6 +76,25 @@ or
   \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
 \end{equation}
 
+
+\begin{align}
+  f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
+  f&=\dots\\
+  \textrm{ri}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt}\\
+  \textrm{ri}&=\textrm{read}\\
+  \textsl{main}&=\textsl{print}\mathBind(((f\mathCompose\textrm{ri}\mathMap)\mathMap)\mathCompose(\textrm{words}\mathMap)\mathCompose\textrm{lines}\mathFMap\textsl{getContents})
+\end{align}
+
+\begin{verbatim}
+f :: Int -> Int
+f = (2*)
+
+readInt :: String -> Int
+readInt = read
+
+main = print =<< (((f . readInt <$>) <$>) . (words <$>) . lines <$> getContents)
+\end{verbatim}
+
 \section{ラムダ}
 
 関数とは，変数名に束縛された\keyword{ラムダ式}である．ラムダ式は次のように書く．\footnote{\haskell では \verb|f = \x -> x+1| と書く．}
