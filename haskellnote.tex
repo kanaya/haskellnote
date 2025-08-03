@@ -613,10 +613,15 @@ Function binding of monadic function and non-monadic function:\footnote{In \hask
 zm = xm >>= f >>= g'
   where g' w = pure (g w)
 \end{footcode}}
-\begin{multline}
-\mathPure{z}=\mathPure{x}\mathBindRight f\mathBindRight g'\\
+\begin{equation}
+\mathPure{z}=\mathPure{x}\mathBindRight f\mathBindRight g'
 \mathWhere{g'w=\mathMakePure{gw}}
-\end{multline}
+\end{equation}
+or
+\begin{equation}
+  \mathPure{z}=\mathPure{x}\mathBindRight(f\mathComposeMonadRight g')
+  \mathWhere{g'w=\mathMakePure{gw}}
+\end{equation}
 where
 \begin{align}
 f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
@@ -624,7 +629,7 @@ g&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}.
 \end{align}
 Another solution is:
 \begin{equation}
-\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBindRight\mathPure{x}
+\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBind\mathPure{x}
 \end{equation}
 where $\mathLiftM{g}$ means \verb|liftM g| in \haskell.\footnote{In \haskell, \verb|zm = (liftM g . f) xm|.}
 
