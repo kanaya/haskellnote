@@ -198,6 +198,7 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 \begin{equation}
 \mathPatternMatchConditional{fx}{x>0}{x}{\mathOtherwise}{-x}
 \end{equation}
+ここに$\mathOtherwise$は$\mathAny$の別名である．
 
 \section{関数の再帰呼び出し}
 
@@ -296,6 +297,12 @@ z\mathTypeIs()
 \begin{equation}
 \mathList{z}=\mathList{x}\mathListConcat\mathList{y}
 \end{equation}
+
+関数はリストを受け取ることができる．次の書き方では，関数$f$は整数リストの最初の要素$x$と残りの要素$\mathList{x}$を別々に受け取り，先頭要素だけを返す．\footnote{\haskell では \verb|f (x:xs) :: [Int] -> Int = x| と書く．}
+\begin{gather}
+f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
+f(x:\mathList{x})=x
+\end{gather}
 
 \section{内包表記}
 
