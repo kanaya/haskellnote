@@ -61,6 +61,12 @@ z=fxy
 \section{IO survival kit}
 
 \begin{align}
+  f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
+  f&=\dots\\
+  \textsl{main}&=\textsl{putStrLn}\mathCompose\textrm{show}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
+\end{align}
+or  
+\begin{align}
 f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
 f&=\dots\\
 \textsl{main}&=\textsl{print}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
