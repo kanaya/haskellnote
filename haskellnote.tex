@@ -76,6 +76,28 @@ or
   \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
 \end{equation}
 
+IO survival kit 2.
+
+\begin{verbatim}
+  1 2 3
+  4 5 6
+\end{verbatim}
+
+$\textsl{getContents}$
+
+$\textrm{lines}$
+
+$\textrm{words}\mathFMap$
+
+$(\textrm{read}\mathFMap)\mathFMap$
+
+$f\mathList{x}=\textrm{sqrt}\mathCompose\textrm{fromIntegral}\mathCompose\textrm{sum}\mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}$
+
+$f\mathFMap$
+
+$\textsl{print}$
+
+
 
 \begin{align}
   f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
@@ -92,7 +114,7 @@ f = (2*)
 readInt :: String -> Int
 readInt = read
 
-main = print =<< (((f . readInt <$>) <$>) . (words <$>) . lines <$> getContents)
+main = print . ((f <$>) <$>) . ((readInt <$>) <$>) . (words <$>) . lines =<< getContents
 \end{verbatim}
 
 \section{ラムダ}
