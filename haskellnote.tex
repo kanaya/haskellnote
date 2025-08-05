@@ -75,7 +75,7 @@ z=fxy
 \begin{equation}
 k=g\mathCompose f
 \end{equation}
-関数合成演算子$\mathCompose$は以下のように右結合する．
+関数合成演算子$\mathCompose$は以下のように\keyword{左結合}する．
 \begin{align}
 k&=h\mathCompose g\mathCompose f\\
 &=\left(h\mathCompose g\right)\mathCompose f\\
@@ -89,7 +89,7 @@ z&=h\mathApply(g\mathCompose f)x\\
 
 \section{IOサバイバルキット1}
 
-プログラムとは合成された関数である．多くのプログラミング言語では，プログラムそのものにmainという名前をつける．本書では「IOモナド」の章で述べる理由によって，main関数をスラント体で$\mathMain$と書く．
+プログラムとは合成された関数である．多くのプログラミング言語では，プログラムそのものにmainという名前をつける．本書では「\keyword{IOモナド}」の章で述べる理由によって，main関数をスラント体で$\mathMain$と書く．
 
 実用的なプログラムはユーザからの入力を受け取り，関数を適用し，ユーザへ出力する．\haskell ではユーザからの1行の入力を$\mathGetLine$で受け取り，変数の値を$\mathPrint$で書き出せる．ここに$\mathGetLine$と$\mathPrint$は関数（ファンクション）ではあるが，特別に「\keyword{アクション}」とも呼ぶ．関数$\mathMain$もアクションである．
 
@@ -132,11 +132,22 @@ f&=\left(\mathAnonymousParameter+1\right)\\
 &=\mathLambda{x}{x+1}
 \end{align}
 
+無名変数が2回以上登場した場合は，その都度新しいパラメタを生成する．たとえば次のとおりである．\footnote{\haskell では \verb|f = (+)| と書く．}
+\begin{align}
+f&=\mathAnonymousParameter+\mathAnonymousParameter\\
+&=\mathLambda{x}{(\mathLambda{y}{x+y})}
+\end{align}
+
 \section{ローカル変数}
 
 関数内で\keyword{ローカル変数}を使いたい場合は以下のように行う．\footnote{\haskell では \verb|z = let {y = 1} in x+y| と書く．\verb|let| 節内の式がひとつの場合，中括弧は省略可能である．式が複数になる場合は \verb|;| で区切る．}
 \begin{equation}
 z=\mathLetIn{y=1}{x+y}
+\label{eq:let-in}
+\end{equation}
+ローカル変数はラムダ式のシンタックスシュガーである．式\eqref{eq:let-in}は次の式と等価である．
+\begin{equation}
+z=(\mathLambda{y}{x+y})1
 \end{equation}
 
 ローカル変数の定義は次のように後置できる．\footnote{\haskell では \verb|z = x+y where {y = 1}| と書く．\verb|where| 節内の式が一つの場合，中括弧は省略可能である．式が複数になる場合は \verb|;| で区切る．}
@@ -146,11 +157,11 @@ z=x+y\mathWhere{y=1}
 
 \section{クロージャ}
 
-ラムダ式を返す関数は，ラムダ式内部に値を閉じ込めることができる．
+ラムダ式を返す関数は，ラムダ式内部に値を閉じ込めることができる．たとえば
 \begin{equation}
 fn=\mathLambda{x}{n+x}
 \end{equation}
-関数$f$に引数$n$を与えると，新たな1引数関数が得られる．例を挙げる．
+のように関数を定義して良い．関数$f$に引数$n$を与えると，新たな1引数関数が得られる．例を挙げる．
 \begin{align}
 n&=3\\
 g&=fn
