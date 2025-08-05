@@ -170,9 +170,13 @@ g&=fn
 
 \section{型}
 
-すべての変数，関数には\keyword{型}がある．代表的な型にはブール型，整数型，浮動小数点型，文字型がある．以降，ブール型を$\mathTypeBool$で，整数型を$\mathTypeInt$で表す．\footnote{\haskell ではブール型を \verb|Bool|，整数型を \verb|Int|，多倍長整数型を \verb|Integer| と書く．}
+すべての変数，関数には\keyword{型}がある．代表的な型には整数型，浮動小数点型，ブール型，文字型がある．整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表すことはすでに述べたとおりである．
 
-浮動小数点型は実数全体を表現できないが，本書では実数全体を意味する$\mathTypeReal$で表すことにする．\footnote{\haskell では単精度浮動小数点型を \verb|Float|，倍精度浮動小数点型を \verb|Double| と書く．}
+\haskell には2種類の整数型がある．ひとつは\keyword{固定長整数型}で，もうひとつは\keyword{多倍長整数型}である．\haskell では前者を \verb|Int| で，後者を \verb|Integer| で表す．多倍長整数型はメモリの許す限り巨大な整数を扱えるので，整数全体の集合に近いのであるが，本書では$\mathTypeInt$と書いて固定長整数型を意味することにする．
+
+浮動小数点型には\keyword{単精度浮動小数点型}と\keyword{倍精度浮動小数点型}があり，\haskell では前者を \verb|Float| で，後者を \verb|Double| で表現するが，単精度浮動小数点型はめったに用いられないため，今後$\mathTypeReal$と書けば倍精度浮動小数点型の意味とする．
+
+ブール型は論理値$\mathTrue$または$\mathFalse$のいずれかしか値をとれない型で，今後$\mathTypeBool$と書く．\footnote{\haskell ではブール型を \verb|Bool| と書く．}
 
 本書では対応する，あるいは近い数学概念がある場合，型名をブラックボード体1文字で書く．文字型のように対応する数学概念がない場合はボールドローマン体を用いる．文字型は$\mathTypeChar$とする．\footnote{\haskell ではUnicode文字型を \verb|Char| と書く．}
 
@@ -180,7 +184,6 @@ g&=fn
 \begin{equation}
 x\mathTypeIs\mathTypeInt
 \end{equation}
-同じことを数学者は$x\in\mathTypeInt$と書くことを好むが，記号$\in$は別の用途で使うため$\mathTypeIs$を用いる．
 
 1引数関数の型は次のように注釈できる．\footnote{\haskell では \verb|f :: Int -> Int| と書く．}
 \begin{equation}
@@ -297,7 +300,7 @@ z\mathTypeIs()
 \begin{equation}
 \mathList{x}=\mathEmptyList
 \end{equation}
-任意のリストは次のように構成する．
+任意のリストは次のように$:$演算子を用いて構成する．
 \begin{equation}
 \mathList{x}=x_0:x_1:x_2:\dots:\mathEmptyList
 \end{equation}
@@ -310,6 +313,10 @@ z\mathTypeIs()
 リストは次のように構成することもできる．\footnote{\haskell では \verb|xs = [1, 2..100]| と書く．}
 \begin{equation}
 \mathList{x}=\mathMakeList{1,2,\dots,100}
+\end{equation}
+なお次のような\keyword{無限リスト}を構成しても良い．\footnote{\haskell では \verb|xs = [1, 2..]| と書く．}
+\begin{equation}
+\mathList{x}=\mathMakeList{1,2,\dots}
 \end{equation}
 
 リストとリストをつなぐ場合は\keyword{リスト結合演算子}$\mathListConcat$を用いる．\footnote{\haskell では \verb|zs = xs ++ ys| と書く．}
@@ -330,8 +337,9 @@ f(x:\mathList{x})=x
       xs = [x^2 | x <- [1, 2..100], x>50]
 \end{footcode}}
 \begin{equation}
-\mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},x>50}
+\mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},\mathEven x}
 \end{equation}
+この例では数列$\mathMakeList{1,2\dots100}$のうち偶数だけを2乗したリストを作っている．
 
 \section{文字列}
 

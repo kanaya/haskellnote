@@ -5,12 +5,13 @@
 \newcommand{\mathCompose}{\mathbin{\bullet}}
 \newcommand{\mathApply}{\mathbin{\S}}
 
-\newcommand{\mathRead}{\mathord{\textrm{read}}}
+\newcommand{\mathFunction}[1]{\mathop{\textrm{#1}}}
+\newcommand{\mathRead}{\mathFunction{read}}
 
-\newcommand{\mathTypeAction}[1]{\mathord{\textsl{#1}}}
-\newcommand{\mathMain}{\mathTypeAction{main}}
-\newcommand{\mathPrint}{\mathTypeAction{print}}
-\newcommand{\mathGetLine}{\mathTypeAction{getLine}}
+\newcommand{\mathAction}[1]{\mathord{\textsl{#1}}}
+\newcommand{\mathMain}{\mathAction{main}}
+\newcommand{\mathPrint}{\mathAction{print}}
+\newcommand{\mathGetLine}{\mathAction{getLine}}
 
 \newcommand{\mathLambda}[2]{\backslash#1\mapsto#2}
 \newcommand{\mathAnonymousParameter}{\mathord{\lozenge}}
@@ -31,6 +32,9 @@
 \newcommand{\mathLiteralChar}[1]{\mathord{\texttt{'#1'}}}
 \newcommand{\mathLiteralString}[1]{\mathord{\texttt{"#1"}}}
 
+\newcommand{\mathTrue}{\mathLiteral{True}}
+\newcommand{\mathFalse}{\mathLiteral{False}}
+
 \newcommand{\mathTypeList}[1]{[#1]}
 \newcommand{\mathList}[1]{{#1}_\mathrm{s}}
 \newcommand{\mathMakeList}[1]{\left[#1\right]}
@@ -38,6 +42,7 @@
 \newcommand{\mathIn}{\in}
 \newcommand{\mathMakeListComplehention}[2]{\mathMakeList{#1\mid#2}}
 \newcommand{\mathListConcat}{\mathbin{\#}}
+\newcommand{\mathEven}{\mathFunction{even}}
 
 \newcommand{\mathKeyword}[1]{\textsf{#1}}
 \newcommand{\mathConstant}[1]{\textrm{#1}}
@@ -49,10 +54,10 @@
 \newcommand{\mathOtherwise}{\mathrel{\mathConstant{otherwise}}}
 \newcommand{\mathPatternMatchConditional}[5]{\left\{\begin{aligned}#1&\mid_{#2}=#3\\&\mid_{#4}=#5\end{aligned}\right.}
 
-\newcommand{\mathFib}{\mathop{\mathrm{fib}}}
+\newcommand{\mathFib}{\mathFunction{fib}}
 
-\newcommand{\mathId}{\mathord{\mathrm{id}}}
-\newcommand{\mathConst}{\mathord{\mathrm{const}}}
+\newcommand{\mathId}{\mathFunction{id}}
+\newcommand{\mathConst}{\mathFunction{const}}
 
 \newcommand{\mathAnonymousOperator}{\mathbin{\maltese}}
 \newcommand{\mathMap}{\otimes}
