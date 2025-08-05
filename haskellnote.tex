@@ -71,7 +71,7 @@ z=fxy
 
 \section{関数合成}
 
-関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g.f| と書く．}
+関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g . f| と書く．}
 \begin{equation}
 k=g\mathCompose f
 \end{equation}
@@ -81,7 +81,7 @@ k&=h\mathCompose g\mathCompose f\\
 &=\left(h\mathCompose g\right)\mathCompose f\\
 \end{align}
 
-関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g.f) x| と書く．}
+関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g . f) x| と書く．}
 \begin{align}
 z&=h\mathApply(g\mathCompose f)x\\
 &=h\left((g\mathCompose f)x\right)
