@@ -343,78 +343,86 @@ f(x:\mathList{x})=x
 
 \section{文字列}
 
-文字型のリストを文字列型と呼び$\mathTypeString$で表す．$\mathTypeString$型は次のように予約語$\mathKeyword{type}$を用いて，\keyword{型シノニム}として定義される．
+文字型のリストを文字列型と呼び$\mathTypeString$で表す．$\mathTypeString$型は次のように予約語$\mathKeyword{type}$を用いて，\keyword{型シノニム}すなわち型の別名として次のように定義される．
 \begin{equation}
-\mathKeyword{type}\;\mathTypeString=\mathTypeList{\mathTypeChar}
+\mathTypeSynonim{\mathTypeString}{\mathTypeList{\mathTypeChar}}
 \end{equation}
 
-文字列型のリテラルは次のように書く．\footnote{\haskell では \verb|x :: String = "Hello, World!"| と書く．}
+文字列型のリテラルは次のように書く．\footnote{\haskell では \verb|xs = "Hello, World!"| と書く．}
 \begin{equation}
-x\mathTypeIs\mathTypeString=\mathLiteralString{Hello, World!}
+\mathString{x}=\mathLiteralString{Hello, World!}
 \end{equation}
 
-
+\tobewritten{Stringに関する有名な関数．}
 
 \section{マップと畳み込み}
 
 リスト$\mathList{x}$の各要素に関数$f$を適用して，その結果をリスト$\mathList{z}$に格納するためには次のように\keyword{マップ演算子}$\mathMap$を用いる．\footnote{\haskell では \verb|zs = f `map` xs| と書く．}
 \begin{equation}
 \mathList{z}=f\mathMap\mathList{x}
+\label{eq:map}
+\end{equation}
+式\eqref{eq:map}は次の式と同じである．\footnote{\haskell では \verb/zs = [f x | x <- xs]/ と書く．}
+\begin{equation}
+\mathList{z}=\mathMakeListComplehention{fx}{x\mathIn\mathList{x}}
 \end{equation}
 
-リスト$\mathList{x}$の各要素を先頭から順番に2項演算子を適用して，その結果を得るには畳み込み演算子を用いる．例えば整数リストの和は次のように書ける．\footnote{\haskell では \verb|z = foldl 0 (+) xs| と書く．}
+リスト$\mathList{x}$の各要素を先頭から順番に二項演算子を適用して，その結果を得るには畳み込み演算子を用いる．たとえば整数リストの和は次のように書ける．\footnote{\haskell では \verb|z = foldl 0 (+) xs| と書く．}
 \begin{equation}
 z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \end{equation}
-リスト$\mathList{x}$が$[x_0,x_1,\dots,x_n]$のとき，一般に
+\haskell では
 \begin{equation}
-\mathFold{a}{\mathAnonymousOperator}{\mathList{x}}
+\mathSum=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}
+\end{equation}
+として関数$\mathSum$が定義されている．\footnote{\haskell では関数$\mathSum$を \verb|sum| と書く．}
+
+リスト$\mathList{x}$が$\mathList{x}=[x_0,x_1,\dots,x_n]$のとき，一般に
+\begin{equation}
+\mathFold{a}{\mathAnonymousParameter\mathAnonymousOperator\mathAnonymousParameter}{\mathList{x}}
 =a\mathAnonymousOperator x_0\mathAnonymousOperator x_1\dots x_{n-1}\mathAnonymousOperator x_n
 \end{equation}
 である．
 
 畳み込み演算子には次の右結合バージョンが存在する．\footnote{\haskell では \verb|foldr| を用いる．}
 \begin{equation}
-\mathFoldRight{a}{\mathAnonymousOperator}{\mathList{x}}
+\mathFoldRight{a}{\mathAnonymousParameter\mathAnonymousOperator\mathAnonymousParameter}{\mathList{x}}
 =a\mathAnonymousOperator\left(x_0\dots\left(x_{n-2}\mathAnonymousOperator\left(x_{n-1}\mathAnonymousOperator x_n\right)\right)\right)
 \end{equation}
 
-IO survival kit 2.
+\section{IOサバイバルキット2}
 
+1行ごとに3次元ベクトルが並べられた，以下の入力ファイルがあるとする．
+\begin{sourcecode}{input.txt}
 \begin{verbatim}
-  1 2 3
-  4 5 6
+1.0 2.0 3.0
+4.5 5.5 6.5
 \end{verbatim}
+\end{sourcecode}
+このようなファイル形式は計算機科学者にとって見慣れたものである．
 
-$\textsl{getContents}$
+各行つまり各ベクトルごとに，そのノルムを計算して出力するプログラムを書きたいとしよう．まず数列を受け取ってそのノルムを返す関数$\mathNorm$を次のように定義する．
+\begin{align}
+\mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeReal}{\mathTypeReal}\\
+\mathNorm[]&=0.0\\
+\mathNorm\mathList{x}&=\mathSqrt\mathCompose\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}
+\end{align}
 
-$\textrm{lines}$
+入力ファイル全体を受け取るにはアクション$\textsl{getContents}$を用いる．入力ファイルを1行毎のリストにするには関数$\textrm{lines}$を用いる．
 
-$\textrm{words}\mathFMap$
+各行を空白で区切ってリストに格納するには関数$\textrm{words}$を用いる．
 
-$(\textrm{read}\mathFMap)\mathFMap$
-
-$f\mathList{x}=\mathrm{sqrt}\mathCompose\textrm{fromIntegral}\mathCompose\textrm{sum}\mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}$
-
-$f\mathFMap$
-
-$\textsl{print}$
-
+各文字列を数に変換するには関数$\mathRead_{\mathTypeReal}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}$を用いる．
 
 \begin{align}
-  f&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeReal}\\
-  f\mathList{x}&=\mathrm{sqrt}
-    \mathCompose\textrm{fromIntegral}
-    \mathCompose\textrm{sum}
-    \mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}\\
-  \textrm{readInt}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt}\\
-  \textrm{readInt}&=\textrm{read}
+\mathRead_{\mathTypeReal}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}\\
+\mathRead_{\mathTypeReal}&=\mathRead
 \end{align}
 
 \begin{multline}
 \textsl{main}=\textsl{print}
 \mathCompose(f\mathMap)
-\mathCompose((\textrm{readInt}\mathMap)\mathMap)
+\mathCompose((\mathRead_{\mathTypeReal}\mathMap)\mathMap)
 \mathCompose(\textrm{words}\mathMap)
 \mathCompose\textrm{lines}\\
 \mathBind\textsl{getContents}
