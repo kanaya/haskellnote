@@ -25,13 +25,21 @@
 
 \maketitle
 
+\section{Haskell}
+
+\tobewritten{Haskellについて．}
+
 \section{変数}
 
 変数$x$に値を代入するには次のようにする．\footnote{\haskell では \verb|x = 1| と書く．}
 \begin{equation}
 x=1
 \end{equation}
-変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．
+変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．上式の右辺を\keyword{リテラル}と呼ぶ．
+
+リテラルや変数には後述する\keyword{型}がある．
+
+\tobewritten{型．}
 
 変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマーが変数の値を変化させたい理由はユーザー入力，ループ，例外，内部状態，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザー入力に関しても章を改めて取り上げる．
 
@@ -58,23 +66,47 @@ z=fxy
 \end{equation}
 なお$fxy$は$(fx)y$と解釈される．前半の$(fx)$は1引数の関数とみなせる．
 
-\section{IO survival kit}
+\tobewritten{有名な関数，実数編．}
 
-\begin{align}
-  f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
-  f&=\dots\\
-  \textsl{main}&=\textsl{putStrLn}\mathCompose\textrm{show}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
-\end{align}
-or  
-\begin{align}
-f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}\\
-f&=\dots\\
-\textsl{main}&=\textsl{print}\mathCompose f\mathCompose(\mathrm{read}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt})\mathBind\textsl{getLine}
-\end{align}
-or
+\tobewritten{有名な関数，文字列編．}
+
+\section{関数合成}
+
+関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g.f| と書く．}
 \begin{equation}
-  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
+k=g\mathCompose f
 \end{equation}
+関数合成演算子$\mathCompose$は以下のように右結合する．
+\begin{align}
+k&=h\mathCompose g\mathCompose f\\
+&=\left(h\mathCompose g\right)\mathCompose f\\
+\end{align}
+
+関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g.f) x| と書く．}
+\begin{align}
+z&=h\mathApply(g\mathCompose f)x\\
+&=h\left((g\mathCompose f)x\right)
+\end{align}
+
+\section{IOサバイバルキット1}
+
+プログラムとは合成された関数である．多くのプログラミング言語では，プログラムそのものにmainという名前をつける．本書では「IOモナド」の章で述べる理由によって，main関数をスラント体で$\mathMain$と書く．
+
+実用的なプログラムはユーザからの入力を受け取り，関数を適用し，ユーザへ出力する．\haskell ではユーザからの1行の入力を$\mathGetLine$で受け取り，変数の値を$\mathPrint$で書き出せる．ここに$\mathGetLine$と$\mathPrint$は関数（ファンクション）ではあるが，特別に「\keyword{アクション}」とも呼ぶ．関数$\mathMain$もアクションである．
+
+引数$x$の1.5乗を求める関数$f$は次のように定義できる．\footnote{\haskell では \verb|f x = x ** 1.5| と書く．}
+\begin{equation}
+fx=x^{1.5}
+\end{equation}
+ユーザからの入力に関数$f$を適用してユーザへ出力するプログラムを\haskell で書くと次のようになる．\footnote{\haskell では \verb|main = print . f . read =<< getLine| と書く．}
+\begin{equation}
+\mathMain
+=\mathPrint\mathCompose f\mathCompose\mathRead\mathBind\mathGetLine
+\end{equation}
+% \begin{equation}
+%  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
+% \end{equation}
+ここに関数$\mathRead$は文字列であるユーザ入力を数に変換する関数である．また演算子$\mathBind$は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「\keyword{モナド}」の章で述べる．
 
 IO survival kit 2.
 
@@ -206,32 +238,7 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
 \end{equation}
 と書いても良い．
 
-\section{リテラル}
 
-整数型の\keyword{リテラル}は次のように書く．\footnote{\haskell では \verb|x = 1| と書く．}
-\begin{equation}
-x=1
-\end{equation}
-変数の束縛と型注釈を組み合わせると次のようになる．\footnote{\haskell では \verb|x :: Int = 1| と書く．}
-\begin{equation}
-x\mathTypeIs\mathTypeInt=1
-\end{equation}
-
-同様に，浮動小数点型のリテラルは次のように書く．\footnote{\haskell では \verb|x = 1.0| と書く．}
-\begin{equation}
-x=1.0
-\end{equation}
-
-文字型のリテラルは次のように書く．\footnote{\haskell では \verb|x = 'a'| と書く．}
-\begin{equation}
-x=\mathLiteralChar{a}
-\end{equation}
-
-論理型のリテラルは次のように書く．\footnote{\haskell では \verb|x = True| と書く．}
-\begin{equation}
-x=\mathLiteral{True}
-\end{equation}
-論理型リテラルは$\mathLiteral{True}$の他に$\mathLiteral{False}$がある．なお$\mathLiteral{True}$と$\mathLiteral{False}$は正しくは\keyword{値コンストラクタ}である．
 
 \section{条件}
 
@@ -287,25 +294,9 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 \right.
 \end{equation}
 
-\section{関数合成}
+\section{モノイド}
 
-関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g.f| と書く．}
-\begin{equation}
-k=g\mathCompose f
-\end{equation}
-関数合成演算子$\mathCompose$は以下のように右結合する．
-\begin{align}
-k&=h\mathCompose g\mathCompose f\\
-&=\left(h\mathCompose g\right)\mathCompose f\\
-\end{align}
-
-関数適用のための特別な演算子$\mathApply$があると便利である．演算子$\mathApply$は関数合成演算子よりも優先順位が低い．例を挙げる．\footnote{\haskell では \verb|z = h $ (g.f) x| と書く．}
-\begin{align}
-z&=h\mathApply(g\mathCompose f)x\\
-&=h\left((g\mathCompose f)x\right)
-\end{align}
-
-いま任意の関数$f$に対して
+任意の関数$f$に対して
 \begin{equation}
 \mathId f=f
 \end{equation}
@@ -314,6 +305,8 @@ z&=h\mathApply(g\mathCompose f)x\\
 (h\mathCompose g)\mathCompose f=h\mathCompose(g\mathCompose f)
 \end{equation}
 が成り立つとする．このとき関数は\keyword{モノイド}であるという．
+
+\tobewritten{一般のモノイド．}
 
 \section{タプル}
 
@@ -731,7 +724,7 @@ or \verb|data V2 = V2 Int Int|.}
 
 \section{型クラスとインスタンス}
 
-\section{IO}
+\section{IOモナド}
 
 IO example:\footnote{In \haskell, \verb|main = getLine >>= print >> return 0|.}
 \begin{equation}

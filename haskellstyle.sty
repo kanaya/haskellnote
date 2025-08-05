@@ -5,6 +5,13 @@
 \newcommand{\mathCompose}{\mathbin{\bullet}}
 \newcommand{\mathApply}{\mathbin{\S}}
 
+\newcommand{\mathRead}{\mathord{\textrm{read}}}
+
+\newcommand{\mathTypeAction}[1]{\mathord{\textsl{#1}}}
+\newcommand{\mathMain}{\mathTypeAction{main}}
+\newcommand{\mathPrint}{\mathTypeAction{print}}
+\newcommand{\mathGetLine}{\mathTypeAction{getLine}}
+
 \newcommand{\mathLambda}[2]{\backslash#1\mapsto#2}
 \newcommand{\mathAnonymousParameter}{\mathord{\lozenge}}
 \newcommand{\mathWhere}[1]{\mathrel{\textsf{where}}\left\{#1\right\}}
@@ -90,9 +97,6 @@
 \newcommand{\mathOr}{\vee}
 \newcommand{\mathAnd}{\wedge}
 
-\newcommand{\mathMain}{\mathord{\textsl{main}}}
-\newcommand{\mathGetLine}{\mathord{\textsl{getLine}}}
-\newcommand{\mathPrint}{\mathord{\textsl{print}}}
 \newcommand{\mathNext}{\gg}
 
 \newcommand{\mathDo}[1]{\mathord{\textsf{do}}\left\{#1\right\}}
