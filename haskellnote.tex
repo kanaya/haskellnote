@@ -412,13 +412,25 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 
 各行を空白で区切ってリストに格納するには関数$\textrm{words}$を用いる．
 
-各文字列を数に変換するには関数$\mathRead_{\mathTypeReal}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}$を用いる．
-
+各文字列を数に変換するには次の関数$\mathRead_{\mathTypeReal}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}$を用いる．\footnote{\haskell では次のように書く．
+\begin{footcode}
+      readDouble :: String -> Double
+      readDouble = read
+\end{footcode}}
 \begin{align}
 \mathRead_{\mathTypeReal}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}\\
 \mathRead_{\mathTypeReal}&=\mathRead
 \end{align}
 
+入力ファイルの各行に書かれたベクトルを対象に関数$f$を適用して，結果を書き出すには次のように書く．\footnote{\haskell では次のように書く．
+\begin{footcode}
+      main = print 
+        . (f <$>) 
+        . ((readDouble <$>) <$>) 
+        . (words <$>) 
+        . lines 
+        =<< getContents
+\end{footcode}}
 \begin{multline}
 \textsl{main}=\textsl{print}
 \mathCompose(f\mathMap)
@@ -427,18 +439,6 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \mathCompose\textrm{lines}\\
 \mathBind\textsl{getContents}
 \end{multline}
-
-
-\begin{verbatim}
-f :: [Int] -> Double
-f [] = 0
-f xs = sqrt . fromIntegral . sum $ (\x -> x * x) `map` xs
-
-readInt :: String -> Int
-readInt = read
-
-main = print . (f <$>) . ((readInt <$>) <$>) . (words <$>) . lines =<< getContents\end{verbatim}
-
 
 \section{Maybe}
 
