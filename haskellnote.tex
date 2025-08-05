@@ -37,9 +37,9 @@ x=1
 \end{equation}
 変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．上式の右辺を\keyword{リテラル}と呼ぶ．
 
-リテラルや変数には後述する\keyword{型}がある．
+リテラルや変数には\keyword{型}がある．型は数学者の集合と似た意味で，整数全体の集合$\mathTypeInt$に相当する\keyword{整数型}や，実数全体の集合$\mathTypeReal$に相当する\keyword{浮動小数点型}がある．以下，誤解のおそれがない限り整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表す．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| を用いる．}
 
-\tobewritten{型．}
+数学者は変数$x$が整数であることを$x\in\mathTypeInt$と書くが，本書では$x\mathTypeIs\mathTypeInt$と書く．これは記号$\in$を別の用途に用いるためである．\footnote{\haskell では \verb|x :: Int| と書く．}
 
 変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマーが変数の値を変化させたい理由はユーザー入力，ループ，例外，内部状態，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザー入力に関しても章を改めて取り上げる．
 
@@ -67,8 +67,6 @@ z=fxy
 なお$fxy$は$(fx)y$と解釈される．前半の$(fx)$は1引数の関数とみなせる．
 
 \tobewritten{有名な関数，実数編．}
-
-\tobewritten{有名な関数，文字列編．}
 
 \section{関数合成}
 
@@ -106,59 +104,8 @@ fx=x^{1.5}
 % \begin{equation}
 %  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
 % \end{equation}
-ここに関数$\mathRead$は文字列であるユーザ入力を数に変換する関数である．また演算子$\mathBind$は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「\keyword{モナド}」の章で述べる．
+ここに関数$\mathRead$は\keyword{文字列}であるユーザ入力を数に変換する関数である．また演算子$\mathBind$は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「\keyword{モナド}」の章で述べる．
 
-IO survival kit 2.
-
-\begin{verbatim}
-  1 2 3
-  4 5 6
-\end{verbatim}
-
-$\textsl{getContents}$
-
-$\textrm{lines}$
-
-$\textrm{words}\mathFMap$
-
-$(\textrm{read}\mathFMap)\mathFMap$
-
-$f\mathList{x}=\mathrm{sqrt}\mathCompose\textrm{fromIntegral}\mathCompose\textrm{sum}\mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}$
-
-$f\mathFMap$
-
-$\textsl{print}$
-
-
-\begin{align}
-  f&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeReal}\\
-  f\mathList{x}&=\mathrm{sqrt}
-    \mathCompose\textrm{fromIntegral}
-    \mathCompose\textrm{sum}
-    \mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}\\
-  \textrm{readInt}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt}\\
-  \textrm{readInt}&=\textrm{read}
-\end{align}
-
-\begin{multline}
-\textsl{main}=\textsl{print}
-\mathCompose(f\mathMap)
-\mathCompose((\textrm{readInt}\mathMap)\mathMap)
-\mathCompose(\textrm{words}\mathMap)
-\mathCompose\textrm{lines}\\
-\mathBind\textsl{getContents}
-\end{multline}
-
-
-\begin{verbatim}
-f :: [Int] -> Double
-f [] = 0
-f xs = sqrt . fromIntegral . sum $ (\x -> x * x) `map` xs
-
-readInt :: String -> Int
-readInt = read
-
-main = print . (f <$>) . ((readInt <$>) <$>) . (words <$>) . lines =<< getContents\end{verbatim}
 \section{ラムダ}
 
 関数とは，変数名に束縛された\keyword{ラムダ式}である．ラムダ式は次のように書く．\footnote{\haskell では \verb|f = \x -> x+1| と書く．}
@@ -413,6 +360,59 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \mathFoldRight{a}{\mathAnonymousOperator}{\mathList{x}}
 =a\mathAnonymousOperator\left(x_0\dots\left(x_{n-2}\mathAnonymousOperator\left(x_{n-1}\mathAnonymousOperator x_n\right)\right)\right)
 \end{equation}
+
+IO survival kit 2.
+
+\begin{verbatim}
+  1 2 3
+  4 5 6
+\end{verbatim}
+
+$\textsl{getContents}$
+
+$\textrm{lines}$
+
+$\textrm{words}\mathFMap$
+
+$(\textrm{read}\mathFMap)\mathFMap$
+
+$f\mathList{x}=\mathrm{sqrt}\mathCompose\textrm{fromIntegral}\mathCompose\textrm{sum}\mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}$
+
+$f\mathFMap$
+
+$\textsl{print}$
+
+
+\begin{align}
+  f&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeReal}\\
+  f\mathList{x}&=\mathrm{sqrt}
+    \mathCompose\textrm{fromIntegral}
+    \mathCompose\textrm{sum}
+    \mathApply(\mathLambda{x}{x*x})\mathMap\mathList{x}\\
+  \textrm{readInt}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeInt}\\
+  \textrm{readInt}&=\textrm{read}
+\end{align}
+
+\begin{multline}
+\textsl{main}=\textsl{print}
+\mathCompose(f\mathMap)
+\mathCompose((\textrm{readInt}\mathMap)\mathMap)
+\mathCompose(\textrm{words}\mathMap)
+\mathCompose\textrm{lines}\\
+\mathBind\textsl{getContents}
+\end{multline}
+
+
+\begin{verbatim}
+f :: [Int] -> Double
+f [] = 0
+f xs = sqrt . fromIntegral . sum $ (\x -> x * x) `map` xs
+
+readInt :: String -> Int
+readInt = read
+
+main = print . (f <$>) . ((readInt <$>) <$>) . (words <$>) . lines =<< getContents\end{verbatim}
+
 
 \section{Maybe}
 
