@@ -4,13 +4,15 @@
 
 \newcommand{\haskell}{\textsf{Haskell}}
 
-\newcommand{\mathCompose}{\mathbin{\bullet}}
-\newcommand{\mathApply}{\mathbin{\S}}
+\newcommand{\mathOperator}[1]{\mathbin{#1}}
+
+\newcommand{\mathCompose}{\mathOperator{\bullet}}
+\newcommand{\mathApply}{\mathOperator{\S}}
 
 \newcommand{\mathFunction}[1]{\mathop{\textrm{#1}}}
 \newcommand{\mathRead}{\mathFunction{read}}
 
-\newcommand{\mathAction}[1]{\mathord{\textsl{#1}}}
+\newcommand{\mathAction}[1]{\mathop{\textsl{#1}}}
 \newcommand{\mathMain}{\mathAction{main}}
 \newcommand{\mathPrint}{\mathAction{print}}
 \newcommand{\mathGetLine}{\mathAction{getLine}}
@@ -44,7 +46,7 @@
 \newcommand{\mathEmptyList}{[\,]}
 \newcommand{\mathIn}{\in}
 \newcommand{\mathMakeListComplehention}[2]{\mathMakeList{#1\mid#2}}
-\newcommand{\mathListConcat}{\mathbin{\#}}
+\newcommand{\mathListConcat}{\mathOperator{\#}}
 \newcommand{\mathEven}{\mathFunction{even}}
 
 \newcommand{\mathTypeSynonim}[2]{\mathKeyword{type}\;#1=#2}
@@ -53,6 +55,13 @@
 
 \newcommand{\mathSqrt}{\mathFunction{sqrt}}
 \newcommand{\mathNorm}{\mathFunction{norm}}
+\newcommand{\mathLines}{\mathFunction{lines}}
+\newcommand{\mathWords}{\mathFunction{words}}
+\newcommand{\mathGetContents}{\mathAction{getContents}}
+
+\newcommand{\mathPrintEach}{\mathAction{printEach}}
+
+\newcommand{\mathMapM}{\mathOperator{\clubsuit}}
 
 \newcommand{\mathKeyword}[1]{\textsf{#1}}
 \newcommand{\mathConstant}[1]{\textrm{#1}}
@@ -69,7 +78,7 @@
 \newcommand{\mathId}{\mathFunction{id}}
 \newcommand{\mathConst}{\mathFunction{const}}
 
-\newcommand{\mathAnonymousOperator}{\mathbin{\maltese}}
+\newcommand{\mathAnonymousOperator}{\mathOperator{\maltese}}
 \newcommand{\mathMap}{\otimes}
 \newcommand{\mathFold}[2]{\bigcup_{#1}^{#2}}
 \newcommand{\mathFoldRight}[2]{\bigsqcup_{#1}^{#2}}
@@ -94,13 +103,13 @@
 
 \newcommand{\mathPure}[1]{#1_\star}
 \newcommand{\mathMakePure}[1]{\mathMakeGeneral{\star}{#1}}
-\newcommand{\mathFMap}{\mathbin{\circledS}}%{\times}
+\newcommand{\mathFMap}{\mathOperator{\circledS}}%{\times}
 
-\newcommand{\mathApplicativeMap}{\mathbin{\circledast}}
+\newcommand{\mathApplicativeMap}{\mathOperator{\circledast}}
 \newcommand{\mathApplicativeFuncCall}[1]{\llbracket#1\rrbracket}
 
 \newcommand{\mathMakeReturn}[1]{\mathMakePure{#1}}%{\mathMakeGeneral{\text{return}}{#1}}
-\newcommand{\mathBind}{\mathbin{\heartsuit}}
+\newcommand{\mathBind}{\mathOperator{\heartsuit}}
 \newcommand{\mathBindRight}{\mathrel{\ooalign{\hss$\mathBind$\hss\cr$\longrightarrow$}}}
 \newcommand{\mathComposeMonadRight}{\rightarrowtail}
 \newcommand{\mathLiftM}[1]{{#1}^*}
@@ -117,7 +126,7 @@
 \newcommand{\mathDo}[1]{\mathord{\textsf{do}}\left\{#1\right\}}
 
 \newcommand{\mathIdentity}{i}
-\newcommand{\mathAnyBinaryOperator}{\mathbin{\bigcirc}}
+\newcommand{\mathAnyBinaryOperator}{\mathOperator{\bigcirc}}
 
 \newcommand{\mathKleisliStar}[1]{{#1}^\bigstar}
 \newcommand{\mathCategory}[1]{\mathcal{#1}}

@@ -415,7 +415,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 
 入力ファイル全体を受け取るにはアクション$\textsl{getContents}$を用いる．入力ファイルを1行毎のリストにするには関数$\textrm{lines}$を用いる．
 
-各行を空白で区切ってリストに格納するには関数$\textrm{words}$を用いる．
+各行を空白で区切ってリストに格納するには関数$\mathWords$を用いる．
 
 各文字列を数に変換するには次の関数$\mathRead_{\mathTypeReal}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}$を用いる．\footnote{\haskell では次のように書く．
 \begin{footcode}
@@ -437,15 +437,19 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
         =<< getContents
 \end{footcode}}
 \begin{multline}
-\textsl{main}=\textsl{print}
+\mathMain=\mathPrint
 \mathCompose(\mathNorm\mathMap)
 \mathCompose((\mathRead_{\mathTypeReal}\mathMap)\mathMap)\\
-\mathCompose(\textrm{words}\mathMap)
-\mathCompose\textrm{lines}
-\mathBind\textsl{getContents}
+\mathCompose(\mathWords\mathMap)
+\mathCompose\mathLines
+\mathBind\mathGetContents
 \end{multline}
 
-% print' xs = mapM_ print xs
+アクション$\mathPrint$に代えて次の$\mathPrintEach$を用いると，入力と出力を同じ形式にできる．\footnote{\haskell では \verb|printEach xs = mapM_ print xs| と書く．}
+\begin{equation}
+\mathPrintEach\mathList{x}=\mathPrint\mathMapM\mathList{x}
+\end{equation}
+演算子$\mathMapM$はアクション版のマップ演算子である．
 
 \section{Maybe}
 
