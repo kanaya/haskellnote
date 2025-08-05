@@ -401,11 +401,16 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \end{sourcecode}
 このようなファイル形式は計算機科学者にとって見慣れたものである．
 
-各行つまり各ベクトルごとに，そのノルムを計算して出力するプログラムを書きたいとしよう．まず数列を受け取ってそのノルムを返す関数$\mathNorm$を次のように定義する．
+各行つまり各ベクトルごとに，そのノルムを計算して出力するプログラムを書きたいとしよう．まず数列を受け取ってそのノルムを返す関数$\mathNorm$を次のように定義する．\footnote{\haskell では次のように書く．
+\begin{footcode}
+      norm :: [Double] -> Double
+      norm [] = 0.0
+      norm xs = sqrt $ sum [x * x | x <- xs]
+\end{footcode}}
 \begin{align}
-\mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeReal}{\mathTypeReal}\\
+\mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeReal}}{\mathTypeReal}\\
 \mathNorm[]&=0.0\\
-\mathNorm\mathList{x}&=\mathSqrt\mathCompose\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}
+\mathNorm\mathList{x}&=\mathSqrt\mathApply\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}
 \end{align}
 
 入力ファイル全体を受け取るにはアクション$\textsl{getContents}$を用いる．入力ファイルを1行毎のリストにするには関数$\textrm{lines}$を用いる．
@@ -425,7 +430,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 入力ファイルの各行に書かれたベクトルを対象に関数$f$を適用して，結果を書き出すには次のように書く．\footnote{\haskell では次のように書く．
 \begin{footcode}
       main = print 
-        . (f <$>) 
+        . (norm <$>) 
         . ((readDouble <$>) <$>) 
         . (words <$>) 
         . lines 
@@ -433,7 +438,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \end{footcode}}
 \begin{multline}
 \textsl{main}=\textsl{print}
-\mathCompose(f\mathMap)
+\mathCompose(\mathNorm\mathMap)
 \mathCompose((\mathRead_{\mathTypeReal}\mathMap)\mathMap)
 \mathCompose(\textrm{words}\mathMap)
 \mathCompose\textrm{lines}\\
