@@ -18,7 +18,7 @@
 \author{Ichi Kanaya}
 \date{2025}
 
-\newcommand{\keyword}[1]{\textgt{#1}}
+\newcommand{\keyword}[1]{\textgt{\textbf{#1}}}
 \newcommand{\tobewritten}[1]{\begin{screen}\textbf{TK.} {#1}\end{screen}}
 
 \begin{document}
@@ -34,8 +34,9 @@
 変数$x$に値を代入するには次のようにする．\footnote{\haskell では \verb|x = 1| と書く．}
 \begin{equation}
 x=1
+\label{eq:x-equal-one}
 \end{equation}
-変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．上式の右辺を\keyword{リテラル}と呼ぶ．
+変数という呼び名に反して，変数の値は変えられない．そこで変数に値を代入するとは呼ばずに，変数名に値を\keyword{束縛}するという．式\eqref{eq:x-equal-one}の右辺を\keyword{リテラル}と呼ぶ．
 
 リテラルや変数には\keyword{型}がある．型は数学者の集合と似た意味で，整数全体の集合$\mathTypeInt$に相当する\keyword{整数型}や，実数全体の集合$\mathTypeReal$に相当する\keyword{浮動小数点型}がある．以下，誤解のおそれがない限り整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表す．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| を用いる．}
 
@@ -100,11 +101,23 @@ fx=x^{1.5}
 \begin{equation}
 \mathMain
 =\mathPrint\mathCompose f\mathCompose\mathRead\mathBind\mathGetLine
+\label{eq:first-main}
 \end{equation}
 % \begin{equation}
 %  \textsl{main}=\textsl{print}\mathCompose f\mathBind(\mathrm{read}\mathFMap\textsl{getLine}\mathTypeIs{\mathFunctorTypeGeneral{\textbf{IO}}{\mathTypeInt}})
 % \end{equation}
 ここに関数$\mathRead$は\keyword{文字列}であるユーザ入力を数に変換する関数である．また演算子$\mathBind$は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「\keyword{モナド}」の章で述べる．
+
+式\eqref{eq:first-main}は「$\mathMain$とは$\mathGetLine$した結果を$\mathRead$して$f$して$\mathPrint$するものである」とも読める．そのため\haskell はどうしても手続き的に書きたいプログラマのために，以下のようなシンタックスシュガーを用意している．
+\begin{verbatim}
+f x = x ** 1.5
+main = do
+  line <- getLine
+  let x = read line
+  let y = f x
+  print y
+\end{verbatim}
+このような書き方は「\keyword{do記法}」の章で述べる．
 
 \section{ラムダ}
 
@@ -240,20 +253,6 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 \end{aligned}
 \right.
 \end{equation}
-
-\section{モノイド}
-
-任意の関数$f$に対して
-\begin{equation}
-\mathId f=f
-\end{equation}
-なる関数$\mathId$があり，かつ任意の関数$f,g,h$に対して
-\begin{equation}
-(h\mathCompose g)\mathCompose f=h\mathCompose(g\mathCompose f)
-\end{equation}
-が成り立つとする．このとき関数は\keyword{モノイド}であるという．
-
-\tobewritten{一般のモノイド．}
 
 \section{タプル}
 
@@ -739,6 +738,20 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \end{equation}
 
 \dbend
+
+\section{モノイド}
+
+任意の関数$f$に対して
+\begin{equation}
+\mathId f=f
+\end{equation}
+なる関数$\mathId$があり，かつ任意の関数$f,g,h$に対して
+\begin{equation}
+(h\mathCompose g)\mathCompose f=h\mathCompose(g\mathCompose f)
+\end{equation}
+が成り立つとする．このとき関数は\keyword{モノイド}であるという．
+
+\tobewritten{一般のモノイド．}
 
 \section{モノイド則}
 型$\mathTypeGeneral{a}$の変数$x,y,z\mathTypeIs\mathTypeGeneral{a}$について，特別な変数$\mathIdentity\mathTypeIs\mathTypeGeneral{a}$および二項演算子$\mathAnyBinaryOperator$ただし$x\mathAnyBinaryOperator y\mathTypeIs\mathTypeGeneral{a}$があり，
