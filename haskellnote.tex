@@ -36,19 +36,19 @@
 x=1
 \label{eq:x-equal-one}
 \end{equation}
-変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を\keyword{束縛}するという．式\eqref{eq:x-equal-one}の右辺を\keyword{リテラル}と呼ぶ．
+変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を\keyword{束縛}するという．式\eqref{eq:x-equal-one}の右辺のように数式にハードコードされた値を\keyword{リテラル}と呼ぶ．
 
-リテラルや変数には\keyword{型}がある．型は数学者の集合と似た意味で，整数全体の集合$\mathTypeInt$に相当する\keyword{整数型}や，実数全体の集合$\mathTypeReal$に相当する\keyword{浮動小数点型}がある．以下，誤解のおそれがない限り整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表す．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| を用いる．}
+リテラルや変数には\keyword{型}がある．型は数学者の\keyword{集合}と似た意味で，整数全体の集合$\mathTypeInt$に相当する\keyword{整数型}や，実数全体の集合$\mathTypeReal$に相当する\keyword{浮動小数点型}がある．以下，誤解のおそれがない限り整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表す．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| を用いる．}
 
 数学者は変数$x$が整数であることを$x\in\mathTypeInt$と書くが，本書では$x\mathTypeIs\mathTypeInt$と書く．これは記号$\in$を別の用途に用いるためである．\footnote{\haskell では \verb|x :: Int| と書く．}
 
-変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマが変数の値を変化させたい，つまkeyword{破壊的代入}を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．
+変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマが変数の値を変化させたい，つまり\keyword{破壊的代入}を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．
 
 本書では変数名を原則1文字として，イタリック体で表し，$w,x,y,z$のような$n$以降のアルファベットを使う．
 
 \section{関数}
 
-関数$f$は次のように定義できる．\footnote{\haskell では \verb|f x = x+1| と書く．}
+整数$x$に$1$を足す\keyword{関数}$f$は次のように定義できる．\footnote{\haskell では \verb|f x = x+1| と書く．}
 \begin{equation}
 fx=x+1
 \end{equation}
@@ -65,7 +65,7 @@ z=fx
 \begin{equation}
 z=fxy
 \end{equation}
-なお$fxy$は$(fx)y$と解釈される．前半の$(fx)$は1引数の関数とみなせる．
+なお$fxy$は$(fx)y$と解釈される．前半の$(fx)$は1引数の関数とみなせる．2引数関数を連続した1引数関数の適用とみなす考え方を，関数の\keyword{カリー化}と呼ぶ．
 
 \tobewritten{有名な関数，実数編．}
 
