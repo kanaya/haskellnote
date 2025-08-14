@@ -56,7 +56,7 @@ fx=x+1
 
 本書では関数名を原則1文字として，イタリック体で表し，$f,g,h$のようにアルファベットの$f$以降の文字を使う．ただし有名な関数についてはローマン体で表し，文字数も2文字以上とする．たとえば$\sin$などの三角関数や指数関数がそれにあたる．
 
-変数$x$に関数$f$を\keyword{適用}する場合は次のように書く．\footnote{\haskell では \verb|z = f x| と書く．}
+変数$x$に関数$f$を\keyword{適用}する場合は次のように書く．ここでも引数を括弧でくるまない．\footnote{\haskell では \verb|z = f x| と書く．}
 \begin{equation}
 z=fx
 \end{equation}
@@ -71,10 +71,18 @@ z=fxy
 
 \section{関数合成}
 
-関数の\keyword{合成}は次のように書く．\footnote{\haskell では \verb|k = g . f| と書く．}
+関数$f$と関数$g$を連続して使いたい場合
+\begin{equation}
+z=g(fx)
+\end{equation}
+とするところであるが，事前に関数$f$と関数$g$を\keyword{合成}しておきたいことがある．
+
+関数の合成は次のように書く．\footnote{\haskell では \verb|k = g . f| と書く．}
 \begin{equation}
 k=g\mathCompose f
 \end{equation}
+関数の連続適用$g(fx)$と合成関数の適用$(g\mathCompose f)x$は同じ結果を返す．
+
 関数合成演算子$\mathCompose$は以下のように\keyword{左結合}する．
 \begin{align}
 k&=h\mathCompose g\mathCompose f\\
