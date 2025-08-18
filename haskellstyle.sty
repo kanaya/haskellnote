@@ -1,6 +1,6 @@
 \newenvironment{footcode}{\begingroup\VerbatimEnvironment\begin{Verbatim}}{\end{Verbatim}\endgroup}
 
-\newenvironment{sourcecode}[1]{\begingroup\begin{itembox}{#1}}{\end{itembox}\endgroup}
+\newenvironment{sourcecode}[1]{\begingroup\begin{itembox}{\texttt{#1}}}{\end{itembox}\endgroup}
 
 \newcommand{\haskell}{\textsf{Haskell}}
 
@@ -41,7 +41,7 @@
 
 \newcommand{\mathTypeList}[1]{[#1]}
 \newcommand{\mathList}[1]{{#1}_\mathrm{s}}
-\newcommand{\mathListList}[1]{{#1}_\mathrm{SS}}
+\newcommand{\mathListList}[1]{{#1}_\mathrm{ss}}
 \newcommand{\mathString}[1]{{#1}_\mathrm{S}}
 \newcommand{\mathMakeList}[1]{\left[#1\right]}
 \newcommand{\mathEmptyList}{[\,]}
@@ -87,7 +87,7 @@
 \newcommand{\mathFunctorTypeGeneral}[2]{{}^{#1}\left\llangle#2\right\rrangle}
 \newcommand{\mathMakeGeneral}[2]{{}^{#1}\left\langle#2\right\rangle}
 \newcommand{\mathMaybe}[1]{{#1}_?}
-\newcommand{\mathTypeMaybe}[1]{\mathFunctorTypeGeneral{?}{#1}}
+\newcommand{\mathTypeMaybe}[1]{\mathFunctorTypeGeneral{\text{Maybe}}{#1}}
 \newcommand{\mathMakeJust}[1]{\mathMakeGeneral{\text{Just}}{#1}}
 \newcommand{\mathNothing}{\emptyset}
 \newcommand{\mathMonadic}[1]{{#1}^\dagger}

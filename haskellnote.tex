@@ -339,8 +339,16 @@ z\mathTypeIs()
 f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
 f(x:\mathList{x})=x
 \end{gather}
+先頭から2個の要素を受け取り，それらの和を返す場合は次のように書く．
+\begin{gather}
+  f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
+  f(x:y:\mathList{y})=x+y
+\end{gather}
 
-% x:y:ys
+リストのリストは次のように構成できる．
+\begin{equation}
+\mathListList{z}=[[1,2],[3,4]]
+\end{equation}
 
 \section{内包表記}
 
@@ -351,7 +359,7 @@ f(x:\mathList{x})=x
 \begin{equation}
 \mathList{x}=\mathMakeListComplehention{x^2}{x\mathIn\mathMakeList{1,2\dots100},\mathEven x}
 \end{equation}
-この例では数列$\mathMakeList{1,2\dots100}$のうち偶数だけを2乗したリストを作っている．
+関数$\mathEven$は引数が偶数の場合にだけ$\mathTrue$を返す関数である．この例では数列$\mathMakeList{1,2\dots100}$のうち偶数だけを2乗したリストを作っている．
 
 \section{文字列}
 
@@ -417,12 +425,12 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \begin{footcode}
       norm :: [Double] -> Double
       norm [] = 0.0
-      norm xs = sqrt $ sum [x * x | x <- xs]
+      norm xs = sqrt (sum [x * x | x <- xs])
 \end{footcode}}
 \begin{align}
 \mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeReal}}{\mathTypeReal}\\
 \mathNorm[]&=0.0\\
-\mathNorm\mathList{x}&=\mathSqrt\mathApply\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}
+\mathNorm\mathList{x}&=\mathSqrt\left(\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}\right)
 \end{align}
 
 入力ファイル全体を受け取るにはアクション$\textsl{getContents}$を用いる．入力ファイルを1行毎のリストにするには関数$\textrm{lines}$を用いる．
@@ -465,7 +473,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 
 \section{Maybe}
 
-計算は失敗する可能性がある．例えば
+計算は失敗する可能性がある．たとえば
 \begin{equation}
 z=y/x
 \end{equation}
@@ -501,7 +509,7 @@ Maybe変数が値を持たない場合は
 
 \section{Maybeに対する計算}
 
-Maybe変数に，非Maybe変数を受け取る関数を適用することは出来ない．そこで特別な演算子$\mathFMap$を用いる．\footnote{\haskell では \verb|zm = (+1) <$> xm| と書く．}
+Maybe変数に，非Maybe変数を受け取る関数を適用することは出来ない．そこで特別な演算子$\mathFMap$を用いて，次のように計算する．\footnote{\haskell では \verb|zm = (+1) <$> xm| と書く．}
 \begin{equation}
 \mathMaybe{z}=(\mathAnonymousParameter+1)\mathFMap\mathMaybe{x}
 \end{equation}
