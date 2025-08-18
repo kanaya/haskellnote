@@ -71,7 +71,7 @@ z=fxy
 
 \section{関数合成}
 
-関数$f$と関数$g$を連続して使いたい場合
+変数$x$に関数$f$と関数$g$を連続して適用したい場合
 \begin{equation}
 z=g(fx)
 \end{equation}
@@ -116,16 +116,16 @@ fx=x^{1.5}
 % \end{equation}
 ここに関数$\mathRead$は\keyword{文字列}であるユーザ入力を数に変換する関数である．また演算子$\mathBind$は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「\keyword{モナド}」の章で述べる．
 
-式\eqref{eq:first-main}は「$\mathMain$とは$\mathGetLine$した結果を$\mathRead$して$f$して$\mathPrint$するものである」とも読める．そのため\haskell はどうしても手続き的に書きたいプログラマのために，以下のようなシンタックスシュガーを用意している．
-\begin{verbatim}
-f x = x ** 1.5
-main = do
-  line <- getLine
-  let x = read line
-  let y = f x
-  print y
-\end{verbatim}
-このような書き方は「\keyword{do記法}」の章で述べる．
+% 式\eqref{eq:first-main}は「$\mathMain$とは$\mathGetLine$した結果を$\mathRead$して$f$して$\mathPrint$するものである」とも読める．そのため\haskell はどうしても手続き的に書きたいプログラマのために，以下のようなシンタックスシュガーを用意している．
+% \begin{verbatim}
+% f x = x ** 1.5
+% main = do
+%   line <- getLine
+%   let x = read line
+%   let y = f x
+%   print y
+% \end{verbatim}
+% このような書き方は「\keyword{do記法}」の章で述べる．
 
 \section{ラムダ}
 
@@ -133,8 +133,9 @@ main = do
 \begin{equation}
 f=\mathLambda{x}{x+1}
 \end{equation}
+ラムダ記号は一般的には$\lambda$が用いられるが，本書ではすべてのギリシア文字を予約しておきたいので，\haskell の記法に倣って$\backslash$を用いる．
 
-本書では無名変数$\mathAnonymousParameter$を用いた以下の書き方も用いる．\footnote{無名変数は\haskell には無いが，代わりに「セクション」という書き方ができる．式$(\mathAnonymousParameter+1)$は\haskell では\verb|(+1)| と書く．}
+本書では無名変数$\mathAnonymousParameter$を用いた以下の書き方も用いる．\footnote{無名変数は\haskell には無いが，代わりに「セクション」という書き方ができる．式$(\mathAnonymousParameter+1)$は\haskell では \verb|(+1)| と書く．}
 \begin{align}
 f&=\left(\mathAnonymousParameter+1\right)\\
 &=\mathLambda{x}{x+1}
@@ -143,8 +144,9 @@ f&=\left(\mathAnonymousParameter+1\right)\\
 無名変数が2回以上登場した場合は，その都度新しいパラメタを生成する．たとえば次のとおりである．\footnote{\haskell では \verb|f = (+)| と書く．}
 \begin{align}
 f&=\mathAnonymousParameter+\mathAnonymousParameter\\
-&=\mathLambda{x}{(\mathLambda{y}{x+y})}
+&=\mathLambda{x}{\mathLambda{y}{x+y}}
 \end{align}
+なお$\mathLambda{x}{\mathLambda{y}{x+y}}$は$\mathLambda{x\,y}{x+y}$と書いても良い．\footnote{\haskell では \verb|\x y -> x+y| と書く．}
 
 \section{ローカル変数}
 
@@ -401,8 +403,6 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \end{equation}
 
 \section{IOサバイバルキット2}
-
-% CHECK THIS SECTION
 
 1行ごとに3次元ベクトルが並べられた，以下の入力ファイルがあるとする．
 \begin{sourcecode}{input.txt}
