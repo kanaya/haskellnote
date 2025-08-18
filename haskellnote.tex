@@ -533,17 +533,17 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 
 \section{型パラメタ}
 
-型をパラメタとして扱うことができる．任意の型を$\mathTypeGeneral{a}$と，ボールド体小文字で書く．ある型$\mathTypeGeneral{a}$の引数を取り，同じ型を返す関数の型は次のように書ける．\footnote{\haskell では \verb|f :: a -> a| と書く．}
+型をパラメタとして扱うことができる．任意の型を$\mathTypeA$と，ボールド体小文字で書く．ある型$\mathTypeA$の引数を取り，同じ型を返す関数の型は次のように書ける．\footnote{\haskell では \verb|f :: a -> a| と書く．}
 \begin{equation}
-f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
+f\mathTypeIs\mathTypeFunctionAA
 \end{equation}
 
-\keyword{型パラメタ}には制約をつけることができる．型の集合を\keyword{型クラス}と呼び，フラクチュール体で書く．たとえば数を表す型クラスは$\mathClassNum$である．型パラメタ$\mathTypeGeneral{a}$が型クラス$\mathClassNum$に属するとき，上述の関数$f$の型注釈は次のようになる．\footnote{\haskell では \verb|f :: Num a => a -> a| と書く．}
+\keyword{型パラメタ}には制約をつけることができる．型の集合を\keyword{型クラス}と呼び，フラクチュール体で書く．たとえば数を表す型クラスは$\mathClassNum$である．型パラメタ$\mathTypeA$が型クラス$\mathClassNum$に属するとき，上述の関数$f$の型注釈は次のようになる．\footnote{\haskell では \verb|f :: Num a => a -> a| と書く．}
 \begin{equation}
 f\mathTypeIs
   \mathTypeClass{\mathClassNum}
-    {\mathTypeGeneral{a}}
-    {\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}}
+    {\mathTypeA}
+    {\mathTypeFunctionAA}
 \end{equation}
 
 型クラスは型に制約を与える．
@@ -554,25 +554,25 @@ f\mathTypeIs
 
 \section{関手}
 
-型$\mathTypeGeneral{a}$のリストの変数は
+型$\mathTypeA$のリストの変数は
 \begin{equation}
-\mathList{x}\mathTypeIs\mathTypeList{\mathTypeGeneral{a}}
+\mathList{x}\mathTypeIs\mathTypeList{\mathTypeA}
 \end{equation}
 という型注釈を持つ．これは
 \begin{equation}
-\mathList{x}\mathTypeIs\mathFunctorTypeGeneral{[]}{\mathTypeGeneral{a}}
+\mathList{x}\mathTypeIs\mathFunctorTypeGeneral{[]}{\mathTypeA}
 \end{equation}
 のシンタックスシュガーである．
 
-型$\mathTypeGeneral{a}$のMaybeの変数は
+型$\mathTypeA$のMaybeの変数は
 \begin{equation}
-\mathMaybe{x}\mathTypeIs\mathTypeMaybe{\mathTypeGeneral{a}}
+\mathMaybe{x}\mathTypeIs\mathTypeMaybe{\mathTypeA}
 \end{equation}
 という型注釈を持つ．
 
 普段遣いの関数
 \begin{equation}
-f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
+f\mathTypeIs\mathTypeFunctionAA
 \end{equation}
 をリスト変数$\mathList{x}$に適用する場合は
 \begin{equation}
@@ -584,12 +584,12 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 \end{equation}
 とする．
 
-リストもMaybeも元の型$\mathTypeGeneral{a}$から派生しており，関数適用のための特別な演算子を持つことになる．そこで，リストやMaybeは\keyword{関手}という型クラスに属する，型パラメタを伴う型であるとする．関手の型クラスを$\mathClassFunctor$で表す．関手型クラスの$\mathTypeGeneral{a}$型の変数を次のように型注釈する．\footnote{\haskell では \verb|xm :: Functor f => f a| と書く．}
+リストもMaybeも元の型$\mathTypeA$から派生しており，関数適用のための特別な演算子を持つことになる．そこで，リストやMaybeは\keyword{関手}という型クラスに属する，型パラメタを伴う型であるとする．関手の型クラスを$\mathClassFunctor$で表す．関手型クラスの$\mathTypeA$型の変数を次のように型注釈する．\footnote{\haskell では \verb|xm :: Functor f => f a| と書く．}
 \begin{equation}
 \mathPure{x}\mathTypeIs
   \mathTypeClass{\mathClassFunctor}
-    {\mathClassGeneral{f}}
-    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
+    {\mathClassF}
+    {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}
 \end{equation}
 
 型クラス$\mathClassFunctor$に属する型は$\mathFMap$演算子を持たねばならない．演算子$\mathFMap$は次の形を持つ．\footnote{In \haskell, \verb|zm = f <$> xm|.}
@@ -599,9 +599,9 @@ f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}
 演算子$\mathFMap$の型は次のとおりである．
 \begin{equation}
 \mathAnonymousParameter\mathFMap\mathAnonymousParameter
-  \mathTypeIs\mathTypeFunctionII{\left(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{b}}\right)}
-    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}
-    {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{b}}}
+  \mathTypeIs\mathTypeFunctionII{\left(\mathTypeFunctionAB\right)}
+    {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}
+    {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeB}}
 \end{equation}
 
 もし変数$\mathPure{x}$の型がリストであれば
@@ -614,9 +614,9 @@ Function of parametric type with functor class:\footnote{In \haskell, \verb|f ::
 \begin{equation}
 f\mathTypeIs
   \mathTypeClass{\mathClassFunctor}
-    {\mathClassGeneral{f}}
-    {\mathTypeFunction{\mathTypeGeneral{a}}
-      {\mathFunctorTypeGeneral{\mathClassGeneral{f}}{\mathTypeGeneral{a}}}}
+    {\mathClassF}
+    {\mathTypeFunction{\mathTypeA}
+      {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}}
 \end{equation}
 
 
@@ -684,7 +684,7 @@ f'=f\mathFMap\mathPure{x}
 
 ピュア演算子とアプリカティブマップ演算子を必ず持つ関手のことを\keyword{アプリカティブ関手}と呼び$\mathClassApplicative$で表す．
 
-いま関数$f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{b}}$に対して，新たな関数$\mathPure{f}$ただし
+いま関数$f\mathTypeIs\mathTypeFunctionAB$に対して，新たな関数$\mathPure{f}$ただし
 \begin{equation}
 \mathPure{f}=\mathMakePure{f}
 \end{equation}
@@ -692,13 +692,13 @@ f'=f\mathFMap\mathPure{x}
 \begin{equation}
   \mathPure{f}\mathTypeIs
   \mathTypeClass{\mathClassApplicative}
-    {\mathClassGeneral{f}}
-    {\mathFunctorTypeGeneral{\mathTypeGeneral{f}}}
-    {\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{b}}}
+    {\mathClassF}
+    {\mathFunctorTypeGeneral{\mathClassF}}
+    {\mathTypeFunctionAB}
 \end{equation}
 という型を持つ．アプリカティブマップ演算子は変数
 \begin{equation}
-\mathPure{x}\mathTypeIs\mathTypeClass{\mathClassApplicative}{\mathClassGeneral{f}}{\mathFunctorTypeGeneral{\mathTypeGeneral{f}}}{\mathTypeGeneral{a}}
+\mathPure{x}\mathTypeIs\mathTypeClass{\mathClassApplicative}{\mathClassF}{\mathFunctorTypeGeneral{\mathClassF}}{\mathTypeA}
 \end{equation}
 に対して，関数$\mathPure{f}$を
 \begin{equation}
@@ -706,7 +706,7 @@ f'=f\mathFMap\mathPure{x}
 \end{equation}
 のように作用させる．変数$\mathPure{z}$の型は
 \begin{equation}
-  \mathPure{z}\mathTypeIs\mathTypeClass{\mathClassApplicative}{\mathClassGeneral{f}}{\mathFunctorTypeGeneral{\mathTypeGeneral{f}}}{\mathTypeGeneral{b}}
+  \mathPure{z}\mathTypeIs\mathTypeClass{\mathClassApplicative}{\mathClassF}{\mathFunctorTypeGeneral{\mathClassF}}{\mathTypeB}
 \end{equation}
 である．
 
@@ -715,6 +715,16 @@ f'=f\mathFMap\mathPure{x}
 % class Functor f => Applicative f where
 % pure :: a -> f a
 % (<*>) :: f (a -> b) -> f a -> f b
+
+\begin{gather}
+  \mathClass{\mathClassFunctor}{\mathClassF}{\mathClassApplicative}{\mathClassF}\\
+  \begin{aligned}
+    \mathMakePure{\mathAnonymousParameter}
+    &\mathTypeIs\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}\\
+    \mathAnonymousParameter\mathApplicativeMap\mathAnonymousParameter
+    &\mathTypeIs\mathTypeFunctionII{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeFunctionAB}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeB}}
+  \end{aligned}
+\end{gather}
 
 
 
@@ -733,7 +743,7 @@ fx&=\mathMakeJust{x}
 Returning \emph{monad}:
 \begin{align}
 f&\mathTypeIs
-  \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}\\
+  \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}\\
 fx&=\mathMakeReturn{x}
 \end{align}
 
@@ -743,7 +753,7 @@ Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
 f\mathTypeIs
   \mathTypeClass{\mathClassMonad}
     {\mathClassGeneral{m}}
-    {\mathTypeFunction{\mathTypeGeneral{a}}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeGeneral{a}}}}
+    {\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}}
 \end{equation}
 
 Monadic function binding:\footnote{In \haskell, \verb|zm = xm >>= f1 >>= f2|.}
@@ -841,21 +851,21 @@ Do notation:\footnote{In \haskell, \verb|z = do {x' <- x; y' <- y; f x'; g y'}|.
 \tobewritten{一般のモノイド．}
 
 \section{モノイド則}
-型$\mathTypeGeneral{a}$の変数$x,y,z\mathTypeIs\mathTypeGeneral{a}$について，特別な変数$\mathIdentity\mathTypeIs\mathTypeGeneral{a}$および二項演算子$\mathAnyBinaryOperator$ただし$x\mathAnyBinaryOperator y\mathTypeIs\mathTypeGeneral{a}$があり，
+型$\mathTypeA$の変数$x,y,z\mathTypeIs\mathTypeA$について，特別な変数$\mathIdentity\mathTypeIs\mathTypeA$および二項演算子$\mathAnyBinaryOperator$ただし$x\mathAnyBinaryOperator y\mathTypeIs\mathTypeA$があり，
 \begin{align}
 \mathIdentity\mathAnyBinaryOperator x&=x\dots\text{（単位元の存在）}\\
 (x\mathAnyBinaryOperator y)\mathAnyBinaryOperator z&=x\mathAnyBinaryOperator(y\mathAnyBinaryOperator z)\dots\text{（結合律）}
 \end{align}
-であるとき，組み合わせ$(\mathTypeGeneral{a},\mathAnyBinaryOperator,\mathIdentity)$をモノイドと呼ぶ．
+であるとき，組み合わせ$(\mathTypeA,\mathAnyBinaryOperator,\mathIdentity)$をモノイドと呼ぶ．
 
 組み合わせ$(\mathTypeInt,+,0)$や$(\mathTypeInt,\times,1)$はモノイドである．
 
-同じ型から同じ型への1引数関数を改めて$\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}}$で表し，特別な変数$\mathIdentity$を関数$\mathId$，二項演算子を$\mathCompose$とすると以下の関係が成り立つ．
+同じ型から同じ型への1引数関数を改めて$\mathTypeFunctionAA$で表し，特別な変数$\mathIdentity$を関数$\mathId$，二項演算子を$\mathCompose$とすると以下の関係が成り立つ．
 \begin{align}
 \mathId\mathCompose f&=f\dots\text{（単位元の存在）}\\
 (h\mathCompose g)\mathCompose f&=h\mathCompose(g\mathCompose f)\dots\text{（結合律）}
 \end{align}
-そこで組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathTypeGeneral{a}},\mathCompose,\mathId)$はモノイドであると言える．
+そこで組み合わせ$(\mathTypeFunctionAA,\mathCompose,\mathId)$はモノイドであると言える．
 
 \section{関手則}
 
@@ -900,7 +910,7 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 \mathMakeReturn{\mathAnonymousParameter}\mathBind\mathPure{x}&=\mathPure{x}\\
 (\mathMonadic{g}\mathBind\mathMonadic{f})\mathBind\mathPure{x}&=\mathMonadic{g}\mathBind(\mathMonadic{f}\mathBind\mathPure{x})
 \end{align}
-% つまり，組み合わせ$(\mathTypeFunction{\mathTypeGeneral{a}}{\mathFunctorTypeGeneral{\mathTypeGeneral{m}}{\mathTypeGeneral{a}}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
+% つまり，組み合わせ$(\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathTypeGeneral{m}}{\mathTypeA}},\mathMakePure{\mathAnonymousParameter},\mathBind)$はモノイドである． -- bindの両辺の型が一致しないのでモノイドではない．
 
 次の\keyword{クライスリスター}すなわち
 \begin{equation}

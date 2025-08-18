@@ -50,6 +50,7 @@
 \newcommand{\mathListConcat}{\mathOperator{\#}}
 \newcommand{\mathEven}{\mathFunction{even}}
 
+\newcommand{\mathKeyword}[1]{\textsf{#1}}
 \newcommand{\mathTypeSynonim}[2]{\mathKeyword{type}\;#1=#2}
 
 \newcommand{\mathSum}{\sum}
@@ -64,7 +65,6 @@
 
 \newcommand{\mathMapM}{\mathOperator{\clubsuit}}
 
-\newcommand{\mathKeyword}[1]{\textsf{#1}}
 \newcommand{\mathConstant}[1]{\textrm{#1}}
 \newcommand{\mathIf}[3]{\mathrel{\mathKeyword{if}}#1\mathrel{\mathKeyword{then}}#2\mathrel{\mathKeyword{else}}#3}
 \newcommand{\mathCompareEq}{\equiv}
@@ -93,11 +93,19 @@
 \newcommand{\mathMonadic}[1]{{#1}^\dagger}
 
 \newcommand{\mathTypeGeneral}[1]{\mathbf{#1}}
-\newcommand{\mathClassNum}{\mathfrak{Num}}
-\newcommand{\mathClassFunctor}{\mathfrak{Functor}}
-\newcommand{\mathClassApplicative}{\mathfrak{Applicative}}
-\newcommand{\mathClassMonad}{\mathfrak{Monad}}
-\newcommand{\mathClassGeneral}[1]{\mathbf{#1}}
+\newcommand{\mathClassGeneral}[1]{\mathfrak{#1}}
+
+\newcommand{\mathTypeA}{\mathTypeGeneral{a}}
+\newcommand{\mathTypeB}{\mathTypeGeneral{b}}
+\newcommand{\mathTypeFunctionAA}{\mathTypeFunction{\mathTypeA}{\mathTypeA}}
+\newcommand{\mathTypeFunctionAB}{\mathTypeFunction{\mathTypeA}{\mathTypeB}}
+
+\newcommand{\mathClassF}{\mathClassGeneral{f}}
+
+\newcommand{\mathClassNum}{\mathClassGeneral{Num}}
+\newcommand{\mathClassFunctor}{\mathClassGeneral{Functor}}
+\newcommand{\mathClassApplicative}{\mathClassGeneral{Applicative}}
+\newcommand{\mathClassMonad}{\mathClassGeneral{Monad}}
 \newcommand{\mathTypeClass}[3]{#1\supset#2\Rightarrow#3}
 
 \newcommand{\mathAnonymousTypeParameter}{\blacklozenge}
@@ -108,6 +116,8 @@
 
 \newcommand{\mathApplicativeMap}{\mathOperator{\circledast}}
 \newcommand{\mathApplicativeFuncCall}[1]{\llbracket#1\rrbracket}
+
+\newcommand{\mathClass}[4]{\mathKeyword{class}\;{#1}\supset{#2}\Rightarrow{#3}\supset{#4}\;\mathKeyword{where}}
 
 \newcommand{\mathMakeReturn}[1]{\mathMakePure{#1}}%{\mathMakeGeneral{\text{return}}{#1}}
 \newcommand{\mathBind}{\mathOperator{\heartsuit}}
