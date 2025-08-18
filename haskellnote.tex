@@ -290,6 +290,8 @@ z=(x,y)
 z\mathTypeIs(\mathTypeInt,\mathTypeInt)
 \end{equation}
 
+% タプルの受け取り
+
 要素を含まないタプルを\keyword{ユニット}と呼ぶ．ユニットは次のように書く．\footnote{\haskell では \verb|z = ()| と書く．}
 \begin{equation}
 z=()
@@ -344,6 +346,8 @@ f(x:\mathList{x})=x
   f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
   f(x:y:\mathList{y})=x+y
 \end{gather}
+
+% headは非推奨
 
 リストのリストは次のように構成できる．
 \begin{equation}
