@@ -38,9 +38,9 @@ x=1
 \end{equation}
 変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を\keyword{束縛}するという．式\eqref{eq:x-equal-one}の右辺のように数式にハードコードされた値を\keyword{リテラル}と呼ぶ．
 
-リテラルや変数には\keyword{型}がある．型は数学者の\keyword{集合}と似た意味で，整数全体の集合$\mathTypeInt$に相当する\keyword{整数型}や，実数全体の集合$\mathTypeReal$に相当する\keyword{浮動小数点型}がある．以下，誤解のおそれがない限り整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表す．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| を用いる．}
+リテラルや変数には\keyword{型}がある．型は数学者の\keyword{集合}と似た意味で，整数全体の集合$\mathbb{Z}$に相当する\keyword{整数型}や，実数全体の集合$\mathbb{R}$に相当する\keyword{浮動小数点型}がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeDouble$で表すことにする．\footnote{\haskell ではそれぞれ \verb|Int| および \verb|Double| と書く．}
 
-数学者は変数$x$が整数であることを$x\in\mathTypeInt$と書くが，本書では$x\mathTypeIs\mathTypeInt$と書く．これは記号$\in$を別の用途に用いるためである．\footnote{\haskell では \verb|x :: Int| と書く．}
+数学者は変数$x$が整数であることを$x\in\mathbb{Z}$と書くが，本書では$x\mathTypeIs\mathTypeInt$と書く．これは記号$\in$を別の用途に用いるためである．\footnote{\haskell では \verb|x :: Int| と書く．}
 
 変数の値がいつでも変化しないことを\keyword{参照透過性}と呼ぶ．プログラマが変数の値を変化させたい，つまり\keyword{破壊的代入}を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．
 
@@ -180,11 +180,11 @@ g&=fn
 
 \section{型}
 
-すべての変数，関数には\keyword{型}がある．代表的な型には整数型，浮動小数点型，ブール型，文字型がある．整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeReal$で表すことはすでに述べたとおりである．
+すべての変数，関数には\keyword{型}がある．代表的な型には整数型，浮動小数点型，ブール型，文字型がある．整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeDouble$で表すことはすでに述べたとおりである．
 
 \haskell には2種類の整数型がある．ひとつは\keyword{固定長整数型}で，もうひとつは\keyword{多倍長整数型}である．\haskell では前者を \verb|Int| で，後者を \verb|Integer| で表す．多倍長整数型はメモリの許す限り巨大な整数を扱えるので，整数全体の集合に近いのであるが，本書では$\mathTypeInt$と書いて固定長整数型を意味することにする．
 
-浮動小数点型には\keyword{単精度浮動小数点型}と\keyword{倍精度浮動小数点型}があり，\haskell では前者を \verb|Float| で，後者を \verb|Double| で表現するが，単精度浮動小数点型はめったに用いられないため，今後$\mathTypeReal$と書けば倍精度浮動小数点型の意味とする．
+浮動小数点型には\keyword{単精度浮動小数点型}と\keyword{倍精度浮動小数点型}があり，\haskell では前者を \verb|Float| で，後者を \verb|Double| で表現するが，単精度浮動小数点型はめったに用いられないため，今後$\mathTypeDouble$と書けば倍精度浮動小数点型の意味とする．
 
 ブール型は論理値$\mathTrue$または$\mathFalse$のいずれかしか値をとれない型で，今後$\mathTypeBool$と書く．\footnote{\haskell ではブール型を \verb|Bool| と書く．}
 
@@ -221,8 +221,6 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
   {\mathTypeFunction{\mathTypeInt}{\mathTypeInt}}
 \end{equation}
 と書いても良い．
-
-
 
 \section{条件}
 
@@ -290,7 +288,7 @@ z=(x,y)
 z\mathTypeIs(\mathTypeInt,\mathTypeInt)
 \end{equation}
 
-% タプルの受け取り
+\tobewritten{タプルの受け取り}
 
 要素を含まないタプルを\keyword{ユニット}と呼ぶ．ユニットは次のように書く．\footnote{\haskell では \verb|z = ()| と書く．}
 \begin{equation}
@@ -347,7 +345,7 @@ f(x:\mathList{x})=x
   f(x:y:\mathList{y})=x+y
 \end{gather}
 
-% headは非推奨
+\tobewritten{headは非推奨}
 
 リストのリストは次のように構成できる．
 \begin{equation}
@@ -406,7 +404,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \mathFold{a}{\mathAnonymousParameter\mathAnonymousOperator\mathAnonymousParameter}{\mathList{x}}
 =a\mathAnonymousOperator x_0\mathAnonymousOperator x_1\dots x_{n-1}\mathAnonymousOperator x_n
 \end{equation}
-である．
+である．ここに$\mathAnonymousOperator$は任意の二項演算子である．
 
 畳み込み演算子には次の右結合バージョンが存在する．\footnote{\haskell では \verb|foldr| を用いる．}
 \begin{equation}
@@ -432,7 +430,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
       norm xs = sqrt (sum [x * x | x <- xs])
 \end{footcode}}
 \begin{align}
-\mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeReal}}{\mathTypeReal}\\
+\mathNorm&\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeDouble}}{\mathTypeDouble}\\
 \mathNorm[]&=0.0\\
 \mathNorm\mathList{x}&=\mathSqrt\left(\mathSum\mathMakeListComplehention{x*x}{x\mathIn\mathList{x}}\right)
 \end{align}
@@ -441,14 +439,14 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 
 各行を空白で区切ってリストに格納するには関数$\mathWords$を用いる．
 
-各文字列を数に変換するには次の関数$\mathRead_{\mathTypeReal}\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}$を用いる．\footnote{\haskell では次のように書く．
+各文字列を数に変換するには次の関数$\mathReadDouble\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeDouble}$を用いる．\footnote{\haskell では次のように書く．
 \begin{footcode}
       readDouble :: String -> Double
       readDouble = read
 \end{footcode}}
 \begin{align}
-\mathRead_{\mathTypeReal}&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeReal}\\
-\mathRead_{\mathTypeReal}&=\mathRead
+\mathReadDouble&\mathTypeIs\mathTypeFunction{\mathTypeString}{\mathTypeDouble}\\
+\mathReadDouble&=\mathRead
 \end{align}
 
 入力ファイルの各行に書かれたベクトルを対象に関数$\mathNorm$を適用して，結果を書き出すには次のように書く．\footnote{\haskell では次のように書く．
@@ -463,7 +461,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \begin{multline}
 \mathMain=\mathPrint
 \mathCompose(\mathNorm\mathMap)
-\mathCompose((\mathRead_{\mathTypeReal}\mathMap)\mathMap)\\
+\mathCompose((\mathReadDouble\mathMap)\mathMap)\\
 \mathCompose(\mathWords\mathMap)
 \mathCompose\mathLines
 \mathBind\mathGetContents
@@ -510,6 +508,8 @@ Maybe変数が値を持たない場合は
 \mathMaybe{x}=\mathNothing
 \end{equation}
 と書く．\footnote{\haskell では \verb|xm = Nothing| と書く．}
+
+一度Maybeになった変数を非Maybeに戻すことは出来ない．
 
 \section{Maybeに対する計算}
 
@@ -596,7 +596,7 @@ f\mathTypeIs\mathTypeFunctionAA
     {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}
 \end{equation}
 
-型クラス$\mathClassFunctor$に属する型は$\mathFMap$演算子を持たねばならない．演算子$\mathFMap$は次の形を持つ．\footnote{In \haskell, \verb|zm = f <$> xm|.}
+型クラス$\mathClassFunctor$に属する型は$\mathFMap$演算子を必ず持つ．演算子$\mathFMap$は次の形を持つ．\footnote{\haskell では \verb|zm = f <$> xm| と書く．}
 \begin{equation}
 \mathPure{z}=f\mathFMap\mathPure{x}
 \end{equation}
@@ -614,22 +614,9 @@ f\mathTypeIs\mathTypeFunctionAA
 \end{equation}
 であると解釈する．
 
-Function of parametric type with functor class:\footnote{In \haskell, \verb|f :: Functor f => a -> f a|.}
-\begin{equation}
-f\mathTypeIs
-  \mathTypeClass{\mathClassFunctor}
-    {\mathClassF}
-    {\mathTypeFunction{\mathTypeA}
-      {\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}}
-\end{equation}
-
-
-Example function application:\footnote{In \haskell, \verb|zm = (+1) <$> Just x|.}
-\begin{equation}
-\mathPure{z}=(\mathAnonymousParameter+1)\mathFMap\mathMakeJust{x}
-\end{equation}
-
 \section{関手としての関数}
+
+\tobewritten{移動する．}
 
 \begin{equation}
 f\mathTypeIs\mathTypeFunction{\mathTypeGeneral{q}}{\mathTypeGeneral{r}}
@@ -684,7 +671,7 @@ f'=f\mathFMap\mathPure{x}
 \begin{equation}
 \mathPure{z}=\mathApplicativeFuncCall{f\,\mathPure{x}\,\mathPure{y}}
 \end{equation}
-のように書くことも提案されたが，普及はしなかった．\footnote{現在の\haskell では \verb|zm = liftA2 f xm ym| と書くことで代用されている．}
+のように書くことも提案されたが，普及はしなかった．\footnote{現在の\haskell では \verb|zm = liftA2 f xm ym| と書くことで代用されている．元の提案は \verb|zm = [[f xm ym]]| であった．}
 
 ピュア演算子とアプリカティブマップ演算子を必ず持つ関手のことを\keyword{アプリカティブ関手}と呼び$\mathClassApplicative$で表す．
 
@@ -713,22 +700,6 @@ f'=f\mathFMap\mathPure{x}
   \mathPure{z}\mathTypeIs\mathTypeClass{\mathClassApplicative}{\mathClassF}{\mathFunctorTypeGeneral{\mathClassF}}{\mathTypeB}
 \end{equation}
 である．
-
-アプリカティブ関手は関手の拡張である．
-
-% class Functor f => Applicative f where
-% pure :: a -> f a
-% (<*>) :: f (a -> b) -> f a -> f b
-
-\begin{gather}
-  \mathClass{\mathClassFunctor}{\mathClassF}{\mathClassApplicative}{\mathClassF}\\
-  \begin{aligned}
-    \mathMakePure{\mathAnonymousParameter}
-    &\mathTypeIs\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}\\
-    \mathAnonymousParameter\mathApplicativeMap\mathAnonymousParameter
-    &\mathTypeIs\mathTypeFunctionII{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeFunctionAB}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeB}}
-  \end{aligned}
-\end{gather}
 
 
 
@@ -932,6 +903,26 @@ f\mathFMap&\rightarrow\mathFunctor{F}f
 %   bib -> bbl,
 %   bbl -> dvi};
 % \end{tikzpicture}
+
+\section{クラスの定義}
+
+アプリカティブ関手は関手の拡張である．
+
+% class Functor f => Applicative f where
+% pure :: a -> f a
+% (<*>) :: f (a -> b) -> f a -> f b
+
+\begin{gather}
+  \mathClass{\mathClassFunctor}{\mathClassF}{\mathClassApplicative}{\mathClassF}\\
+  \begin{aligned}
+    \mathMakePure{\mathAnonymousParameter}
+    &\mathTypeIs\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}\\
+    \mathAnonymousParameter\mathApplicativeMap\mathAnonymousParameter
+    &\mathTypeIs\mathTypeFunctionII{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeFunctionAB}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeA}}{\mathFunctorTypeGeneral{\mathClassF}{\mathTypeB}}
+  \end{aligned}
+\end{gather}
+
+
 
 
 % http://walk.northcol.org/haskell/monads/

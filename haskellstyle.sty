@@ -11,6 +11,7 @@
 
 \newcommand{\mathFunction}[1]{\mathop{\textrm{#1}}}
 \newcommand{\mathRead}{\mathFunction{read}}
+\newcommand{\mathReadDouble}{\mathFunction{readDouble}}
 
 \newcommand{\mathAction}[1]{\mathop{\textsl{#1}}}
 \newcommand{\mathMain}{\mathAction{main}}
@@ -20,15 +21,16 @@
 \newcommand{\mathLambda}[2]{\backslash#1\mapsto#2}
 \newcommand{\mathAnonymousParameter}{\mathord{\lozenge}}
 \newcommand{\mathWhere}[1]{\mathrel{\textsf{where}}\left\{#1\right\}}
-\newcommand{\mathLetIn}[2]{\mathrel{\textsf{let}}\left\{#1\right\}\mathrel{\textsf{in}}#2}
+\newcommand{\mathLetIn}[2]{\mathord{\textsf{let}}\left\{#1\right\}\mathrel{\textsf{in}}#2}
 
 \newcommand{\mathTypeIs}{::}
+\newcommand{\mathTypeGeneral}[1]{\mathord{\mathbf{#1}}}
 \newcommand{\mathSet}[1]{\mathord{\mathbb{#1}}}
-\newcommand{\mathTypeInt}{\mathSet{Z}}
-\newcommand{\mathTypeBool}{\mathSet{B}}
-\newcommand{\mathTypeReal}{\mathSet{R}}
-\newcommand{\mathTypeChar}{\mathbf{Char}}
-\newcommand{\mathTypeString}{\mathbf{String}}
+\newcommand{\mathTypeInt}{\mathTypeGeneral{Int}}
+\newcommand{\mathTypeBool}{\mathTypeGeneral{Bool}}
+\newcommand{\mathTypeDouble}{\mathTypeGeneral{Double}}
+\newcommand{\mathTypeChar}{\mathTypeGeneral{Char}}
+\newcommand{\mathTypeString}{\mathTypeGeneral{String}}
 \newcommand{\mathTypeFunction}[2]{#1\rightarrow#2}
 \newcommand{\mathTypeFunctionII}[3]{#1\rightarrow#2\rightarrow#3}
 
@@ -66,11 +68,11 @@
 \newcommand{\mathMapM}{\mathOperator{\clubsuit}}
 
 \newcommand{\mathConstant}[1]{\textrm{#1}}
-\newcommand{\mathIf}[3]{\mathrel{\mathKeyword{if}}#1\mathrel{\mathKeyword{then}}#2\mathrel{\mathKeyword{else}}#3}
+\newcommand{\mathIf}[3]{\mathord{\mathKeyword{if}}\,#1\mathrel{\mathKeyword{then}}#2\mathrel{\mathKeyword{else}}#3}
 \newcommand{\mathCompareEq}{\equiv}
 \newcommand{\mathAny}{\_}
 \newcommand{\mathPatternMatch}[4]{\left\{\begin{aligned}#1&=#2\\#3&=#4\end{aligned}\right.}
-\newcommand{\mathCase}[5]{\mathrel{\mathKeyword{case}}#1\mathrel{\mathKeyword{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
+\newcommand{\mathCase}[5]{\mathord{\mathKeyword{case}}\,#1\mathrel{\mathKeyword{of}}\left\{\begin{aligned}#2&\dashrightarrow#3\\#4&\dashrightarrow#5\end{aligned}\right.}
 \newcommand{\mathOtherwise}{\mathrel{\mathConstant{otherwise}}}
 \newcommand{\mathPatternMatchConditional}[5]{\left\{\begin{aligned}#1&\mid_{#2}=#3\\&\mid_{#4}=#5\end{aligned}\right.}
 
@@ -92,7 +94,6 @@
 \newcommand{\mathNothing}{\emptyset}
 \newcommand{\mathMonadic}[1]{{#1}^\dagger}
 
-\newcommand{\mathTypeGeneral}[1]{\mathbf{#1}}
 \newcommand{\mathClassGeneral}[1]{\mathfrak{#1}}
 
 \newcommand{\mathTypeA}{\mathTypeGeneral{a}}
