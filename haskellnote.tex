@@ -182,13 +182,13 @@ g&=fn
 
 すべての変数，関数には\keyword{型}がある．代表的な型には整数型，浮動小数点型，ブール型，文字型がある．整数型を$\mathTypeInt$で，浮動小数点型を$\mathTypeDouble$で表すことはすでに述べたとおりである．
 
-\haskell には2種類の整数型がある．ひとつは\keyword{固定長整数型}で，もうひとつは\keyword{多倍長整数型}である．\haskell では前者を \verb|Int| で，後者を \verb|Integer| で表す．多倍長整数型はメモリの許す限り巨大な整数を扱えるので，整数全体の集合に近いのであるが，本書では$\mathTypeInt$と書いて固定長整数型を意味することにする．
+\haskell には2種類の整数型がある．ひとつは\keyword{固定長整数型}で，もうひとつは\keyword{多倍長整数型}である．\haskell では前者を \verb|Int| で，後者を \verb|Integer| で表す．多倍長整数型はメモリの許す限り巨大な整数を扱えるので，整数全体の集合に近いのであるが，本書では主に固定長整数型を用いる．
 
-浮動小数点型には\keyword{単精度浮動小数点型}と\keyword{倍精度浮動小数点型}があり，\haskell では前者を \verb|Float| で，後者を \verb|Double| で表現するが，単精度浮動小数点型はめったに用いられないため，今後$\mathTypeDouble$と書けば倍精度浮動小数点型の意味とする．
+浮動小数点型には\keyword{単精度浮動小数点型}と\keyword{倍精度浮動小数点型}があり，\haskell では前者を \verb|Float| で，後者を \verb|Double| で表現するが，単精度浮動小数点型はめったに用いられないため，本書では浮動小数点型と言えば倍精度浮動小数点型を意味することにする．
 
 ブール型は論理値$\mathTrue$または$\mathFalse$のいずれかしか値をとれない型で，今後$\mathTypeBool$と書く．\footnote{\haskell ではブール型を \verb|Bool| と書く．}
 
-本書では対応する，あるいは近い数学概念がある場合，型名をブラックボード体1文字で書く．文字型のように対応する数学概念がない場合はボールドローマン体を用いる．文字型は$\mathTypeChar$とする．\footnote{\haskell ではUnicode文字型を \verb|Char| と書く．}
+文字型は$\mathTypeChar$とする．\footnote{\haskell ではUnicode文字型を \verb|Char| と書く．}
 
 変数$x$の型が$\mathTypeInt$のとき，以下のように\keyword{型注釈}を書く．\footnote{\haskell では \verb|x :: Int| と書く．}
 \begin{equation}
@@ -338,14 +338,30 @@ z\mathTypeIs()
 \begin{gather}
 f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
 f(x:\mathList{x})=x
+\label{eq:list-head}
 \end{gather}
-先頭から2個の要素を受け取り，それらの和を返す場合は次のように書く．
-\begin{gather}
-  f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
-  f(x:y:\mathList{y})=x+y
-\end{gather}
+ただし，引数のリストが空リストである可能性を考慮して，式\eqref{eq:list-head}は次のように書き直すべきである．
+\begin{equation}
+  \left\{
+  \begin{aligned}
+    f\mathEmptyList&=\mathEmptyList\\
+    f(x:\mathList{x})&=x
+  \end{aligned}
+  \right.
+\end{equation}
+
+% 先頭から2個の要素を受け取り，それらの和を返す場合は次のように書く．
+% \begin{gather}
+%   f\mathTypeIs\mathTypeFunction{\mathTypeList{\mathTypeInt}}{\mathTypeInt}\\
+%   \begin{aligned}
+%     f[]&=0
+%     f(x:y:\mathList{y})&=x+y
+%   \end{aligned}
+% \end{gather}
 
 \tobewritten{headは非推奨}
+
+\tobewritten{リスト先頭2要素の和}
 
 リストのリストは次のように構成できる．
 \begin{equation}
