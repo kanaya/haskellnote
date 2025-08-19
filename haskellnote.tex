@@ -222,6 +222,8 @@ f\mathTypeIs\mathTypeFunction{\left(\mathTypeFunction{\mathTypeInt}{\mathTypeInt
 \end{equation}
 と書いても良い．
 
+\haskell ではすべての変数，関数に型があり，型はコンパイル時に決定されていなければならない．ただし，式から\keyword{型推論}が行える場合は型注釈を省略できる．
+
 \section{条件}
 
 \keyword{条件分岐}は次のように書く．\footnote{\haskell では \verb|z = if x>0 then x else -x| と書く．}
@@ -310,7 +312,7 @@ z\mathTypeIs()
 \begin{equation}
 \mathList{x}=\mathEmptyList
 \end{equation}
-任意のリストは次のように$:$演算子を用いて構成する．
+任意のリストは次のように\keyword{リスト構築演算子}$:$を用いて構成する．
 \begin{equation}
 \mathList{x}=x_0:x_1:x_2:\dots:\mathEmptyList
 \end{equation}
