@@ -403,11 +403,12 @@ f(x:\mathList{x})=x\incomplete
 \begin{equation}
   \left\{
   \begin{aligned}
-    f\mathEmptyList&=\mathEmptyList\\
+    f\mathEmptyList&=0\\
     f(x:\mathList{x})&=x
   \end{aligned}
   \right.
 \end{equation}
+$f\mathEmptyList$が$0$を返すのは不自然だが，関数$f$の戻り型を整数型としているためこれは仕方がない．エラーを考慮する場合は\ref{sec:maybe}節で述べるMaybeを使う必要がある．
 
 % 先頭から2個の要素を受け取り，それらの和を返す場合は次のように書く．
 % \begin{gather}
@@ -554,6 +555,7 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 演算子$\mathMapM$はアクション版のマップ演算子である．
 
 \section{Maybe}
+\label{sec:maybe}
 
 計算は失敗する可能性がある．たとえば
 \begin{equation}
