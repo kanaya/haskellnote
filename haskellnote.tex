@@ -850,17 +850,17 @@ Returning \emph{List}.
 	.
 \end{equation}
 Returning \emph{Maybe}:\footnote{In \haskell, \verb|f :: Int -> Maybe Int| and \verb|f x = Just x|.}
-\begin{align}
-f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
-fx&=\mathMakeJust{x}
-\end{align}
+\begin{gather}
+f\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
+fx=\mathMakeJust{x}
+\end{gather}
 % Applicative.
 Returning \emph{monad}:
-\begin{align}
-f&\mathTypeIs
+\begin{gather}
+f\mathTypeIs
   \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}\\
-fx&=\mathMakeReturn{x}
-\end{align}
+fx=\mathMakeReturn{x}
+\end{gather}
 
 
 Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
