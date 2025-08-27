@@ -25,6 +25,20 @@
 
 \maketitle
 
+\tableofcontents
+\clearpage
+
+\section{The New Flow}
+
+\begin{enumerate}
+  \item Function. $z=fx$
+  \item List. $\mathList{z}=f\mathMap\mathList{x}=[fx\mid x\in\mathList{x}]=\llbracket f\mathList{x}\rrbracket$
+  \item Monadic function. $\mathPure{z}=\mathMonadic{f}x$
+  \item Bind. $\mathPure{z}=\mathMonadic{f}\mathBind\mathPure{x}=(\mathMonadic{f}x\mid x\leftarrow\mathPure{x})$
+  \item Functor map. $\mathPure{z}=f\mathFMap\mathPure{x}=\langle fx\mid x\leftarrow\mathPure{x}\rangle=\llbracket f\mathPure{x}\rrbracket$
+  \item App. $\mathPure{z}=\mathPure{f}\mathApplicativeMap\mathPure{x}=\langle fx\mid f\leftarrow\mathPure{f},x\leftarrow\mathPure{x}\rangle=\llbracket f\mathPure{x}\mid f\leftarrow\mathPure{f}\rrbracket$
+\end{enumerate}
+
 \section{Haskell}
 
 \tobewritten{Haskellについて．}
