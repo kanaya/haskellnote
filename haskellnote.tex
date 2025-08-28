@@ -37,6 +37,8 @@
   \item Monadic function. $\mathPure{z}=\mathMonadic{f}x$
   \item Bind. $\mathPure{z}=\mathMonadic{f}\mathBind\mathPure{x}=(\mathMonadic{f}x\mid x\leftarrow\mathPure{x})$
   \item App. $\mathPure{z}=\mathPure{f}\mathApplicativeMap\mathPure{x}=\langle fx\mid f\leftarrow\mathPure{f},x\leftarrow\mathPure{x}\rangle=\llbracket f\mathPure{x}\mid f\leftarrow\mathPure{f}\rrbracket$
+  \item App 2. $\mathPure{z}=\llbracket f\mathPure{x}\mathPure{y}\rrbracket$
+  \item Bind 2. $\mathPure{z}=\mathMonadic{g}\mathBind\mathMonadic{f}\mathBind\mathPure{x}$
 \end{enumerate}
 
 \section{Haskell}
