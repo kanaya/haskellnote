@@ -41,6 +41,8 @@
   \item Bind 2. $\mathPure{z}=\mathMonadic{g}\mathBind\mathMonadic{f}\mathBind\mathPure{x}$
 \end{enumerate}
 
+\chapter{はじめに}
+
 \section{Haskell}
 
 \tobewritten{Haskellについて．}
@@ -62,6 +64,8 @@
 \haskell プログラマもまた，多くの異なる概念を同じ貧弱な文字セットで表現しなければならない．これは，はじめて\haskell コードを読むときに大きな問題になりえる．たとえば\haskell では \verb|[a]| という表記をよく扱う．この \verb|[a]| は \verb|a| という変数1要素からなるリストのこともあるし，\verb|a| 型という仮の型から作ったリスト型の場合もあるが，字面からでは判断できない．もし変数はイタリック体，型はボールド体と決まっていれば，それぞれ$[a]$および$[\mathTypeA]$と区別できたところである．
 
 本書は，異なる性質のものには異なる書体を割り当てるようにしている．ただし，どの表現もいつでも\haskell に翻訳できるように配慮している．実際，本書執筆の最大の困難点は，数学的に妥当で，かつ\haskell の記法とも矛盾しない記法を見つけることであった．
+
+\chapter{変数・関数・型}
 
 \section{変数}
 
@@ -218,6 +222,8 @@ z&=h\mathApply(g\mathCompose f)x\\
 % 型注釈を省略したこと．
 
 \tobewritten{readDoubleを導入する．}
+
+\chapter{条件分岐と再帰呼び出し}
 
 \section{ラムダ}
 
@@ -411,6 +417,8 @@ z=()
 \begin{equation}
 z\mathTypeIs()
 \end{equation}
+
+\chapter{リスト}
 
 \section{リスト}
 
@@ -608,6 +616,8 @@ z=\mathFold{0}{(\mathAnonymousParameter+\mathAnonymousParameter)}\mathList{x}
 \mathPrintEach\mathList{x}=\mathPrint\mathMapM\mathList{x}
 \end{equation}
 演算子$\mathMapM$はアクション版のマップ演算子である．
+
+\chapter{関手とモナド}
 
 \section{Maybe}
 \label{sec:maybe}
@@ -845,6 +855,8 @@ f_2\mathCompose f_1\equiv f_2\mathFMap f_1
 (h\mathCompose g)\mathCompose f&=((h\mathCompose)\mathCompose(g\mathCompose))f\\
 &=h\mathCompose(g\mathCompose f)
 \end{align}
+
+\chapter{アプリカティブ関手}
 
 \section{アプリカティブ関手}
 
