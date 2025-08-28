@@ -150,7 +150,6 @@ f\mathTypeIs\mathTypeFunctionII{\mathTypeInt}{\mathTypeInt}{\mathTypeInt}
   f\mathTypeIs\mathTypeFunctionII{\mathTypeInt}{\mathTypeInt}{\mathTypeInt}
 \end{equation}
 
-
 \section{関数合成}
 
 変数$x$に関数$f$と関数$g$を連続して適用したい場合
@@ -388,6 +387,8 @@ f=\mathCase{x}{1}{1}{\mathAny}{0}
 \tobewritten{プログラムの本質}
 
 \section{タプル}
+
+\tobewritten{タブルを後回しに．}
 
 複数の変数をまとめてひとつの\keyword{タプル}にすることができる．例を挙げる．\footnote{\haskell では \verb|z = (x, y)| と書く．}
 \begin{equation}
@@ -660,6 +661,69 @@ Maybe変数に，非Maybe変数を受け取る関数を適用することは出�
 \end{align}
 と定義される．
 
+\tobewritten{Bindもここへ．}
+
+Returning \emph{List}.
+\begin{equation}
+	.
+\end{equation}
+Returning \emph{Maybe}:\footnote{In \haskell, \verb|f :: Int -> Maybe Int| and \verb|f x = Just x|.}
+\begin{gather}
+f\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
+fx=\mathMakeJust{x}
+\end{gather}
+% Applicative.
+Returning \emph{monad}:
+\begin{gather}
+f\mathTypeIs
+  \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}\\
+fx=\mathMakeReturn{x}
+\end{gather}
+
+
+Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
+\begin{equation}
+f\mathTypeIs
+  \mathTypeClass{\mathClassMonad}
+    {\mathClassGeneral{m}}
+    {\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}}
+\end{equation}
+
+Monadic function binding:\footnote{In \haskell, \verb|zm = xm >>= f1 >>= f2|.}
+\begin{equation}
+\mathPure{z}=\mathPure{x}\mathBindRight f_1\mathBindRight f_2
+\end{equation}
+where
+\begin{align}
+f_1&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
+f_2&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}.
+\end{align}
+
+Function binding of monadic function and non-monadic function:\footnote{In \haskell,
+\begin{footcode}
+zm = xm >>= f >>= g'
+  where g' w = pure (g w)
+\end{footcode}}
+\begin{equation}
+\mathPure{z}=\mathPure{x}\mathBindRight f\mathBindRight g'
+\mathWhere{g'w=\mathMakePure{gw}}
+\end{equation}
+or
+\begin{equation}
+  \mathPure{z}=\mathPure{x}\mathBindRight(f\mathComposeMonadRight g')
+  \mathWhere{g'w=\mathMakePure{gw}}
+\end{equation}
+where
+\begin{align}
+f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
+g&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}.
+\end{align}
+Another solution is:
+\begin{equation}
+\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBind\mathPure{x}
+\end{equation}
+where $\mathLiftM{g}$ means \verb|liftM g| in \haskell.\footnote{In \haskell, \verb|zm = (liftM g . f) xm|.}
+
 \section{Maybeの中のリスト}
 
 リストがMaybeの中に入っている場合は，リストの各要素に関数を適用することができる．例を挙げる．
@@ -847,66 +911,6 @@ f'=f\mathFMap\mathPure{x}
 
 \section{モナド}
 
-Returning \emph{List}.
-\begin{equation}
-	.
-\end{equation}
-Returning \emph{Maybe}:\footnote{In \haskell, \verb|f :: Int -> Maybe Int| and \verb|f x = Just x|.}
-\begin{gather}
-f\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
-fx=\mathMakeJust{x}
-\end{gather}
-% Applicative.
-Returning \emph{monad}:
-\begin{gather}
-f\mathTypeIs
-  \mathTypeFunction{\mathTypeInt}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}\\
-fx=\mathMakeReturn{x}
-\end{gather}
-
-
-Returning monadic value:\footnote{In \haskell, \verb|f :: Monad m => a -> m a|.}
-\begin{equation}
-f\mathTypeIs
-  \mathTypeClass{\mathClassMonad}
-    {\mathClassGeneral{m}}
-    {\mathTypeFunction{\mathTypeA}{\mathFunctorTypeGeneral{\mathClassGeneral{m}}{\mathTypeA}}}
-\end{equation}
-
-Monadic function binding:\footnote{In \haskell, \verb|zm = xm >>= f1 >>= f2|.}
-\begin{equation}
-\mathPure{z}=\mathPure{x}\mathBindRight f_1\mathBindRight f_2
-\end{equation}
-where
-\begin{align}
-f_1&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
-f_2&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}.
-\end{align}
-
-Function binding of monadic function and non-monadic function:\footnote{In \haskell,
-\begin{footcode}
-zm = xm >>= f >>= g'
-  where g' w = pure (g w)
-\end{footcode}}
-\begin{equation}
-\mathPure{z}=\mathPure{x}\mathBindRight f\mathBindRight g'
-\mathWhere{g'w=\mathMakePure{gw}}
-\end{equation}
-or
-\begin{equation}
-  \mathPure{z}=\mathPure{x}\mathBindRight(f\mathComposeMonadRight g')
-  \mathWhere{g'w=\mathMakePure{gw}}
-\end{equation}
-where
-\begin{align}
-f&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeMaybe{\mathTypeInt}}\\
-g&\mathTypeIs\mathTypeFunction{\mathTypeInt}{\mathTypeInt}.
-\end{align}
-Another solution is:
-\begin{equation}
-\mathPure{z}=(\mathLiftM{g}\mathCompose f)\mathBind\mathPure{x}
-\end{equation}
-where $\mathLiftM{g}$ means \verb|liftM g| in \haskell.\footnote{In \haskell, \verb|zm = (liftM g . f) xm|.}
 
 \section{種}
 
