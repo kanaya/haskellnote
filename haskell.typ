@@ -23,6 +23,13 @@
 #outline()
 #pagebreak()
 
-= テストです Test
+#let haskellint = math.bb("Z")
 
-テストです． Test
+= Testです
+
+$ x :: haskellint\
+ x = 1 $
+
+$ f :: haskellint -> haskellint\
+f x = x + 1 $
+
