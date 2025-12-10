@@ -1,16 +1,25 @@
 // Typst
 #import "@preview/in-dexter:0.7.2": *
+#import "@preview/codelst:2.0.2": sourcecode
 
 #set text(lang:"ja")
+#set math.equation(numbering: "(1)")
 
 #set document(title: [Haskell Notes])
 
 #set text(font: ("Times", "Toppan Bunkyu Mincho"))
+
 #let heading_font(body) = {
     set text(font: ("Helvetica", "Toppan Bunkyu Midashi Gothic"), navy)
     body
 }
 #show heading: heading_font
+
+#let highlight_font(body) = {
+  set text(font: ("Helvetica", "Toppan Bunkyu Gothic"))
+  body
+}
+#show highlight: highlight_font
 
 #set page(
   paper: "a4",
@@ -21,6 +30,12 @@
   first-line-indent: 1em)
 #set heading(numbering: "1.1")
 
+#let haskellblock(x) = { 
+  set text(gray)
+  $bold(lambda)$
+  h(1em)
+  x}
+
 #let haskellparameter(x) = { x }
 #let haskelltypeparameter(x) = { math.bold(x) }
 
@@ -28,16 +43,6 @@
 
 #outline()
 #pagebreak()
-
-#let haskellint = math.bb("Z")
-
-= Testです
-
-$ x :: haskellint\
- x = 1 $
-
-$ f :: haskellint -> haskellint\
-f x = x + 1 $
 
 = Haskellについて
 
@@ -59,5 +64,18 @@ Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文�
 
 本書は，異なる性質のものには異なる書体を割り当てるようにしている．ただし，どの表現もいつでもHaskellに翻訳できるように配慮している．実際，本書執筆の最大の困難点は，数学的に妥当で，かつHaskellの記法とも矛盾しない記法を見つけることであった．
 
-#pagebreak()
+= 変数・関数・型
 
+== 変数
+
+変数$x$に値$1$を代入するには次のようにする．
+
+$ x = 1 $<binding>
+
+#haskellblock[Haskellでは
+#sourcecode[```haskell
+x = 1
+```]
+と書く．]
+
+変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を #highlight[束縛] するという． @binding の右辺のように数式にハードコードされた値を #highlight[リテラル] と呼ぶ．
