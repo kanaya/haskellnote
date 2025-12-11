@@ -8,7 +8,11 @@
 #let parameter(x) = { x }
 #let typeparameter(x) = { math.bold(x) }
 
+#let list(x) = { x+sub("s") }
+
 #let typename(x) = { math.bold(x) }
 
 #let int = { typename("Int") }
 #let double = { typename("Double") }
+
+#let map = { math.ast.op }
