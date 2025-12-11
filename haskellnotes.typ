@@ -96,3 +96,10 @@ $ haskell.list(z) = f haskell.map haskell.list(x) $
 #sourcecode[```Haskell
 zs = f `map` xs
 ```]
+
+$ haskell.ctxt(z) = f haskell.amap haskell.ctxt(x) $
+
+#sourcecode[```Haskell
+zm = f <*> xm
+```]
+

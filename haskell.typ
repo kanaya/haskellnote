@@ -9,6 +9,7 @@
 #let typeparameter(x) = { math.bold(x) }
 
 #let list(x) = { x+sub("s") }
+#let ctxt(x) = { x+sub("m") }
 
 #let typename(x) = { math.bold(x) }
 
@@ -16,3 +17,4 @@
 #let double = { typename("Double") }
 
 #let map = { math.ast.op }
+#let amap = { math.ast.op.o }
