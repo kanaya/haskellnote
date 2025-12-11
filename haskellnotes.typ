@@ -30,12 +30,6 @@
   first-line-indent: 1em)
 #set heading(numbering: "1.1")
 
-#let haskellblock(x) = { 
-  set text(gray)
-  $bold(lambda)$
-  h(1em)
-  x}
-
 #import "haskell.typ"
 
 #title[Haskell Notes]
@@ -71,10 +65,26 @@ Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文�
 
 $ x = 1 $<binding>
 
-#haskellblock[Haskellでは
+#haskell.block[Haskellでは
 #sourcecode[```haskell
 x = 1
 ```]
 と書く．]
 
 変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を #highlight[束縛] するという． @binding の右辺のように数式にハードコードされた値を #highlight[リテラル] と呼ぶ．
+
+リテラルや変数には #highlight[型] がある．型は数学者の #highlight[集合] と似た意味で，整数全体の集合 $ZZ$ に相当する #highlight[整数型] や，実数全体の集合 $RR$ に相当する #highlight[浮動小数点型] がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を $haskell.int$ で，浮動小数点型を $haskell.double$ で表すことにする．
+
+#haskell.block[Haskellでは $haskell.int$ および $haskell.double$ をそれぞれ `Int` および `Double` と書く．]
+
+数学者は変数 $x$ が整数であることを $x in ZZ$ と書くが，本書では $x::haskell.int$ と書く．これは記号 $in$ を別の用途に用いるためである．
+
+#haskell.block[Haskellでは $x::haskell.int$ を
+#sourcecode[```Haskell
+x :: Int
+```]
+と書く．]
+
+本書では変数名を原則1文字として，イタリック体で表し $w,x,y,z$ のような $n$ 以降のアルファベットを使う．
+
+変数の値がいつでも変化しないことを #highlight[参照透過性] と呼ぶ．プログラマが変数の値を変化させたい，つまり #highlight[破壊的代入] を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．参照透過性を強くサポートするプログラミング言語をを #highlight[関数型プログラミング言語] と呼ぶ．
