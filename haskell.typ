@@ -29,4 +29,4 @@
 #let map = { math.star.op }
 #let fmap = { math.ast.op }
 #let amap = { math.ast.op.o }
-#let bind = {math.suit.heart.stroked }
+#let bind = { math.class("binary", math.suit.heart.stroked) }
