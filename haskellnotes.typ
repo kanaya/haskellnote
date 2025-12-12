@@ -91,15 +91,50 @@ x :: Int
 
 = Test Part
 
-$ haskell.list(z) = f haskell.map haskell.list(x) $
+Function application. $ z = f x $
+
+#sourcecode[```haskell 
+z = f x
+```]
+
+List map. $ haskell.list(z) = f haskell.map haskell.list(x) $
 
 #sourcecode[```Haskell
 zs = f `map` xs
 ```]
 
-$ haskell.ctxt(z) = f haskell.amap haskell.ctxt(x) $
+Functor map. $ haskell.ctxt(z) = f haskell.fmap haskell.ctxt(x) $
+
+#sourcecode[```haskell
+zm = f <$> xm
+```]
+
+Applicative map. $ haskell.ctxt(z) = haskell.ctxt(f) haskell.amap haskell.ctxt(x) $
 
 #sourcecode[```Haskell
 zm = f <*> xm
 ```]
 
+Apllicative map 2. $ haskell.ctxt(z) = haskell.ctxt(f) haskell.fmap haskell.ctxt(x) haskell.amap haskell.ctxt(y) $
+
+#sourcecode[```haskell
+zm = f <$> xm <*> ym
+```]
+
+Monadic function application. $ haskell.ctxt(z) = haskell.monadic(f) x $
+
+#sourcecode[```Haskell
+zm = f xm
+```]
+
+Bind. $ haskell.ctxt(z) = haskell.monadic(f) haskell.bind haskell.ctxt(x) $
+
+#sourcecode[```Haskell
+zm = f =<< xm
+```]
+
+Double bind. $ haskell.ctxt(z) = haskell.monadic(g) haskell.bind haskell.monadic(f) haskell.bind haskell.ctxt(x) $
+
+#sourcecode[```haskell
+zm = g =<< f =<< xm
+```]
