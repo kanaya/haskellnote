@@ -112,13 +112,19 @@ zm = f <$> xm
 Applicative map. $ haskell.ctxt(z) = haskell.ctxt(f) haskell.amap haskell.ctxt(x) $
 
 #sourcecode[```Haskell
-zm = f <*> xm
+zm = fm <*> xm
 ```]
 
-Apllicative map 2. $ haskell.ctxt(z) = haskell.ctxt(f) haskell.fmap haskell.ctxt(x) haskell.amap haskell.ctxt(y) $
+Apllicative map 2. $ haskell.ctxt(z) = haskell.ctxt(g) haskell.amap haskell.ctxt(x) haskell.amap haskell.ctxt(y) $
 
 #sourcecode[```haskell
-zm = f <$> xm <*> ym
+zm = gm <*> xm <*> ym
+```]
+
+Applicative map 2 (another version). $ haskell.ctxt(z) = g haskell.fmap haskell.ctxt(x) haskell.amap haskell.ctxt(y) $
+
+#sourcecode[```haskell
+zm = g <$> xm <*> ym
 ```]
 
 Monadic function application. $ haskell.ctxt(z) = haskell.monadic(f) x $
