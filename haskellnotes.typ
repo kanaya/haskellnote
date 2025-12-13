@@ -93,7 +93,7 @@ x :: Int
 
 Function application. $ z = f x $
 
-#sourcecode[```haskell 
+#sourcecode[```haskell
 z = f x
 ```]
 
@@ -124,7 +124,7 @@ zm = f <$> xm <*> ym
 Monadic function application. $ haskell.ctxt(z) = haskell.monadic(f) x $
 
 #sourcecode[```Haskell
-zm = f xm
+zm = f x
 ```]
 
 Bind. $ haskell.ctxt(z) = haskell.monadic(f) haskell.bind haskell.ctxt(x) $
