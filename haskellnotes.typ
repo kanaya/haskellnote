@@ -5,6 +5,16 @@
 #set text(lang:"ja")
 #set math.equation(numbering: "(1)")
 
+#set page(
+  paper: "a4",
+  header: align(right, context document.title),
+  numbering: "1",
+)
+
+#set par(justify: true, first-line-indent: 1em)
+
+#set heading(numbering: "1.1")
+
 #set document(title: [Haskell Notes])
 
 #set text(font: ("Times", "Toppan Bunkyu Mincho"))
@@ -21,14 +31,8 @@
 }
 #show highlight: highlight_font
 
-#set page(
-  paper: "a4",
-  header: align(right, context document.title),
-  numbering: "1",
-)
-#set par(justify: true,
-  first-line-indent: 1em)
-#set heading(numbering: "1.1")
+#let tk = [ #emoji.ast.box *TK* ]
+#let keyword(x) = [#highlight[#x]]
 
 #import "haskell.typ"
 
@@ -39,7 +43,7 @@
 
 = Haskellについて
 
-本書はプログラミング言語Haskellの入門書である．それと同時に，本書はプログラミング言語を用いた代数構造の入門書でもある．プログラミングと代数構造の間には密接な関係があるが，とくに#highlight[関数型プログラミング]を実践する時にはその関係を意識する必要が出てくる．本書はその両者を同時に解説することを試みる．
+本書はプログラミング言語Haskellの入門書である．それと同時に，本書はプログラミング言語を用いた代数構造の入門書でもある．プログラミングと代数構造の間には密接な関係があるが，とくに#keyword[関数型プログラミング]を実践する時にはその関係を意識する必要が出てくる．本書はその両者を同時に解説することを試みる．
 
 これからのプログラマにとってHaskellを無視することはできない．Haskellの「欠点をあげつらうことも，攻撃することもできるが，無視することだけはできない」のだ．それはHaskellがプログラミングの本質に深く関わっているからである．
 
@@ -61,9 +65,9 @@ Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文�
 
 == 変数
 
-変数$x$に値$1$を代入するには次のようにする．
+変数$haskell.parameter(x)$に値$haskell.constant(1)$を代入するには次のようにする．
 
-$ x = 1 $<binding>
+$ haskell.parameter(x) = haskell.constant(1) $<binding>
 
 #haskell.block[Haskellでは
 #sourcecode[```haskell
@@ -71,9 +75,9 @@ x = 1
 ```]
 と書く．]
 
-変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を#highlight[束縛]するという． @binding の右辺のように数式にハードコードされた値を#highlight[リテラル]と呼ぶ．
+変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を#keyword[束縛]するという． @binding の右辺のように数式にハードコードされた値を#keyword[リテラル]と呼ぶ．
 
-リテラルや変数には#highlight[型]がある．型は数学者の#highlight[集合]と似た意味で，整数全体の集合 $ZZ$ に相当する#highlight[整数型]や，実数全体の集合 $RR$ に相当する#highlight[浮動小数点型]がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を $haskell.int$ で，浮動小数点型を $haskell.double$ で表すことにする．
+リテラルや変数には#keyword[型]がある．型は数学者の#keyword[集合]と似た意味で，整数全体の集合 $ZZ$ に相当する#keyword[整数型]や，実数全体の集合 $RR$ に相当する#keyword[浮動小数点型]がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を $haskell.int$ で，浮動小数点型を $haskell.double$ で表すことにする．
 
 #haskell.block[Haskellでは $haskell.int$ および $haskell.double$ をそれぞれ `Int` および `Double` と書く．]
 
@@ -87,7 +91,54 @@ x :: Int
 
 本書では変数名を原則1文字として，イタリック体で表し $w,x,y,z$ のような $n$ 以降のアルファベットを使う．
 
-変数の値がいつでも変化しないことを#highlight[参照透過性]と呼ぶ．プログラマが変数の値を変化させたい，つまり#highlight[破壊的代入]を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．参照透過性を強くサポートするプログラミング言語をを#highlight[関数型プログラミング言語]と呼ぶ．
+変数の値がいつでも変化しないことを#keyword[参照透過性]と呼ぶ．プログラマが変数の値を変化させたい，つまり#keyword[破壊的代入]を行いたい理由はユーザ入力，ループ，例外，内部状態の変化，大域ジャンプ，継続を扱いたいからであろう．しかし，後に見るようにループ，例外，内部状態の変化，大域ジャンプ，継続に変数の破壊的代入は必要ない．ユーザ入力に関しても章を改めて取り上げる．参照透過性を強くサポートするプログラミング言語をを#keyword[関数型プログラミング言語]と呼ぶ．
+
+== 変数の型
+
+#tk
+
+$ x :: haskell.int $
+
+$ x = 1 $
+
+$ x :: haskell.int = 1 $
+
+== 関数
+
+整数 $haskell.parameter(x)$ に $haskell.constant(1)$を足す#keyword[関数] $haskell.parameter(f)$ は次のように定義できる．
+$ haskell.parameter(f) haskell.parameter(x) = haskell.parameter(x) + haskell.constant(1) $
+ここに $haskell.parameter(x)$ は関数 $haskell.parameter(f)$ の引数である．引数は括弧でくるまない．
+
+#haskell.block[Haskell では $haskell.parameter(f) haskell.parameter(x) = haskell.parameter(x) + haskell.constant(1)$ を
+#sourcecode[```haskell
+f x = x + 1
+```]
+と書く．]
+
+本書では関数名を原則1文字として，イタリック体で表し，$haskell.parameter(f),haskell.parameter(g),haskell.parameter(h)$ のようにアルファベットの $haskell.parameter(f)$以降の文字を使う．ただし有名な関数についてはローマン体で表し，文字数も2文字以上とする．たとえば $haskell.longfunction(sin)$ などの三角関数や指数関数がそれにあたる．
+
+変数 $haskell.parameter(x)$ に関数 $haskell.parameter(f)$ を#keyword[適用]する場合は次のように書く．ここでも引数を括弧でくるまない．
+$ haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) $
+
+#haskell.block[Haskell では $haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x)$ を
+#sourcecode[```haskell
+z = f x
+```]
+と書く．]
+
+関数 $haskell.parameter(f)$ が引数をふたつ取る場合は，次のように書く．
+$ haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) haskell.parameter(y) $
+
+#haskell.block[Haskell では $haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) haskell.parameter(y)$ を
+#sourcecode[```haskell
+z = f x y
+```]
+と書く．]
+
+なお $haskell.parameter(f) haskell.parameter(x) haskell.parameter(y)$ は $(haskell.parameter(f) haskell.parameter(x)) haskell.parameter(y)$ と解釈される．前半の $(haskell.parameter(f) haskell.parameter(x))$ は1引数の関数とみなせる．2引数関数を連続した1引数関数の適用とみなす考え方を，関数の#keyword[カリー化]と呼ぶ．
+
+
+
 
 = Test Part
 
