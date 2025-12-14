@@ -196,7 +196,6 @@ z = h $ (g . f) x
 ```]
 と書く．]
 
-
 == IOサバイバルキット1
 
 プログラムとは合成された関数である．多くのプログラミング言語では，プログラムそのものにmainという名前をつける．本書では「#keyword[IOモナド]」の章で述べる理由によって，main関数をサンセリフ体で $haskell.main$ と書く．
@@ -205,8 +204,8 @@ z = h $ (g . f) x
 
 引数 $x$ の2乗を求める関数 $f$ は次のように定義できる．
 $
-  f :: haskell.Double -> haskell.Double\
-  f x = x times x
+  &f :: haskell.Double -> haskell.Double\
+  &f x = x times x
 $<square>
 
 ユーザからの入力に関数 $f$ を適用してユーザへ出力するプログラムをHaskellで書くと次のようになる．
@@ -268,6 +267,31 @@ $
 f = (+)
 ```]
 と書く．]
+
+== ローカル変数
+
+関数内で#keyword[ローカル変数]を使いたい場合は以下のように行う．
+$ z = haskell.kwlet y haskell.leteq 1 haskell.kwin x + y $<let-in>
+
+#haskell.block[Haskellでは $z = haskell.kwlet y haskell.leteq 1 haskell.kwin x + y$ を
+#sourcecode[```haskell
+z = let {y = 1} in x + y
+```]
+と書く． `let` 節内の式がひとつの場合，中括弧は省略可能である．式が複数になる場合は `;` で区切る．]
+
+ローカル変数はラムダ式のシンタックスシュガーである．@let-in は次の式と等価である．
+$ z = (haskell.lambda y haskell.lambdaarrow x + y) 1 $<let-in-alternative>
+
+ローカル変数の定義は次のように後置できる．
+$ z = x + y haskell.kwwhere y haskell.leteq 1 $<where>
+
+#haskell.block[Haskellでは $z = x + y haskell.kwwhere y haskell.leteq 1$ を
+#sourcecode[```haskell
+z = x + y where {y = 1}
+```]
+と書く． `where` 節内の式が一つの場合，中括弧は省略可能である．式が複数になる場合は `;` で区切る．]
+
+
 
 = Test Part
 

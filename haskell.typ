@@ -8,6 +8,8 @@
 #let constant(x) = x
 #let parameter(x) = x
 
+#let keyword(x) = math.mono(x)
+
 #let typeparameter(x) = math.bold(x)
 
 #let longfunction(x) = x
@@ -37,3 +39,9 @@
 #let fmap = math.ast.op
 #let amap = math.ast.op.o
 #let bind = math.class("binary", math.suit.heart.stroked)
+
+#let leteq = math.equiv
+
+#let kwlet = keyword("let")
+#let kwin = keyword("in")
+#let kwwhere = keyword("where")
