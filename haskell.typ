@@ -7,20 +7,30 @@
 
 #let constant(x) = x
 #let parameter(x) = x
-#let longfunction(x) = x
+
 #let typeparameter(x) = math.bold(x)
 
-#let typename(x) = math.bold(x)
+#let longfunction(x) = x
+#let read = longfunction("read")
+
+#let action(x) = math.sans(x)
+#let main = action("main")
+#let print = action("print")
+#let getLine = action("getLine")
+
 
 #let list(x) = $x_"s"$
 #let ctxt(x) = $x_*$
 #let monadic(x) = $x^dagger$
 
-#let int = typename("Int")
-#let double = typename("Double")
+#let typename(x) = math.bold(x)
+#let Int = typename("Int")
+#let Double = typename("Double")
+
+#let compose = math.bullet.op
+#let apply = math.class("binary", math.section)
 
 #let map = math.star.op
 #let fmap = math.ast.op
 #let amap = math.ast.op.o
 #let bind = math.class("binary", math.suit.heart.stroked)
-

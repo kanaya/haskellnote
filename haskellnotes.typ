@@ -77,13 +77,13 @@ x = 1
 
 変数という呼び名に反して，変数の値は一度代入したら変えられない．そこで変数に値を代入するとは呼ばずに，変数に値を#keyword[束縛]するという． @binding の右辺のように数式にハードコードされた値を#keyword[リテラル]と呼ぶ．
 
-リテラルや変数には#keyword[型]がある．型は数学者の#keyword[集合]と似た意味で，整数全体の集合 $ZZ$ に相当する#keyword[整数型]や，実数全体の集合 $RR$ に相当する#keyword[浮動小数点型]がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を $haskell.int$ で，浮動小数点型を $haskell.double$ で表すことにする．
+リテラルや変数には#keyword[型]がある．型は数学者の#keyword[集合]と似た意味で，整数全体の集合 $ZZ$ に相当する#keyword[整数型]や，実数全体の集合 $RR$ に相当する#keyword[浮動小数点型]がある．整数と整数型，実数と浮動小数点型は異なるため，整数型を $haskell.Int$ で，浮動小数点型を $haskell.Double$ で表すことにする．
 
-#haskell.block[Haskellでは $haskell.int$ および $haskell.double$ をそれぞれ `Int` および `Double` と書く．]
+#haskell.block[Haskellでは $haskell.Int$ および $haskell.Double$ をそれぞれ `Int` および `Double` と書く．]
 
-数学者は変数 $x$ が整数であることを $x in ZZ$ と書くが，本書では $x::haskell.int$ と書く．これは記号 $in$ を別の用途に用いるためである．
+数学者は変数 $x$ が整数であることを $x in ZZ$ と書くが，本書では $x::haskell.Int$ と書く．これは記号 $in$ を別の用途に用いるためである．
 
-#haskell.block[Haskellでは $x::haskell.int$ を
+#haskell.block[Haskellでは $x::haskell.Int$ を
 #sourcecode[```Haskell
 x :: Int
 ```]
@@ -97,11 +97,11 @@ x :: Int
 
 #tk
 
-$ x :: haskell.int $
+$ x :: haskell.Int $
 
 $ x = 1 $
 
-$ x :: haskell.int = 1 $
+$ x :: haskell.Int = 1 $
 
 == 関数
 
@@ -137,6 +137,74 @@ z = f x y
 
 なお $f x y$ は $(f x)y$ と解釈される．前半の $(f x)$ は1引数の関数とみなせる．2引数関数を連続した1引数関数の適用とみなす考え方を，関数の#keyword[カリー化]と呼ぶ．
 
+
+== 有名な関数
+
+#tk
+
+== 関数の型
+
+#tk
+
+== 関数合成
+
+変数 $x$ に関数 $f$ と関数 $g$ を連続して適用したい場合
+$ z = g(f x)$
+とするところであるが，事前に関数 $f$ と関数 $g$ を#keyword[合成]しておきたいことがある．
+
+関数の合成は次のように書く．
+$ k = g haskell.compose f $
+関数の連続適用 $g(f x)$ と合成関数の適用 $(g haskell.compose f)x$ は同じ結果を返す．
+
+#haskell.block[Haskell では $k = g haskell.compose f$ を
+#sourcecode[```haskell
+k = g . f
+```]
+と書く．]
+
+関数合成演算子 $.$ は以下のように#keyword[左結合]する．
+$ k &= h haskell.compose g haskell.compose f \
+    &= (h haskell.compose g) haskell.compose f $
+
+関数適用のための特別な演算子 $haskell.apply$ があると便利である．演算子 $haskell.apply$ は関数合成演算子よりも優先順位が低い．例を挙げる．
+$ z &= h haskell.compose (g haskell.compose f) x \
+    &= h haskell.apply g haskell.compose f x $
+
+#haskell.block[Haskell では $z = h haskell.apply g haskell.compose f x$ を
+#sourcecode[```haskell
+z = h $ (g . f) x
+```]
+と書く．]
+
+
+== IOサバイバルキット1
+
+プログラムとは合成された関数である．多くのプログラミング言語では，プログラムそのものにmainという名前をつける．本書では「#keyword[IOモナド]」の章で述べる理由によって，main関数をサンセリフ体で $haskell.main$ と書く．
+
+実用的なプログラムはユーザからの入力を受け取り，関数を適用し，ユーザへ出力する．Haskellではユーザからの1行の入力を $haskell.getLine$ で受け取り，変数の値を $haskell.print$ で書き出せる．ここに $haskell.getLine$ と $haskell.print$ は関数（ファンクション）ではあるが，特別に「#keyword[アクション]」とも呼ぶ．関数 $haskell.main$もアクションである．
+
+引数 $x$ の2乗を求める関数 $f$ は次のように定義できる．
+$
+  f :: haskell.Double -> haskell.Double\
+  f x = x times x
+$<square>
+
+#haskell.block[Haskell では @square を
+#sourcecode[```haskell
+f :: Double -> Double
+f x = x * x
+```]
+と書く．]
+
+ユーザからの入力に関数 $f$ を適用してユーザへ出力するプログラムをHaskellで書くと次のようになる．
+$ haskell.main = haskell.print haskell.compose f haskell.compose haskell.read haskell.bind haskell.getLine $<first-main>
+ここに関数 $haskell.read$ は#keyword{文字列}であるユーザ入力を数に変換する関数である．また演算子 $haskell.bind$ は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「#keyword[モナド]」の章で述べる．
+
+#haskell.block[Haskell では @first-main を
+#sourcecode[```haskell
+main = print . f . read =<< getLine
+```]
+と書く．]
 
 
 
