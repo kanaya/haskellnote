@@ -11,7 +11,7 @@
   numbering: "1",
 )
 
-#set par(justify: true, first-line-indent: 1em)
+#set par(justify: true, first-line-indent: (all: true, amount: 1em))
 
 #set heading(numbering: "1.1")
 
