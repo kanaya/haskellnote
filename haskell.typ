@@ -28,6 +28,10 @@
   let xx = x
   $xx_"s"$
 }
+#let maybe(x) = {
+  let xx = x
+  $xx_?$
+}
 #let ctxt(x) = {
   let xx = x
   $xx_*$
