@@ -41,6 +41,30 @@
 #outline()
 #pagebreak()
 
+= 凡例
+
+#table(
+  columns: (auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  table.header([種類], [字体・表記法], [例]),
+  [変数・関数], [イタリック（1文字）], $x, f$,
+  [有名な変数・関数], [ローマン・大文字], $"first", "id"$,
+  [リスト変数], [変数名にsをつける], $haskell.list(x)$,
+  [一般のコンテナ変数], [変数名に $*$ をつける], $haskell.ctxt(x)$,
+  [コンテナに入れる関数], [関数名に $dagger$ をつける], $haskell.monadic(f)$,
+  [定数値コンストラクタ1], [数学記号], $emptyset$,
+  [定数値コンストラクタ2], [ローマン・大文字], $haskell.True$,
+  [値コンストラクタ], [ローマン・大文字], $"Just"_x$,
+  [有名な値コンストラクタ], [特別なカッコで包む], $[x], chevron.l x chevron.r$,
+  [アクション], [ギリシア文字（1文字）], $alpha$,
+  [有名なアクション], [サンセリフ], $haskell.main$,
+  [型], [ボールドイタリック（1文字）], $haskell.typename(a)$,
+  [有名な型], [ボールド・大文字], $haskell.Int$,
+  [型クラス], [フラクチュール], $haskell.Num$,
+  [集合（数学）], [ブラックボード], $ZZ$
+)
+
 = Haskellについて
 
 本書はプログラミング言語Haskellの入門書である．それと同時に，本書はプログラミング言語を用いた代数構造の入門書でもある．プログラミングと代数構造の間には密接な関係があるが，とくに#keyword[関数型プログラミング]を実践する時にはその関係を意識する必要が出てくる．本書はその両者を同時に解説することを試みる．
@@ -275,9 +299,9 @@ $ z = haskell.kwlet y haskell.leteq 1 haskell.kwin x + y $<let-in>
 
 #haskell.block[Haskellでは $z = haskell.kwlet y haskell.leteq 1 haskell.kwin x + y$ を
 #sourcecode[```haskell
-z = let {y = 1} in x + y
+z = let y = 1 in x + y
 ```]
-と書く． `let` 節内の式がひとつの場合，中括弧は省略可能である．式が複数になる場合は `;` で区切る．]
+と書く．]
 
 ローカル変数はラムダ式のシンタックスシュガーである．@let-in は次の式と等価である．
 $ z = (haskell.lambda y haskell.lambdaarrow x + y) 1 $<let-in-alternative>
@@ -287,9 +311,9 @@ $ z = x + y haskell.kwwhere y haskell.leteq 1 $<where>
 
 #haskell.block[Haskellでは $z = x + y haskell.kwwhere y haskell.leteq 1$ を
 #sourcecode[```haskell
-z = x + y where {y = 1}
+z = x + y where y = 1
 ```]
-と書く． `where` 節内の式が一つの場合，中括弧は省略可能である．式が複数になる場合は `;` で区切る．]
+と書く．]
 
 == クロージャ
 

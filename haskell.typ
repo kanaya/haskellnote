@@ -24,14 +24,26 @@
 #let lambdaarrow = math.arrow.r.bar
 #let anonymousparameter = math.lozenge
 
-#let list(x) = $x_"s"$
-#let ctxt(x) = $x_*$
-#let monadic(x) = $x^dagger$
+#let list(x) = {
+  let xx = x
+  $xx_"s"$
+}
+#let ctxt(x) = {
+  let xx = x
+  $xx_*$
+}
+#let monadic(x) = {
+  let xx = x
+  $xx^dagger$
+}
 
 #let typename(x) = math.bold(x)
 #let Int = typename("Int")
 #let Double = typename("Double")
 #let Bool = typename("Bool")
+
+#let typeclass(x) = math.frak(x)
+#let Num = typeclass("Num")
 
 #let constructor(x) = math.serif(x)
 #let True = constructor("True")
