@@ -47,7 +47,7 @@
   columns: (auto, auto, auto),
   inset: 10pt,
   align: horizon,
-  table.header([種類], [字体・表記法], [例]),
+  table.header([*種類*], [*字体・表記法*], [*例*]),
   [変数・関数], [イタリック（1文字）], $x, f$,
   [有名な変数・関数], [ローマン・大文字], $"first", "id"$,
   [リスト変数], [変数名にsをつける], $haskell.list(x)$,
