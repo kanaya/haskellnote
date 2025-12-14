@@ -198,7 +198,7 @@ f x = x * x
 
 ユーザからの入力に関数 $f$ を適用してユーザへ出力するプログラムをHaskellで書くと次のようになる．
 $ haskell.main = haskell.print haskell.compose f haskell.compose haskell.read haskell.bind haskell.getLine $<first-main>
-ここに関数 $haskell.read$ は#keyword{文字列}であるユーザ入力を数に変換する関数である．また演算子 $haskell.bind$ は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「#keyword[モナド]」の章で述べる．
+ここに関数 $haskell.read$ は#keyword[文字列]であるユーザ入力を数に変換する関数である．また演算子 $haskell.bind$ は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「#keyword[モナド]」の章で述べる．
 
 #haskell.block[Haskell では @first-main を
 #sourcecode[```haskell
