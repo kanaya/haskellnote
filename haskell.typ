@@ -31,6 +31,11 @@
 #let typename(x) = math.bold(x)
 #let Int = typename("Int")
 #let Double = typename("Double")
+#let Bool = typename("Bool")
+
+#let constructor(x) = math.serif(x)
+#let True = constructor("True")
+#let False = constructor("False")
 
 #let compose = math.bullet.op
 #let apply = math.class("binary", math.section)
