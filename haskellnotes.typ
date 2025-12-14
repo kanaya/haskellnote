@@ -57,7 +57,7 @@ Haskellというプログラミング言語を知ろうとすると，従来の�
 
 ところで，プログラムのソースコードは現代でもASCII文字セットの範囲で書くことが標準的である．Unicodeを利用したり，まして文字にカラーを指定したり，書体や装飾を指定することは一般的ではない．たとえば変数 `a` のことを $a$ と書いたり $bold(a)$ と書いたり $tilde(a)$ と書いたりして区別することはない．
 
-Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文字セットで表現しなければならない．これは，はじめてHaskellコードを読むときに大きな問題になりえる．たとえばHaskellでは `[a]` という表記をよく扱う．この `[a]` は `a` という変数1要素からなるリストのこともあるし，`a` 型という仮の型から作ったリスト型の場合もあるが，字面からでは判断できない．もし変数はイタリック体，型はボールド体と決まっていれば，それぞれ $[haskell.parameter(a)]$ および $[haskell.typeparameter(a)]$ と区別できたところである．
+Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文字セットで表現しなければならない．これは，はじめてHaskellコードを読むときに大きな問題になりえる．たとえばHaskellでは `[a]` という表記をよく扱う．この `[a]` は `a` という変数1要素からなるリストのこともあるし，`a` 型という仮の型から作ったリスト型の場合もあるが，字面からでは判断できない．もし変数はイタリック体，型はボールド体と決まっていれば，それぞれ $[a]$ および $[haskell.typeparameter(a)]$ と区別できたところである．
 
 本書は，異なる性質のものには異なる書体を割り当てるようにしている．ただし，どの表現もいつでもHaskellに翻訳できるように配慮している．実際，本書執筆の最大の困難点は，数学的に妥当で，かつHaskellの記法とも矛盾しない記法を見つけることであった．
 
@@ -65,9 +65,9 @@ Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文�
 
 == 変数
 
-変数$haskell.parameter(x)$に値$haskell.constant(1)$を代入するには次のようにする．
+変数 $x$ に値 $1$ を代入するには次のようにする．
 
-$ haskell.parameter(x) = haskell.constant(1) $<binding>
+$ x = 1 $<binding>
 
 #haskell.block[Haskellでは
 #sourcecode[```haskell
@@ -105,37 +105,37 @@ $ x :: haskell.int = 1 $
 
 == 関数
 
-整数 $haskell.parameter(x)$ に $haskell.constant(1)$を足す#keyword[関数] $haskell.parameter(f)$ は次のように定義できる．
-$ haskell.parameter(f) haskell.parameter(x) = haskell.parameter(x) + haskell.constant(1) $
-ここに $haskell.parameter(x)$ は関数 $haskell.parameter(f)$ の引数である．引数は括弧でくるまない．
+整数 $x$ に $1$ を足す#keyword[関数] $f$ は次のように定義できる．
+$ f x = x+1 $
+ここに $x$ は関数 $f$ の#keyword[引数]である．引数は括弧でくるまない．
 
-#haskell.block[Haskell では $haskell.parameter(f) haskell.parameter(x) = haskell.parameter(x) + haskell.constant(1)$ を
+#haskell.block[Haskell では $f x = x+1$ を
 #sourcecode[```haskell
 f x = x + 1
 ```]
 と書く．]
 
-本書では関数名を原則1文字として，イタリック体で表し，$haskell.parameter(f),haskell.parameter(g),haskell.parameter(h)$ のようにアルファベットの $haskell.parameter(f)$以降の文字を使う．ただし有名な関数についてはローマン体で表し，文字数も2文字以上とする．たとえば $haskell.longfunction(sin)$ などの三角関数や指数関数がそれにあたる．
+本書では関数名を原則1文字として，イタリック体で表し，$f,g,h$ のようにアルファベットの $f$ 以降の文字を使う．ただし有名な関数についてはローマン体で表し，文字数も2文字以上とする．たとえば $sin$ などの三角関数や指数関数がそれにあたる．
 
-変数 $haskell.parameter(x)$ に関数 $haskell.parameter(f)$ を#keyword[適用]する場合は次のように書く．ここでも引数を括弧でくるまない．
-$ haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) $
+変数 $x$ に関数 $f$ を#keyword[適用]する場合は次のように書く．ここでも引数を括弧でくるまない．
+$ z = f x $
 
-#haskell.block[Haskell では $haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x)$ を
+#haskell.block[Haskell では $z = f x$ を
 #sourcecode[```haskell
 z = f x
 ```]
 と書く．]
 
-関数 $haskell.parameter(f)$ が引数をふたつ取る場合は，次のように書く．
-$ haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) haskell.parameter(y) $
+関数 $f$ が引数をふたつ取る場合は，次のように書く．
+$ z = f x y $
 
-#haskell.block[Haskell では $haskell.parameter(z) = haskell.parameter(f) haskell.parameter(x) haskell.parameter(y)$ を
+#haskell.block[Haskell では $z = f x y$ を
 #sourcecode[```haskell
 z = f x y
 ```]
 と書く．]
 
-なお $haskell.parameter(f) haskell.parameter(x) haskell.parameter(y)$ は $(haskell.parameter(f) haskell.parameter(x)) haskell.parameter(y)$ と解釈される．前半の $(haskell.parameter(f) haskell.parameter(x))$ は1引数の関数とみなせる．2引数関数を連続した1引数関数の適用とみなす考え方を，関数の#keyword[カリー化]と呼ぶ．
+なお $f x y$ は $(f x)y$ と解釈される．前半の $(f x)$ は1引数の関数とみなせる．2引数関数を連続した1引数関数の適用とみなす考え方を，関数の#keyword[カリー化]と呼ぶ．
 
 
 
