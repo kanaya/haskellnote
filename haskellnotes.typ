@@ -61,6 +61,26 @@ Haskellプログラマもまた，多くの異なる概念を同じ貧弱な文�
 
 本書は，異なる性質のものには異なる書体を割り当てるようにしている．ただし，どの表現もいつでもHaskellに翻訳できるように配慮している．実際，本書執筆の最大の困難点は，数学的に妥当で，かつHaskellの記法とも矛盾しない記法を見つけることであった．
 
+= 関数型という考え方
+
+#tk
+
+#sourcecode[```shell-unix-generic
+$ cat the-great-gatsby.txt | tr '[A-Z]' '[a-z]' | tr -C -d ‘[a-z ]' | tr ' ' '\n' | sort | uniq -c | sort -nr
+```]
+
+$ f_1 &= "tr"_([A...Z]->[a...z])\
+  f_2 &= "tr"_(overline([a...z, square])->emptyset)\
+  f_3 &= "tr"_(square->arrow.bl.hook)\
+  f_4 &= "sort"\
+  f_5 &= "uniq"_c\
+  f_6 &= "sort"_(n,r) $
+
+
+$ y = f_6(f_5(f_4(f_3(f_2(f_1(x)))))) $
+
+$ y = f_6 haskell.compose f_5 haskell.compose f_4 haskell.compose f_3 haskell.compose f_2 haskell.compose f_1(x) $
+
 = 変数・関数・型
 
 == 変数
@@ -189,24 +209,65 @@ $
   f x = x times x
 $<square>
 
-#haskell.block[Haskell では @square を
-#sourcecode[```haskell
-f :: Double -> Double
-f x = x * x
-```]
-と書く．]
-
 ユーザからの入力に関数 $f$ を適用してユーザへ出力するプログラムをHaskellで書くと次のようになる．
 $ haskell.main = haskell.print haskell.compose f haskell.compose haskell.read haskell.bind haskell.getLine $<first-main>
 ここに関数 $haskell.read$ は#keyword[文字列]であるユーザ入力を数に変換する関数である．また演算子 $haskell.bind$ は新たな関数合成演算子で，アクションとアクションを合成するための特別な演算子である．詳細は「#keyword[モナド]」の章で述べる．
 
-#haskell.block[Haskell では @first-main を
+#haskell.block[Haskell では @square と@first-main をまとめて
 #sourcecode[```haskell
+f :: Double -> Double
+f x = x * x
+
 main = print . f . read =<< getLine
 ```]
 と書く．]
 
+= 条件分岐と再帰呼び出し
 
+== ラムダ
+
+関数とは，変数名に束縛された#keyword[ラムダ式]である．引数をひとつとり，その引数に $1$ を足して返す関数 $f$ はラムダ式を用いて次のように書ける．
+$ f = haskell.lambda x haskell.lambdaarrow x + 1 $
+ラムダ記号は一般的には $lambda$ が用いられるが，本書ではすべてのギリシア文字を予約しておきたいので，Haskellの記法に倣って $haskell.lambda$ を用いる．
+
+#haskell.block[Haskell では $f = haskell.lambda x haskell.lambdaarrow x + 1$ を
+#sourcecode[```haskell
+f = \x -> x + 1
+```]
+と書く．]
+
+ラムダ式は入れ子に出来る．引数をふたつとり，その引数同士を足すラムダ式は次のように書ける．
+$ haskell.lambda x haskell.lambdaarrow (haskell.lambda y haskell.lambdaarrow x + y) $<lambda-nested>
+ラムダ式中の $haskell.lambdaarrow$ は右結合するので，@lambda-nested は次のようにも書ける．
+$ haskell.lambda x haskell.lambdaarrow haskell.lambda y haskell.lambdaarrow x + y $<lambda-nested-alternative>
+より簡潔に@lambda-nested-alternative を
+$ haskell.lambda x y haskell.lambdaarrow x + y $<lambda-nested-alternative-simplified>
+と書いても良い．
+
+本書では無名変数 $haskell.anonymousparameter$ を用いた以下の書き方も用いる．
+$
+  f &= (haskell.anonymousparameter + 1)\
+    &= haskell.lambda x haskell.lambdaarrow x + 1
+$
+
+#haskell.block[無名変数はHaskellには無いが，代わりに「セクション」という書き方ができる．式 $f = (haskell.anonymousparameter + 1)$ をHaskellでは
+#sourcecode[```haskell
+f = (+1)
+```]
+と書く．]
+
+無名変数が2回以上登場した場合は，その都度新しいパラメタを生成する．たとえば次のとおりである．
+$
+  f &= haskell.anonymousparameter + haskell.anonymousparameter\
+    &= haskell.lambda x haskell.lambdaarrow haskell.lambda y haskell.lambdaarrow x + y\
+    &= haskell.lambda x y haskell.lambdaarrow x + y
+$
+
+#haskell.block[Haskellでは $f = (haskell.anonymousparameter + haskell.anonymousparameter)$ を
+#sourcecode[```haskell
+f = (+)
+```]
+と書く．]
 
 = Test Part
 

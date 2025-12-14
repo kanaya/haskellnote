@@ -18,6 +18,9 @@
 #let print = action("print")
 #let getLine = action("getLine")
 
+#let lambda = math.backslash
+#let lambdaarrow = math.arrow.r.bar
+#let anonymousparameter = math.lozenge
 
 #let list(x) = $x_"s"$
 #let ctxt(x) = $x_*$
